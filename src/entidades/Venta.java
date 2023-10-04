@@ -1,6 +1,7 @@
 
 package entidades;
 
+import entidades.Cliente;
 import java.time.LocalDate;
 
 public class Venta {

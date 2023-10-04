@@ -1,6 +1,7 @@
 
 package entidades;
 
+import Enums.TipoAlquiler;
 import java.time.LocalDate;
 
 public class Alquiler {
@@ -8,6 +9,7 @@ public class Alquiler {
     private Inmueble inmueble;
     private Cliente cliente;
     private Garante garante;
+    private TipoAlquiler tipo;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private double precioInicial;
@@ -19,11 +21,11 @@ public class Alquiler {
     public Alquiler() {
     }
 
-    public Alquiler(int idAlquiler, Inmueble inmueble, Cliente cliente, Garante garante, LocalDate fechaInicio, LocalDate fechaFin, double precioInicial, String clausula, LocalDate fechaFirma, LocalDate fechaRescision, boolean estado) {
-        this.idAlquiler = idAlquiler;
+    public Alquiler(Inmueble inmueble, Cliente cliente, Garante garante, TipoAlquiler tipo, LocalDate fechaInicio, LocalDate fechaFin, double precioInicial, String clausula, LocalDate fechaFirma, LocalDate fechaRescision, boolean estado) {
         this.inmueble = inmueble;
         this.cliente = cliente;
         this.garante = garante;
+        this.tipo = tipo;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.precioInicial = precioInicial;
@@ -33,10 +35,12 @@ public class Alquiler {
         this.estado = estado;
     }
 
-    public Alquiler(Inmueble inmueble, Cliente cliente, Garante garante, LocalDate fechaInicio, LocalDate fechaFin, double precioInicial, String clausula, LocalDate fechaFirma, LocalDate fechaRescision, boolean estado) {
+    public Alquiler(int idAlquiler, Inmueble inmueble, Cliente cliente, Garante garante, TipoAlquiler tipo, LocalDate fechaInicio, LocalDate fechaFin, double precioInicial, String clausula, LocalDate fechaFirma, LocalDate fechaRescision, boolean estado) {
+        this.idAlquiler = idAlquiler;
         this.inmueble = inmueble;
         this.cliente = cliente;
         this.garante = garante;
+        this.tipo = tipo;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.precioInicial = precioInicial;
@@ -76,6 +80,14 @@ public class Alquiler {
 
     public void setGarante(Garante garante) {
         this.garante = garante;
+    }
+
+    public TipoAlquiler getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoAlquiler tipo) {
+        this.tipo = tipo;
     }
 
     public LocalDate getFechaInicio() {
@@ -136,11 +148,9 @@ public class Alquiler {
 
     @Override
     public String toString() {
-        return "Alquiler{" + "idAlquiler=" + idAlquiler + ", inmueble=" + inmueble + ", cliente=" + cliente +
-                ", garante=" + garante + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin +
-                ", precioInicial=" + precioInicial + ", clausula=" + clausula + ", fechaFirma=" + fechaFirma +
-                ", fechaRescision=" + fechaRescision + ", estado=" + estado + '}';
+        return "idAlquiler=" + idAlquiler + ", inmueble=" + inmueble + ", cliente=" + cliente + ", garante=" + garante + ", tipo=" + tipo + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", precioInicial=" + precioInicial + ", clausula=" + clausula + ", fechaFirma=" + fechaFirma + ", fechaRescision=" + fechaRescision + ", estado=" + estado + '}';
     }
+    
     
     
 }

@@ -1,6 +1,7 @@
 
 package entidades;
 
+import entidades.Persona;
 import Enums.TipoCliente;
 
 public class Propietario extends Persona {

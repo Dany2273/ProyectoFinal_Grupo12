@@ -2,18 +2,18 @@
 package entidades;
 
 import Enums.TipoInmueble;
-import Enums.Caracteristicas;
+import Enums.Zona;
+import entidades.Propietario;
 
 public class Inmueble {
    
     private String direccion;
     private Propietario prop;
     private TipoInmueble tipo;
-    private String accesibilidad;
-    private Caracteristicas carac;
+    private String accesibilidad; 
+    private Zona zona;
     private int superficie;
     private double precioTasado;
-    private String zona;
     private String alquilerVenta;
     private String descripcion;
     private int ambientes;
@@ -30,18 +30,18 @@ public class Inmueble {
     public Inmueble() {
     }
 
-    public Inmueble(String direccion, Propietario prop, TipoInmueble tipo, 
-            String accesibilidad, Caracteristicas carac, int superficie, double precioTasado,
-            String zona, String alquilerVenta, String descripcion, int ambientes,
-            int dormitorios, int baños, boolean patio, boolean cochera, boolean quincho, 
-            boolean pileta, boolean mascotas, boolean niños, boolean disponible) {
+    public Inmueble(String direccion, Propietario prop, TipoInmueble tipo, String accesibilidad, Zona zona, 
+            int superficie, double precioTasado, String alquilerVenta, String descripcion, int ambientes, 
+            int dormitorios, int baños, boolean patio, boolean cochera, boolean quincho, boolean pileta, 
+            boolean mascotas, boolean niños, boolean disponible) {
         
-        this.direccion = direccion;this.prop = prop;this.tipo = tipo; this.accesibilidad = accesibilidad;
-        this.carac = carac;this.superficie = superficie; this.precioTasado = precioTasado;
-        this.zona = zona;this.alquilerVenta = alquilerVenta;
-        this.descripcion = descripcion;this.ambientes = ambientes;this.dormitorios = dormitorios;
-        this.baños = baños;this.patio = patio;this.cochera = cochera;this.quincho = quincho;
-        this.pileta = pileta;this.mascotas = mascotas;this.niños = niños;this.disponible = disponible;
+        
+        this.direccion = direccion;this.prop = prop;this.tipo = tipo;this.accesibilidad = accesibilidad;
+        this.zona = zona;this.superficie = superficie;this.precioTasado = precioTasado;
+        this.alquilerVenta = alquilerVenta;this.descripcion = descripcion;this.ambientes = ambientes;
+        this.dormitorios = dormitorios;this.baños = baños;this.patio = patio;this.cochera = cochera;
+        this.quincho = quincho;this.pileta = pileta;this.mascotas = mascotas;
+        this.niños = niños;this.disponible = disponible;
     }
 
     public String getDireccion() {
@@ -76,12 +76,12 @@ public class Inmueble {
         this.accesibilidad = accesibilidad;
     }
 
-    public Caracteristicas getCarac() {
-        return carac;
+    public Zona getZona() {
+        return zona;
     }
 
-    public void setCarac(Caracteristicas carac) {
-        this.carac = carac;
+    public void setZona(Zona zona) {
+        this.zona = zona;
     }
 
     public int getSuperficie() {
@@ -98,14 +98,6 @@ public class Inmueble {
 
     public void setPrecioTasado(double precioTasado) {
         this.precioTasado = precioTasado;
-    }
-
-    public String getZona() {
-        return zona;
-    }
-
-    public void setZona(String zona) {
-        this.zona = zona;
     }
 
     public String getAlquilerVenta() {
@@ -206,12 +198,13 @@ public class Inmueble {
 
     @Override
     public String toString() {
-        return "Inmueble{" + "direccion=" + direccion + ", prop=" + prop + ", tipo=" + tipo + ", accesibilidad=" + 
-                accesibilidad + ", carac=" + carac + ", superficie=" + superficie + ", precioTasado=" + precioTasado  + 
-                ", zona=" + zona + ", alquilerVenta=" + alquilerVenta + ", descripcion=" + descripcion + 
-                ", ambientes=" + ambientes + ", dormitorios=" + dormitorios + ", ba\u00f1os=" + baños + ", patio=" + 
-                patio + ", cochera=" + cochera + ", quincho=" + quincho + ", pileta=" + pileta +
-                ", mascotas=" + mascotas + ", ni\u00f1os=" + niños + ", disponible=" + disponible + '}';
+        return "direccion=" + direccion + ", prop=" + prop + ", tipo=" + tipo + ", accesibilidad=" + 
+                accesibilidad + ", zona=" + zona + ", superficie=" + superficie + ", precioTasado=" +
+                precioTasado + ", alquilerVenta=" + alquilerVenta + ", descripcion=" + descripcion + 
+                ", ambientes=" + ambientes + ", dormitorios=" + dormitorios + ", baños=" + baños + 
+                ", patio=" + patio + ", cochera=" + cochera + ", quincho=" + quincho + ", pileta=" + pileta +
+                ", mascotas=" + mascotas + ", niños=" + niños + ", disponible=" + disponible + '}';
     }
-     
+    
+
 }

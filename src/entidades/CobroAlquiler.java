@@ -1,6 +1,7 @@
 
 package entidades;
 
+import entidades.Alquiler;
 import java.time.LocalDate;
 
 public class CobroAlquiler {
