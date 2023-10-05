@@ -6,7 +6,6 @@ import java.time.LocalDate;
 
 public class CobroAlquiler {
     private int idCobroAlquiler;
-    private int cobro;
     private Alquiler alq;
     private LocalDate fechaCobro;
     private String mesCobro;
@@ -18,8 +17,8 @@ public class CobroAlquiler {
     public CobroAlquiler() {
     }
 
-    public CobroAlquiler(int cobro, Alquiler alq, LocalDate fechaCobro, String mesCobro, double importe, double comision, double importeMora, String numComprobante) {
-        this.cobro = cobro;
+    public CobroAlquiler(Alquiler alq, LocalDate fechaCobro, String mesCobro, double importe, double comision, double importeMora, String numComprobante) {
+        
         this.alq = alq;
         this.fechaCobro = fechaCobro;
         this.mesCobro = mesCobro;
@@ -29,9 +28,8 @@ public class CobroAlquiler {
         this.numComprobante = numComprobante;
     }
 
-    public CobroAlquiler(int idCobroAlquiler, int cobro, Alquiler alq, LocalDate fechaCobro, String mesCobro, double importe, double comision, double importeMora, String numComprobante) {
+    public CobroAlquiler(int idCobroAlquiler, Alquiler alq, LocalDate fechaCobro, String mesCobro, double importe, double comision, double importeMora, String numComprobante) {
         this.idCobroAlquiler = idCobroAlquiler;
-        this.cobro = cobro;
         this.alq = alq;
         this.fechaCobro = fechaCobro;
         this.mesCobro = mesCobro;
@@ -47,14 +45,6 @@ public class CobroAlquiler {
 
     public void setIdCobroAlquiler(int idCobroAlquiler) {
         this.idCobroAlquiler = idCobroAlquiler;
-    }
-
-    public int getCobro() {
-        return cobro;
-    }
-
-    public void setCobro(int cobro) {
-        this.cobro = cobro;
     }
 
     public Alquiler getAlq() {
@@ -115,7 +105,7 @@ public class CobroAlquiler {
 
     @Override
     public String toString() {
-        return "CobroAlquiler{"+idCobroAlquiler + "cobro=" + cobro + ", alq=" + alq + ", fechaCobro=" + fechaCobro + ", mesCobro=" + mesCobro + ", importe=" + importe + ", comision=" + comision + ", importeMora=" + importeMora + ", numComprobante=" + numComprobante + '}';
+        return "CobroAlquiler{"+idCobroAlquiler + ", alq=" + alq + ", fechaCobro=" + fechaCobro + ", mesCobro=" + mesCobro + ", importe=" + importe + ", comision=" + comision + ", importeMora=" + importeMora + ", numComprobante=" + numComprobante + '}';
     }
     
 }

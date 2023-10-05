@@ -2,6 +2,7 @@
 package entidades;
 
 import Enums.TipoAlquiler;
+import Enums.TipoCliente;
 import java.time.LocalDate;
 
 public class Alquiler {
@@ -9,7 +10,8 @@ public class Alquiler {
     private Inmueble inmueble;
     private Cliente cliente;
     private Garante garante;
-    private TipoAlquiler tipo;
+    private TipoCliente tipoC;//es un enum del paquete Enums TipoAlquiler castear con toString
+    private TipoAlquiler tipo;//es un enum del paquete Enums TipoAlquiler castear con toString
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private double precioInicial;
@@ -21,11 +23,12 @@ public class Alquiler {
     public Alquiler() {
     }
 
-    public Alquiler(Inmueble inmueble, Cliente cliente, Garante garante, TipoAlquiler tipo, LocalDate fechaInicio, LocalDate fechaFin, double precioInicial, String clausula, LocalDate fechaFirma, LocalDate fechaRescision, boolean estado) {
+    public Alquiler(Inmueble inmueble, Cliente cliente, Garante garante, TipoCliente tipoC, TipoAlquiler tipo, LocalDate fechaInicio, LocalDate fechaFin, double precioInicial, String clausula, LocalDate fechaFirma, LocalDate fechaRescision, boolean estado) {
         this.inmueble = inmueble;
         this.cliente = cliente;
         this.garante = garante;
         this.tipo = tipo;
+        this.tipoC = tipoC;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.precioInicial = precioInicial;
@@ -35,12 +38,13 @@ public class Alquiler {
         this.estado = estado;
     }
 
-    public Alquiler(int idAlquiler, Inmueble inmueble, Cliente cliente, Garante garante, TipoAlquiler tipo, LocalDate fechaInicio, LocalDate fechaFin, double precioInicial, String clausula, LocalDate fechaFirma, LocalDate fechaRescision, boolean estado) {
+    public Alquiler(int idAlquiler, Inmueble inmueble, Cliente cliente, Garante garante, TipoCliente tipoC, TipoAlquiler tipo, LocalDate fechaInicio, LocalDate fechaFin, double precioInicial, String clausula, LocalDate fechaFirma, LocalDate fechaRescision, boolean estado) {
         this.idAlquiler = idAlquiler;
         this.inmueble = inmueble;
         this.cliente = cliente;
         this.garante = garante;
         this.tipo = tipo;
+        this.tipoC = tipoC;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.precioInicial = precioInicial;
@@ -90,6 +94,14 @@ public class Alquiler {
         this.tipo = tipo;
     }
 
+    public void setTipoC(TipoCliente tipoC) {
+        this.tipoC = tipoC;
+    }
+    
+    public TipoCliente getTipoC() {
+        return tipoC;
+    }
+    
     public LocalDate getFechaInicio() {
         return fechaInicio;
     }

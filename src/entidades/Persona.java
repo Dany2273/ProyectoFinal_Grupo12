@@ -4,7 +4,7 @@ package entidades;
 import Enums.TipoCliente;
 
 public class Persona {
-     private TipoCliente tipo;
+    private TipoCliente tipo;
     private String nombre;
     private int dni;
     private int cuilCuit;

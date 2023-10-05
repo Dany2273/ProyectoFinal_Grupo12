@@ -7,15 +7,15 @@ import entidades.Propietario;
 
 public class Inmueble {
     private int idInmueble;
-    private String direccion;
     private Propietario prop;
     private TipoInmueble tipo;
-    private String accesibilidad; 
-    private Zona zona;
-    private int superficie;
-    private double precioTasado;
     private String alquilerVenta;
+    private String direccion;
+    private Zona zona;
     private String descripcion;
+    private int superficie;
+    private double precioTasado;    
+    private String accesibilidad; 
     private int ambientes;
     private int dormitorios;
     private int baños;
@@ -25,24 +25,57 @@ public class Inmueble {
     private boolean pileta;
     private boolean mascotas;
     private boolean niños;
-     private boolean disponible;
+    private boolean disponible;
 
     public Inmueble() {
     }
 
-    public Inmueble(int idInmueble, String direccion, Propietario prop, TipoInmueble tipo, String accesibilidad, Zona zona, 
-            int superficie, double precioTasado, String alquilerVenta, String descripcion, int ambientes, 
-            int dormitorios, int baños, boolean patio, boolean cochera, boolean quincho, boolean pileta, 
-            boolean mascotas, boolean niños, boolean disponible) {
-        
-        
-        this.direccion = direccion;this.prop = prop;this.tipo = tipo;this.accesibilidad = accesibilidad;
-        this.zona = zona;this.superficie = superficie;this.precioTasado = precioTasado;
-        this.alquilerVenta = alquilerVenta;this.descripcion = descripcion;this.ambientes = ambientes;
-        this.dormitorios = dormitorios;this.baños = baños;this.patio = patio;this.cochera = cochera;
-        this.quincho = quincho;this.pileta = pileta;this.mascotas = mascotas;
-        this.niños = niños;this.disponible = disponible;this.idInmueble = idInmueble;
+    public Inmueble(Propietario prop, TipoInmueble tipo, String alquilerVenta, String direccion, Zona zona, String descripcion, int superficie, double precioTasado, String accesibilidad, int ambientes, int dormitorios, int baños, boolean patio, boolean cochera, boolean quincho, boolean pileta, boolean mascotas, boolean niños, boolean disponible) {
+        this.prop = prop;
+        this.tipo = tipo;
+        this.alquilerVenta = alquilerVenta;
+        this.direccion = direccion;
+        this.zona = zona;
+        this.descripcion = descripcion;
+        this.superficie = superficie;
+        this.precioTasado = precioTasado;
+        this.accesibilidad = accesibilidad;
+        this.ambientes = ambientes;
+        this.dormitorios = dormitorios;
+        this.baños = baños;
+        this.patio = patio;
+        this.cochera = cochera;
+        this.quincho = quincho;
+        this.pileta = pileta;
+        this.mascotas = mascotas;
+        this.niños = niños;
+        this.disponible = disponible;
     }
+
+    public Inmueble(int idInmueble, Propietario prop, TipoInmueble tipo, String alquilerVenta, String direccion, Zona zona, String descripcion, int superficie, double precioTasado, String accesibilidad, int ambientes, int dormitorios, int baños, boolean patio, boolean cochera, boolean quincho, boolean pileta, boolean mascotas, boolean niños, boolean disponible) {
+        this.idInmueble = idInmueble;
+        this.prop = prop;
+        this.tipo = tipo;
+        this.alquilerVenta = alquilerVenta;
+        this.direccion = direccion;
+        this.zona = zona;
+        this.descripcion = descripcion;
+        this.superficie = superficie;
+        this.precioTasado = precioTasado;
+        this.accesibilidad = accesibilidad;
+        this.ambientes = ambientes;
+        this.dormitorios = dormitorios;
+        this.baños = baños;
+        this.patio = patio;
+        this.cochera = cochera;
+        this.quincho = quincho;
+        this.pileta = pileta;
+        this.mascotas = mascotas;
+        this.niños = niños;
+        this.disponible = disponible;
+    }
+
+    
 
     public int getIdInmueble() {
         return idInmueble;
