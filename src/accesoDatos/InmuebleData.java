@@ -31,7 +31,7 @@ public class InmuebleData {
             ps.setObject(2,inmueble.getTipo().toString());
             ps.setString(3, inmueble.getAlquilerVenta());
             ps.setString(4, inmueble.getDireccion());
-            ps.setObject(5, inmueble.getZona());
+            ps.setObject(5, inmueble.getZona().toString());
             ps.setString(6, inmueble.getDescripcion());
             ps.setInt(7, inmueble.getSuperficie());
             ps.setDouble(8, inmueble.getPrecioTasado());

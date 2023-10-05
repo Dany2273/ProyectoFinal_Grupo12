@@ -6,14 +6,15 @@
             <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/Conexion.java</file>
         </group>
         <group>
-            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/entidades/Venta.java</file>
-            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/GaranteData.java</file>
-            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/VentaData.java</file>
-            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/ClienteData.java</file>
-            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/AlquilerData.java</file>
-            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/PropietarioData.java</file>
-            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/InmuebleData.java</file>
-            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/CobroData.java</file>
+            <file>file:/C:/Users/Miki/Desktop/final%20proye%2012/ProyectoFinal_Grupo12/src/accesoDatos/InmuebleData.java</file>
+            <file>file:/C:/Users/Miki/Desktop/final%20proye%2012/ProyectoFinal_Grupo12/src/accesoDatos/GaranteData.java</file>
+            <file>file:/C:/Users/Miki/Desktop/final%20proye%2012/ProyectoFinal_Grupo12/src/entidades/Cliente.java</file>
+            <file>file:/C:/Users/Miki/Desktop/final%20proye%2012/ProyectoFinal_Grupo12/src/accesoDatos/VentaData.java</file>
+            <file>file:/C:/Users/Miki/Desktop/final%20proye%2012/ProyectoFinal_Grupo12/src/accesoDatos/ClienteData.java</file>
+            <file>file:/C:/Users/Miki/Desktop/final%20proye%2012/ProyectoFinal_Grupo12/src/entidades/Propietario.java</file>
+            <file>file:/C:/Users/Miki/Desktop/final%20proye%2012/ProyectoFinal_Grupo12/src/accesoDatos/CobroData.java</file>
+            <file>file:/C:/Users/Miki/Desktop/final%20proye%2012/ProyectoFinal_Grupo12/src/accesoDatos/AlquilerData.java</file>
+            <file>file:/C:/Users/Miki/Desktop/final%20proye%2012/ProyectoFinal_Grupo12/src/accesoDatos/PropietarioData.java</file>
         </group>
     </open-files>
 </project-private>
