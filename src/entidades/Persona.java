@@ -8,10 +8,10 @@ public class Persona {
     private String nombre;
     private int dni;
     private int cuilCuit;
+    private String lugarTrabajo;
     private String domicilio;
     private String ciudad;
     private String codigoPostal;
-    private String lugarTrabajo;
     private String telefono;
     private String mail;
     private boolean estado;
@@ -19,32 +19,34 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(TipoCliente tipo, String nombre, int dni, int cuilCuit, String domicilio, String ciudad, String codigoPostal, String lugarTrabajo, String telefono, String mail, boolean estado) {
+    public Persona(TipoCliente tipo, String nombre, int dni, int cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
         this.tipo = tipo;
         this.nombre = nombre;
         this.dni = dni;
         this.cuilCuit = cuilCuit;
+        this.lugarTrabajo = lugarTrabajo;
         this.domicilio = domicilio;
         this.ciudad = ciudad;
         this.codigoPostal = codigoPostal;
-        this.lugarTrabajo = lugarTrabajo;
         this.telefono = telefono;
         this.mail = mail;
         this.estado = estado;
     }
 
-    public Persona(TipoCliente tipo, String nombre, int cuilCuit, String domicilio, String ciudad, String codigoPostal, String lugarTrabajo, String telefono, String mail, boolean estado) {
+    public Persona(TipoCliente tipo, String nombre, int cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
         this.tipo = tipo;
         this.nombre = nombre;
         this.cuilCuit = cuilCuit;
+        this.lugarTrabajo = lugarTrabajo;
         this.domicilio = domicilio;
         this.ciudad = ciudad;
         this.codigoPostal = codigoPostal;
-        this.lugarTrabajo = lugarTrabajo;
         this.telefono = telefono;
         this.mail = mail;
         this.estado = estado;
     }
+
+    
 
     public TipoCliente getTipo() {
         return tipo;

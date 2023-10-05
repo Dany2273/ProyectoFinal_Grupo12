@@ -11,26 +11,25 @@ public class Propietario extends Persona {
     public Propietario() {
     }
 
-    public Propietario(TipoCliente tipo, String nombre, int dni, int cuilCuit, String domicilio, String ciudad, String codigoPostal, String lugarTrabajo, String telefono, String mail, boolean estado) {
-        super(tipo, nombre, dni, cuilCuit, domicilio, ciudad, codigoPostal, lugarTrabajo, telefono, mail, estado);
+    public Propietario(TipoCliente tipo, String nombre, int dni, int cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
+        super(tipo, nombre, dni, cuilCuit, lugarTrabajo, domicilio, ciudad, codigoPostal, telefono, mail, estado);
     }
 
-    public Propietario(TipoCliente tipo, String nombre, int cuilCuit, String domicilio, String ciudad, String codigoPostal, String lugarTrabajo, String telefono, String mail, boolean estado) {
-        super(tipo, nombre, cuilCuit, domicilio, ciudad, codigoPostal, lugarTrabajo, telefono, mail, estado);
+    public Propietario(TipoCliente tipo, String nombre, int cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
+        super(tipo, nombre, cuilCuit, lugarTrabajo, domicilio, ciudad, codigoPostal, telefono, mail, estado);
     }
 
-    public Propietario(int idPropietario, TipoCliente tipo, String nombre, int dni, int cuilCuit, String domicilio, 
-            String ciudad, String codigoPostal, String lugarTrabajo, String telefono, String mail, boolean estado) {
-        super(tipo, nombre, dni, cuilCuit, domicilio, ciudad, codigoPostal, lugarTrabajo, telefono, mail, estado);
+    public Propietario(int idPropietario, TipoCliente tipo, String nombre, int dni, int cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
+        super(tipo, nombre, dni, cuilCuit, lugarTrabajo, domicilio, ciudad, codigoPostal, telefono, mail, estado);
         this.idPropietario = idPropietario;
     }
 
-    public Propietario(int idPropietario, TipoCliente tipo, String nombre, int cuilCuit, String domicilio, 
-            String ciudad, String codigoPostal, String lugarTrabajo, String telefono, String mail, boolean estado) {
-        super(tipo, nombre, cuilCuit, domicilio, ciudad, codigoPostal, lugarTrabajo, telefono, mail, estado);
+    public Propietario(int idPropietario, TipoCliente tipo, String nombre, int cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
+        super(tipo, nombre, cuilCuit, lugarTrabajo, domicilio, ciudad, codigoPostal, telefono, mail, estado);
         this.idPropietario = idPropietario;
     }
 
+   
     public int getIdPropietario() {
         return idPropietario;
     }
