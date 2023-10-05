@@ -20,22 +20,22 @@ public class ClienteData {
     
     public void agregarCliente(Cliente cliente){
         
-        String sql = "INSERT INTO cliente(nombreRsocial, dni, cuilCuit, domicilio, lugarTrabajo, tipo, telefono, "
-                + "mail, ciudad, codigoPostal, estado) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO cliente(tipo, nombreRsocial, dni, cuilCuit, domicilio,ciudad,"
+                + " codigoPostal, lugarTrabajo,  telefono, mail,  estado) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         
         try{
             PreparedStatement ps = con.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
             
-            ps.setString(1, cliente.getNombre());
-            ps.setInt(2, cliente.getDni());
-            ps.setInt(3, cliente.getCuilCuit());
-            ps.setString(4, cliente.getDomicilio());
-            ps.setString(5, cliente.getLugarTrabajo());
-            ps.setString(6, cliente.getTipo().toString());
-            ps.setString(7, cliente.getTelefono());
-            ps.setString(8, cliente.getMail());
-            ps.setString(9, cliente.getCiudad());
-            ps.setString(10, cliente.getCodigoPostal());
+            ps.setObject(1, cliente.getTipo());
+            ps.setString(2, cliente.getNombre());
+            ps.setInt(3, cliente.getDni());
+            ps.setInt(4, cliente.getCuilCuit());
+            ps.setString(5, cliente.getDomicilio());
+            ps.setString(6, cliente.getCiudad());
+            ps.setString(7, cliente.getCodigoPostal());
+            ps.setString(8, cliente.getLugarTrabajo());
+            ps.setString(9, cliente.getTelefono());
+            ps.setString(10, cliente.getMail());
             ps.setBoolean(11, cliente.isEstado());
             
             ps.executeUpdate();
@@ -45,7 +45,7 @@ public class ClienteData {
              if (rs.next()) {
                cliente.setIdCliente(rs.getInt(1));
 
-                JOptionPane.showMessageDialog(null, "Cliente guradado correctamente");
+                JOptionPane.showMessageDialog(null, "Cliente guardado correctamente");
                 //Generamos un mje de comprobacion, pero antes creamos un alumno en el main del proyecto
             }
             ps.close();

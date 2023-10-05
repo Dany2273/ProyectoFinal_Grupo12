@@ -6,7 +6,7 @@ import Enums.Zona;
 import entidades.Propietario;
 
 public class Inmueble {
-   
+    private int idInmueble;
     private String direccion;
     private Propietario prop;
     private TipoInmueble tipo;
@@ -30,7 +30,7 @@ public class Inmueble {
     public Inmueble() {
     }
 
-    public Inmueble(String direccion, Propietario prop, TipoInmueble tipo, String accesibilidad, Zona zona, 
+    public Inmueble(int idInmueble, String direccion, Propietario prop, TipoInmueble tipo, String accesibilidad, Zona zona, 
             int superficie, double precioTasado, String alquilerVenta, String descripcion, int ambientes, 
             int dormitorios, int baños, boolean patio, boolean cochera, boolean quincho, boolean pileta, 
             boolean mascotas, boolean niños, boolean disponible) {
@@ -41,7 +41,15 @@ public class Inmueble {
         this.alquilerVenta = alquilerVenta;this.descripcion = descripcion;this.ambientes = ambientes;
         this.dormitorios = dormitorios;this.baños = baños;this.patio = patio;this.cochera = cochera;
         this.quincho = quincho;this.pileta = pileta;this.mascotas = mascotas;
-        this.niños = niños;this.disponible = disponible;
+        this.niños = niños;this.disponible = disponible;this.idInmueble = idInmueble;
+    }
+
+    public int getIdInmueble() {
+        return idInmueble;
+    }
+
+    public void setIdInmueble(int idInmueble) {
+        this.idInmueble = idInmueble;
     }
 
     public String getDireccion() {
@@ -198,7 +206,7 @@ public class Inmueble {
 
     @Override
     public String toString() {
-        return "direccion=" + direccion + ", prop=" + prop + ", tipo=" + tipo + ", accesibilidad=" + 
+        return idInmueble+"direccion=" + direccion + ", prop=" + prop + ", tipo=" + tipo + ", accesibilidad=" + 
                 accesibilidad + ", zona=" + zona + ", superficie=" + superficie + ", precioTasado=" +
                 precioTasado + ", alquilerVenta=" + alquilerVenta + ", descripcion=" + descripcion + 
                 ", ambientes=" + ambientes + ", dormitorios=" + dormitorios + ", baños=" + baños + 

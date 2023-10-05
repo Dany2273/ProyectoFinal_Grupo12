@@ -5,7 +5,7 @@ import entidades.Alquiler;
 import java.time.LocalDate;
 
 public class CobroAlquiler {
-    
+    private int idCobroAlquiler;
     private int cobro;
     private Alquiler alq;
     private LocalDate fechaCobro;
@@ -27,6 +27,26 @@ public class CobroAlquiler {
         this.comision = comision;
         this.importeMora = importeMora;
         this.numComprobante = numComprobante;
+    }
+
+    public CobroAlquiler(int idCobroAlquiler, int cobro, Alquiler alq, LocalDate fechaCobro, String mesCobro, double importe, double comision, double importeMora, String numComprobante) {
+        this.idCobroAlquiler = idCobroAlquiler;
+        this.cobro = cobro;
+        this.alq = alq;
+        this.fechaCobro = fechaCobro;
+        this.mesCobro = mesCobro;
+        this.importe = importe;
+        this.comision = comision;
+        this.importeMora = importeMora;
+        this.numComprobante = numComprobante;
+    }
+
+    public int getIdCobroAlquiler() {
+        return idCobroAlquiler;
+    }
+
+    public void setIdCobroAlquiler(int idCobroAlquiler) {
+        this.idCobroAlquiler = idCobroAlquiler;
     }
 
     public int getCobro() {
@@ -95,7 +115,7 @@ public class CobroAlquiler {
 
     @Override
     public String toString() {
-        return "CobroAlquiler{" + "cobro=" + cobro + ", alq=" + alq + ", fechaCobro=" + fechaCobro + ", mesCobro=" + mesCobro + ", importe=" + importe + ", comision=" + comision + ", importeMora=" + importeMora + ", numComprobante=" + numComprobante + '}';
+        return "CobroAlquiler{"+idCobroAlquiler + "cobro=" + cobro + ", alq=" + alq + ", fechaCobro=" + fechaCobro + ", mesCobro=" + mesCobro + ", importe=" + importe + ", comision=" + comision + ", importeMora=" + importeMora + ", numComprobante=" + numComprobante + '}';
     }
     
 }
