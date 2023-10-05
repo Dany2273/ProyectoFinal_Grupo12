@@ -6,9 +6,14 @@
             <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/Conexion.java</file>
         </group>
         <group>
-            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/Enums/TipoInmueble.java</file>
-            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/Enums/TipoCliente.java</file>
-            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/Enums/Caracteristicas.java</file>
+            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/entidades/Venta.java</file>
+            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/GaranteData.java</file>
+            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/VentaData.java</file>
+            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/ClienteData.java</file>
+            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/AlquilerData.java</file>
+            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/PropietarioData.java</file>
+            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/InmuebleData.java</file>
+            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/CobroData.java</file>
         </group>
     </open-files>
 </project-private>

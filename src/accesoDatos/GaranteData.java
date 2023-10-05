@@ -15,9 +15,9 @@ public class GaranteData {
         con = Conexion.getConexion();
     }
 
-    public void agregarCliente(Garante garante) {
+    public void agregarGarante(Garante garante) {
 
-        String sql = "INSERT INTO cliente(tipo, nombreRsocial, dni, cuilCuit, domicilio,ciudad,"
+        String sql = "INSERT INTO garante(tipo, nombreRsocial, dni, cuilCuit, domicilio,ciudad,"
                 + " codigoPostal, lugarTrabajo,  telefono, mail,  estado) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
         try {

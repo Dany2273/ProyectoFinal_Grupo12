@@ -24,9 +24,11 @@ public class ClienteData {
                 + " codigoPostal, lugarTrabajo,  telefono, mail,  estado) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         
         try{
+//            System.out.println(cliente.toString());
             PreparedStatement ps = con.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+//            System.out.println(cliente.toString());
             
-            ps.setObject(1, cliente.getTipo());
+            ps.setString(1, cliente.getTipo().toString()); 
             ps.setString(2, cliente.getNombre());
             ps.setInt(3, cliente.getDni());
             ps.setInt(4, cliente.getCuilCuit());
@@ -37,7 +39,7 @@ public class ClienteData {
             ps.setString(9, cliente.getTelefono());
             ps.setString(10, cliente.getMail());
             ps.setBoolean(11, cliente.isEstado());
-            
+            System.out.println(cliente);
             ps.executeUpdate();
             
             ResultSet rs = ps.getGeneratedKeys();
@@ -54,6 +56,13 @@ public class ClienteData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
         }
     }
+    public void modificarCliente(){
+        
+    }
+    
+    public void eliminarCliente(){
+        
+    }
     
     public void buscarCliente(int cuilCuit){
         
@@ -62,5 +71,6 @@ public class ClienteData {
     public void buscarCliente(String nombre){
         
     }
+    
     
 }
