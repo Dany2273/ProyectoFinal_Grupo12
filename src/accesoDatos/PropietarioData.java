@@ -22,7 +22,7 @@ public class PropietarioData {
         try {
             PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
-            ps.setObject(1, propietario.getTipo());
+            ps.setObject(1, propietario.getTipo().toString());
             ps.setString(2, propietario.getNombre());
             ps.setInt(3, propietario.getDni());
             ps.setInt(4, propietario.getCuilCuit());

@@ -30,7 +30,7 @@ public class AlquilerData {
             ps.setInt(1, alquiler.getInmueble().getIdInmueble());
             ps.setInt(2, alquiler.getCliente().getIdCliente());
             ps.setInt(3, alquiler.getGarante().getIdGarante());
-            ps.setObject(4, alquiler.getTipo());
+            ps.setObject(4, alquiler.getTipo().toString());
             ps.setDate(5,Date.valueOf(alquiler.getFechaInicio()));
             ps.setDate(6, Date.valueOf(alquiler.getFechaFin()));
             ps.setDouble(7, alquiler.getPrecioInicial());

@@ -23,7 +23,7 @@ public class GaranteData {
         try {
             PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
-            ps.setObject(1, garante.getTipo());
+            ps.setObject(1, garante.getTipo().toString());
             ps.setString(2, garante.getNombre());
             ps.setInt(3, garante.getDni());
             ps.setInt(4, garante.getCuilCuit());

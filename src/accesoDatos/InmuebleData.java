@@ -28,7 +28,7 @@ public class InmuebleData {
             PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             
             ps.setInt(1, inmueble.getProp().getIdPropietario());
-            ps.setObject(2,inmueble.getTipo());
+            ps.setObject(2,inmueble.getTipo().toString());
             ps.setString(3, inmueble.getAlquilerVenta());
             ps.setString(4, inmueble.getDireccion());
             ps.setObject(5, inmueble.getZona());
