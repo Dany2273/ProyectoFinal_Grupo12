@@ -11,6 +11,15 @@ public class Garante extends Persona {
         
     }
 
+    public Garante(TipoCliente tipo, String nombre, int dni, int cuilCuit, String domicilio, String ciudad, String codigoPostal, String lugarTrabajo, String telefono, String mail, boolean estado) {
+        super(tipo, nombre, dni, cuilCuit, domicilio, ciudad, codigoPostal, lugarTrabajo, telefono, mail, estado);
+    }
+
+    public Garante(TipoCliente tipo, String nombre, int cuilCuit, String domicilio, String ciudad, String codigoPostal, String lugarTrabajo, String telefono, String mail, boolean estado) {
+        super(tipo, nombre, cuilCuit, domicilio, ciudad, codigoPostal, lugarTrabajo, telefono, mail, estado);
+    }
+    
+
     public Garante(int idGarante, TipoCliente tipo, String nombre, int dni, int cuilCuit, String domicilio,
             String ciudad, String codigoPostal, String lugarTrabajo, String telefono, String mail, boolean estado) {
         super(tipo, nombre, dni, cuilCuit, domicilio, ciudad, codigoPostal, lugarTrabajo, telefono, mail, estado);
