@@ -10,25 +10,25 @@ public class Cliente extends Persona {
     public Cliente() {
     }
 
-    public Cliente(TipoCliente tipo, String nombre, int dni, int cuilCuit, String domicilio, String ciudad, String codigoPostal, String lugarTrabajo, String telefono, String mail, boolean estado) {
-        super(tipo, nombre, dni, cuilCuit, domicilio, ciudad, codigoPostal, lugarTrabajo, telefono, mail, estado);
+    public Cliente(TipoCliente tipo, String nombre, int dni, long cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
+        super(tipo, nombre, dni, cuilCuit, lugarTrabajo, domicilio, ciudad, codigoPostal, telefono, mail, estado);
     }
 
-    public Cliente(TipoCliente tipo, String nombre, int cuilCuit, String domicilio, String ciudad, String codigoPostal, String lugarTrabajo, String telefono, String mail, boolean estado) {
-        super(tipo, nombre, cuilCuit, domicilio, ciudad, codigoPostal, lugarTrabajo, telefono, mail, estado);
+    public Cliente(TipoCliente tipo, String nombre, long cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
+        super(tipo, nombre, cuilCuit, lugarTrabajo, domicilio, ciudad, codigoPostal, telefono, mail, estado);
     }
 
-    public Cliente(int idCliente, TipoCliente tipo, String nombre, int dni, int cuilCuit, String domicilio,
-            String ciudad, String codigoPostal, String lugarTrabajo, String telefono, String mail, boolean estado) {
-        super(tipo, nombre, dni, cuilCuit, domicilio, ciudad, codigoPostal, lugarTrabajo, telefono, mail, estado);
+    public Cliente(int idCliente, TipoCliente tipo, String nombre, int dni, long cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
+        super(tipo, nombre, dni, cuilCuit, lugarTrabajo, domicilio, ciudad, codigoPostal, telefono, mail, estado);
         this.idCliente = idCliente;
     }
 
-    public Cliente(int idCliente, TipoCliente tipo, String nombre, int cuilCuit, String domicilio, String ciudad,
-            String codigoPostal, String lugarTrabajo, String telefono, String mail, boolean estado) {
-        super(tipo, nombre, cuilCuit, domicilio, ciudad, codigoPostal, lugarTrabajo, telefono, mail, estado);
+    public Cliente(int idCliente, TipoCliente tipo, String nombre, long cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
+        super(tipo, nombre, cuilCuit, lugarTrabajo, domicilio, ciudad, codigoPostal, telefono, mail, estado);
         this.idCliente = idCliente;
     }
+
+   
 
     public int getIdCliente() {
         return idCliente;
@@ -40,7 +40,7 @@ public class Cliente extends Persona {
 
     @Override
     public String toString() {
-        return "idCliente=" + idCliente + super.toString();
+        return "idCliente: " + idCliente + super.toString();
     }
 
    

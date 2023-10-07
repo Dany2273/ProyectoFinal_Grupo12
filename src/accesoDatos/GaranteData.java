@@ -26,7 +26,7 @@ public class GaranteData {
             ps.setObject(1, garante.getTipo().toString());
             ps.setString(2, garante.getNombre());
             ps.setInt(3, garante.getDni());
-            ps.setInt(4, garante.getCuilCuit());
+            ps.setLong(4, garante.getCuilCuit());
             ps.setString(5, garante.getDomicilio());
             ps.setString(6, garante.getCiudad());
             ps.setString(7, garante.getCodigoPostal());

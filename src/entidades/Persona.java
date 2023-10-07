@@ -7,7 +7,7 @@ public class Persona {
     private TipoCliente tipo;
     private String nombre;
     private int dni;
-    private int cuilCuit;
+    private long cuilCuit;
     private String lugarTrabajo;
     private String domicilio;
     private String ciudad;
@@ -19,7 +19,7 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(TipoCliente tipo, String nombre, int dni, int cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
+    public Persona(TipoCliente tipo, String nombre, int dni, long cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
         this.tipo = tipo;
         this.nombre = nombre;
         this.dni = dni;
@@ -33,7 +33,7 @@ public class Persona {
         this.estado = estado;
     }
 
-    public Persona(TipoCliente tipo, String nombre, int cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
+    public Persona(TipoCliente tipo, String nombre, long cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
         this.tipo = tipo;
         this.nombre = nombre;
         this.cuilCuit = cuilCuit;
@@ -72,11 +72,11 @@ public class Persona {
         this.dni = dni;
     }
 
-    public int getCuilCuit() {
+    public long getCuilCuit() {
         return cuilCuit;
     }
 
-    public void setCuilCuit(int cuilCuit) {
+    public void setCuilCuit(long cuilCuit) {
         this.cuilCuit = cuilCuit;
     }
 
@@ -138,7 +138,8 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" + "tipo=" + tipo + ", nombre=" + nombre + ", dni=" + dni + ", cuilCuit=" + cuilCuit + ", domicilio=" + domicilio + ", ciudad=" + ciudad + ", codigoPostal=" + codigoPostal + ", lugarTrabajo=" + lugarTrabajo + ", telefono=" + telefono + ", mail=" + mail + ", estado=" + estado + '}';
+        return ", Tipo Persona: " + tipo + ", Nombre: " + nombre + ", Dni: " + dni + ", Cuil/Cuit: " + cuilCuit ;
     }
+
     
 }

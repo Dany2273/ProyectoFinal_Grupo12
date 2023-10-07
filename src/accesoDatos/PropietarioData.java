@@ -25,7 +25,7 @@ public class PropietarioData {
             ps.setObject(1, propietario.getTipo().toString());
             ps.setString(2, propietario.getNombre());
             ps.setInt(3, propietario.getDni());
-            ps.setInt(4, propietario.getCuilCuit());
+            ps.setLong(4, propietario.getCuilCuit());
             ps.setString(5, propietario.getDomicilio());
             ps.setString(6, propietario.getCiudad());
             ps.setString(7, propietario.getCodigoPostal());
@@ -61,7 +61,7 @@ public class PropietarioData {
 
             ps.setObject(1, propietario.getTipo().toString());
             ps.setString(2, propietario.getNombre());
-            ps.setInt(3, propietario.getCuilCuit());
+            ps.setLong(3, propietario.getCuilCuit());
             ps.setString(4, propietario.getDomicilio());
             ps.setString(5, propietario.getCiudad());
             ps.setString(6, propietario.getCodigoPostal());
@@ -123,7 +123,7 @@ public class PropietarioData {
             ps.setObject(1, propietario.getTipo().toString());
             ps.setString(2, propietario.getNombre());
             ps.setInt(3, propietario.getDni());
-            ps.setInt(4, propietario.getCuilCuit());
+            ps.setLong(4, propietario.getCuilCuit());
             ps.setString(5, propietario.getLugarTrabajo());
             ps.setString(6, propietario.getDomicilio());
             ps.setString(7, propietario.getCiudad());
@@ -156,7 +156,7 @@ public class PropietarioData {
 
             ps.setObject(1, propietario.getTipo().toString());
             ps.setString(2, propietario.getNombre());
-            ps.setInt(3, propietario.getCuilCuit());
+            ps.setLong(3, propietario.getCuilCuit());
             ps.setString(4, propietario.getLugarTrabajo());
             ps.setString(5, propietario.getDomicilio());
             ps.setString(6, propietario.getCiudad());

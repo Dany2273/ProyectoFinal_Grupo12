@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group name="Guia1 Ejercicios 1 al 5">
-            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/Conexion.java</file>
-        </group>
+        <group name="Guia1 Ejercicios 1 al 5"/>
         <group>
-            <file>file:/C:/Users/Miki/Desktop/final%20proye%2012/ProyectoFinal_Grupo12/src/accesoDatos/InmuebleData.java</file>
-            <file>file:/C:/Users/Miki/Desktop/final%20proye%2012/ProyectoFinal_Grupo12/src/accesoDatos/GaranteData.java</file>
-            <file>file:/C:/Users/Miki/Desktop/final%20proye%2012/ProyectoFinal_Grupo12/src/entidades/Cliente.java</file>
-            <file>file:/C:/Users/Miki/Desktop/final%20proye%2012/ProyectoFinal_Grupo12/src/accesoDatos/VentaData.java</file>
-            <file>file:/C:/Users/Miki/Desktop/final%20proye%2012/ProyectoFinal_Grupo12/src/accesoDatos/ClienteData.java</file>
-            <file>file:/C:/Users/Miki/Desktop/final%20proye%2012/ProyectoFinal_Grupo12/src/entidades/Propietario.java</file>
-            <file>file:/C:/Users/Miki/Desktop/final%20proye%2012/ProyectoFinal_Grupo12/src/accesoDatos/CobroData.java</file>
-            <file>file:/C:/Users/Miki/Desktop/final%20proye%2012/ProyectoFinal_Grupo12/src/accesoDatos/AlquilerData.java</file>
-            <file>file:/C:/Users/Miki/Desktop/final%20proye%2012/ProyectoFinal_Grupo12/src/accesoDatos/PropietarioData.java</file>
+            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/entidades/Persona.java</file>
+            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/GaranteData.java</file>
+            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/accesoDatos/ClienteData.java</file>
+            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/entidades/Propietario.java</file>
+            <file>file:/C:/Users/Compaq/Documents/NetBeansProjects/ProyectoFinal_Grupo12/src/proyectofinal_grupo12/ProyectoFinal_Grupo12.java</file>
         </group>
     </open-files>
 </project-private>

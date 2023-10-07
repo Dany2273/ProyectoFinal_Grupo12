@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="inmobiliaria">
+  <ClassDiagramComponents>
+    <Class name="Persona" package="" visibility="public" xPosition="4.0" yPosition="-171.0">
+      <Fields>
+        <Field name="tipo" type="TipoCliente" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="dni" type="int" visibility="private"/>
+        <Field name="cuilCuit" type="int" visibility="private"/>
+        <Field name="lugarTrabajo" type="String" visibility="private"/>
+        <Field name="domicilio" type="String" visibility="private"/>
+        <Field name="ciudad" type="String" visibility="private"/>
+        <Field name="codigoPostal" type="String" visibility="private"/>
+        <Field name="telefono" type="String" visibility="private"/>
+        <Field name="mail" type="String" visibility="private"/>
+        <Field name="estado" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Cliente" package="" visibility="public" xPosition="189.0" yPosition="110.0">
+      <Fields>
+        <Field name="idCliente" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Garante" package="" visibility="public" xPosition="421.0" yPosition="0.0">
+      <Fields>
+        <Field name="idGarante" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Propietario" package="" visibility="public" xPosition="4.0" yPosition="256.0">
+      <Fields>
+        <Field name="idPropietario" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Inmueble" package="" visibility="public" xPosition="405.0" yPosition="418.0">
+      <Fields>
+        <Field name="idInmueble" type="int" visibility="private"/>
+        <Field name="prop" type="Propietario" visibility="private"/>
+        <Field name="tipo" type="TipoInmueble" visibility="private"/>
+        <Field name="alquilerVenta" type="String" visibility="private"/>
+        <Field name="direccion" type="String" visibility="private"/>
+        <Field name="zona" type="Zona" visibility="private"/>
+        <Field name="descripcion" type="String" visibility="private"/>
+        <Field name="superficie" type="int" visibility="private"/>
+        <Field name="precioTasado" type="double" visibility="private"/>
+        <Field name="accesibilidad" type="String" visibility="private"/>
+        <Field name="ambientes" type="int" visibility="private"/>
+        <Field name="dormitorios" type="int" visibility="private"/>
+        <Field name="banios" type="int" visibility="private"/>
+        <Field name="patio" type="boolean" visibility="private"/>
+        <Field name="cochera" type="boolean" visibility="private"/>
+        <Field name="quincho" type="boolean" visibility="private"/>
+        <Field name="pileta" type="boolean" visibility="private"/>
+        <Field name="mascotas" type="boolean" visibility="private"/>
+        <Field name="ninios" type="boolean" visibility="private"/>
+        <Field name="disponible" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Alquiler" package="" visibility="public" xPosition="563.0" yPosition="159.0">
+      <Fields>
+        <Field name="idAlquiler" type="int" visibility="private"/>
+        <Field name="inmueble" type="Inmueble" visibility="private"/>
+        <Field name="cliente" type="Cliente" visibility="private"/>
+        <Field name="garante" type="Garante" visibility="private"/>
+        <Field name="tipoC" type="TipoCliente" visibility="private"/>
+        <Field name="tipoA" type="TipoAlquiler" visibility="private"/>
+        <Field name="fechaInicio" type="LocalDate" visibility="private"/>
+        <Field name="fechaFin" type="LocalDate" visibility="private"/>
+        <Field name="precioInicial" type="double" visibility="private"/>
+        <Field name="clausula" type="String" visibility="private"/>
+        <Field name="fechaFirma" type="LocalDate" visibility="private"/>
+        <Field name="fechaRescision" type="LocalDate" visibility="private"/>
+        <Field name="estado" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="CobroAlquiler" package="" visibility="public" xPosition="823.0" yPosition="295.0">
+      <Fields>
+        <Field name="idCobroAlquiler" type="int" visibility="private"/>
+        <Field name="alq" type="Alquiler" visibility="private"/>
+        <Field name="fechaCobro" type="LocalDate" visibility="private"/>
+        <Field name="mesCobro" type="String" visibility="private"/>
+        <Field name="importe" type="double" visibility="private"/>
+        <Field name="comision" type="double" visibility="private"/>
+        <Field name="importeMora" type="double" visibility="private"/>
+        <Field name="numComprobante" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Venta" package="" visibility="public" xPosition="263.0" yPosition="256.0">
+      <Fields>
+        <Field name="idVenta" type="int" visibility="private"/>
+        <Field name="inmueble" type="Inmueble" visibility="private"/>
+        <Field name="cliente" type="Cliente" visibility="private"/>
+        <Field name="prop" type="Propietario" visibility="private"/>
+        <Field name="fechaPagoInicial" type="LocalDate" visibility="private"/>
+        <Field name="precioAcordado" type="double" visibility="private"/>
+        <Field name="pagoInicial" type="double" visibility="private"/>
+        <Field name="pagoRestante" type="double" visibility="private"/>
+        <Field name="estadoPago" type="String" visibility="private"/>
+        <Field name="fechaCancelacion" type="LocalDate" visibility="private"/>
+        <Field name="importeGastos" type="double" visibility="private"/>
+        <Field name="importeComision" type="double" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Enum name="TipoAlquiler" package="" visibility="public" xPosition="857.0" yPosition="155.0">
+      <Literals>
+        <Literal name="RESIDENCIAL"/>
+        <Literal name="COMERCIAL"/>
+        <Literal name="VACACIONAL"/>
+        <Literal name="CORTO_PLAZO"/>
+        <Literal name="LARGO_PLAZO"/>
+        <Literal name="EVENTOS"/>
+        <Literal name="ESTACIONAMIENTO"/>
+      </Literals>
+    </Enum>
+    <Enum name="TipoCliente" package="" visibility="public" xPosition="823.0" yPosition="0.0">
+      <Literals>
+        <Literal name="PERSONA_FISICA"/>
+        <Literal name="PERSONA_JURIDICA"/>
+      </Literals>
+    </Enum>
+    <Enum name="TipoInmueble" package="" visibility="public" xPosition="16.0" yPosition="450.0">
+      <Literals>
+        <Literal name="CASA"/>
+        <Literal name="COCHERA"/>
+        <Literal name="DEPARTAMENTO"/>
+        <Literal name="DUPLEX"/>
+        <Literal name="GALPON"/>
+        <Literal name="LOCAL"/>
+        <Literal name="LOTE"/>
+        <Literal name="MONOAMBIENTE"/>
+        <Literal name="OFICINA"/>
+        <Literal name="QUINTA"/>
+        <Literal name="TERRENO"/>
+      </Literals>
+    </Enum>
+    <Enum name="Zona" package="" visibility="public" xPosition="746.0" yPosition="418.0">
+      <Literals>
+        <Literal name="RESIDENCIAL"/>
+        <Literal name="COMERCIAL"/>
+        <Literal name="INDUSTRIAL"/>
+        <Literal name="RURAL"/>
+        <Literal name="TURISTICA"/>
+        <Literal name="HISTÓRICA"/>
+        <Literal name="EDUCATIVA"/>
+        <Literal name="DE_RECREACION"/>
+      </Literals>
+    </Enum>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="tiene" source="CobroAlquiler" target="Alquiler" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="tiene" source="Alquiler" target="TipoCliente" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Garante" target="Persona"/>
+    <HasRelation name="tiene" source="Cliente" target="Alquiler" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="ArrayList"/>
+    <HasRelation name="tipo" source="Alquiler" target="TipoAlquiler" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Propietario" target="Persona"/>
+    <HasRelation name="tiene" source="Alquiler" target="Garante" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="tiene" source="Venta" target="Cliente" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="tiene" source="Inmueble" target="TipoInmueble" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="tiene" source="Inmueble" target="Zona" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Cliente" target="Persona"/>
+    <HasRelation name="tiene" source="Venta" target="Inmueble" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="tiene" source="Alquiler" target="Inmueble" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="ArrayList"/>
+    <HasRelation name="tiene" source="Propietario" target="Inmueble" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="ArrayList"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
