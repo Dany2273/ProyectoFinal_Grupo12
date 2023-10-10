@@ -7,6 +7,8 @@ import accesoDatos.ClienteData;
 import accesoDatos.PropietarioData;
 import entidades.Cliente;
 import entidades.Propietario;
+import entidades.Venta;
+import java.time.LocalDate;
 
 public class ProyectoFinal_Grupo12 {
 
@@ -55,6 +57,7 @@ public class ProyectoFinal_Grupo12 {
 //            }
           
 //          cData.eliminarCliente(8);
+
 
     }
     

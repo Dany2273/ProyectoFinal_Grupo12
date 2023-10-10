@@ -50,9 +50,61 @@ public class VentaData {
         } catch (SQLException ex) {
             Logger.getLogger(VentaData.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-       
-        
     }
     
+    public void modificarVenta(Venta venta){
+        String sql = "UPDATE venta SET idInmueble = ?,idCliente = ?,idPropietario = ?,fechaPagoInicial = ?,"
+                + "precioAcordado = ?,pagoInicial = ?,pagoRestante = ?,estadoPago = ?,fechaCancelacion = ?,"
+                + "importeGastos = ?,importeComision = ? WHERE idVenta = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1,venta.getInmueble().getIdInmueble());
+            ps.setInt(2, venta.getCliente().getIdCliente());
+            ps.setInt(3, venta.getProp().getIdPropietario());
+            ps.setDate(4, Date.valueOf(venta.getFechaPagoInicial()));
+            ps.setDouble(5, venta.getPrecioAcordado());
+            ps.setDouble(6, venta.getPagoInicial());
+            ps.setDouble(7, venta.getPagoRestante());
+            ps.setString(8, venta.getEstadoPago());
+            ps.setDate(9, Date.valueOf(venta.getFechaCancelacion()));
+            ps.setDouble(10, venta.getImporteGastos());
+            ps.setDouble(11, venta.getImporteComision());
+            ps.setInt(12, venta.getIdVenta());
+            
+            int exito = ps.executeUpdate();
+            
+            if(exito == 1){
+                 JOptionPane.showMessageDialog(null, "La venta ha sido modificada con exito.");
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla venta.");
+        }
+    }
+    
+    public void eliminarVenta(int idInmueble, int idCliente, int idPropietario){
+        String sql = "DELETE FROM venta WHERE idInmueble = ? AND idCiente = ? AND idPropietario = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, idInmueble);
+            ps.setInt(2, idCliente);
+            ps.setInt(3, idPropietario);
+            
+            int filas = ps.executeUpdate();
+            if(filas > 0){
+                JOptionPane.showMessageDialog(null, "La venta ha sido eliminada con exito.");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla venta.");
+        }
+    }
+    
+    public void buscarVenta(){
+        
+    }
 }
