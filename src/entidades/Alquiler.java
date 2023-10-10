@@ -14,6 +14,10 @@ public class Alquiler {
     private TipoAlquiler tipo;//es un enum del paquete Enums TipoAlquiler castear con toString
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
+    private double precioEstimativo;
+    private double deposito;
+    private double gastos;
+    private double gastosRecision;
     private double precioInicial;
     private String clausula;
     private LocalDate fechaFirma;
@@ -23,14 +27,18 @@ public class Alquiler {
     public Alquiler() {
     }
 
-    public Alquiler(Inmueble inmueble, Cliente cliente, Garante garante, TipoCliente tipoC, TipoAlquiler tipo, LocalDate fechaInicio, LocalDate fechaFin, double precioInicial, String clausula, LocalDate fechaFirma, LocalDate fechaRescision, boolean estado) {
+    public Alquiler(Inmueble inmueble, Cliente cliente, Garante garante, TipoCliente tipoC, TipoAlquiler tipo, LocalDate fechaInicio, LocalDate fechaFin, double precioEstimativo, double deposito, double gastos, double gastosRecision, double precioInicial, String clausula, LocalDate fechaFirma, LocalDate fechaRescision, boolean estado) {
         this.inmueble = inmueble;
         this.cliente = cliente;
         this.garante = garante;
-        this.tipo = tipo;
         this.tipoC = tipoC;
+        this.tipo = tipo;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.precioEstimativo = precioEstimativo;
+        this.deposito = deposito;
+        this.gastos = gastos;
+        this.gastosRecision = gastosRecision;
         this.precioInicial = precioInicial;
         this.clausula = clausula;
         this.fechaFirma = fechaFirma;
@@ -38,15 +46,19 @@ public class Alquiler {
         this.estado = estado;
     }
 
-    public Alquiler(int idAlquiler, Inmueble inmueble, Cliente cliente, Garante garante, TipoCliente tipoC, TipoAlquiler tipo, LocalDate fechaInicio, LocalDate fechaFin, double precioInicial, String clausula, LocalDate fechaFirma, LocalDate fechaRescision, boolean estado) {
+    public Alquiler(int idAlquiler, Inmueble inmueble, Cliente cliente, Garante garante, TipoCliente tipoC, TipoAlquiler tipo, LocalDate fechaInicio, LocalDate fechaFin, double precioEstimativo, double deposito, double gastos, double gastosRecision, double precioInicial, String clausula, LocalDate fechaFirma, LocalDate fechaRescision, boolean estado) {
         this.idAlquiler = idAlquiler;
         this.inmueble = inmueble;
         this.cliente = cliente;
         this.garante = garante;
-        this.tipo = tipo;
         this.tipoC = tipoC;
+        this.tipo = tipo;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.precioEstimativo = precioEstimativo;
+        this.deposito = deposito;
+        this.gastos = gastos;
+        this.gastosRecision = gastosRecision;
         this.precioInicial = precioInicial;
         this.clausula = clausula;
         this.fechaFirma = fechaFirma;
@@ -86,6 +98,14 @@ public class Alquiler {
         this.garante = garante;
     }
 
+    public TipoCliente getTipoC() {
+        return tipoC;
+    }
+
+    public void setTipoC(TipoCliente tipoC) {
+        this.tipoC = tipoC;
+    }
+
     public TipoAlquiler getTipo() {
         return tipo;
     }
@@ -94,14 +114,6 @@ public class Alquiler {
         this.tipo = tipo;
     }
 
-    public void setTipoC(TipoCliente tipoC) {
-        this.tipoC = tipoC;
-    }
-    
-    public TipoCliente getTipoC() {
-        return tipoC;
-    }
-    
     public LocalDate getFechaInicio() {
         return fechaInicio;
     }
@@ -116,6 +128,38 @@ public class Alquiler {
 
     public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
+    }
+
+    public double getPrecioEstimativo() {
+        return precioEstimativo;
+    }
+
+    public void setPrecioEstimativo(double precioEstimativo) {
+        this.precioEstimativo = precioEstimativo;
+    }
+
+    public double getDeposito() {
+        return deposito;
+    }
+
+    public void setDeposito(double deposito) {
+        this.deposito = deposito;
+    }
+
+    public double getGastos() {
+        return gastos;
+    }
+
+    public void setGastos(double gastos) {
+        this.gastos = gastos;
+    }
+
+    public double getGastosRecision() {
+        return gastosRecision;
+    }
+
+    public void setGastosRecision(double gastosRecision) {
+        this.gastosRecision = gastosRecision;
     }
 
     public double getPrecioInicial() {
@@ -158,9 +202,12 @@ public class Alquiler {
         this.estado = estado;
     }
 
+  
+
+
     @Override
     public String toString() {
-        return "idAlquiler=" + idAlquiler + ", inmueble=" + inmueble + ", cliente=" + cliente + ", garante=" + garante + ", tipo=" + tipo + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", precioInicial=" + precioInicial + ", clausula=" + clausula + ", fechaFirma=" + fechaFirma + ", fechaRescision=" + fechaRescision + ", estado=" + estado + '}';
+        return "idAlquiler=" + idAlquiler + ", inmueble=" + inmueble + ", cliente=" + cliente + ", garante=" + garante + ", tipo=" + tipo +  ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", precioEstimativo="+precioEstimativo+",deposito="+deposito+",gastos ="+gastos+",gastosRecision ="+gastosRecision+ ",precioInicial=" + precioInicial + ", clausula=" + clausula + ", fechaFirma=" + fechaFirma + ", fechaRescision=" + fechaRescision + ", estado=" + estado + '}';
     }
     
     
