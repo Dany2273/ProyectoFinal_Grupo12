@@ -5,6 +5,7 @@ import Enums.TipoCliente;
 import static Enums.TipoCliente.PERSONA_JURIDICA;
 import accesoDatos.ClienteData;
 import accesoDatos.PropietarioData;
+import accesoDatos.VentaData;
 import entidades.Cliente;
 import entidades.Propietario;
 import entidades.Venta;
@@ -57,8 +58,10 @@ public class ProyectoFinal_Grupo12 {
 //            }
           
 //          cData.eliminarCliente(8);
-
-
+        Venta venta = new Venta();
+        VentaData vData = new VentaData();
+        
+        vData.eliminarVenta(1, 1, 1);
     }
     
 }

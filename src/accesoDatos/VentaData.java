@@ -1,6 +1,9 @@
 
 package accesoDatos;
 
+import entidades.Cliente;
+import entidades.Inmueble;
+import entidades.Propietario;
 import entidades.Venta;
 import java.sql.Connection;
 import java.sql.Date;
@@ -13,10 +16,16 @@ import javax.swing.JOptionPane;
 
 public class VentaData {
     
-    Connection con = null;
-
+    private Connection con = null;
+    private InmuebleData iData = null;
+    private ClienteData cData = null;
+    private PropietarioData pData = null;
+    
     public VentaData() {
         con = Conexion.getConexion();
+        iData = new InmuebleData();
+        cData = new ClienteData();
+        pData = new PropietarioData();
     }
     
     public void agregarVenta(Venta venta){
@@ -85,7 +94,7 @@ public class VentaData {
     }
     
     public void eliminarVenta(int idInmueble, int idCliente, int idPropietario){
-        String sql = "DELETE FROM venta WHERE idInmueble = ? AND idCiente = ? AND idPropietario = ?";
+        String sql = "DELETE FROM venta WHERE idInmueble = ? AND idCliente = ? AND idPropietario = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -104,7 +113,41 @@ public class VentaData {
         }
     }
     
-    public void buscarVenta(){
+    public Venta buscarVenta(int id){
+        String sql = "SELECT * FROM venta WHERE idCliente = ?";
+        
+        Venta venta = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+             ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                venta = new Venta();
+                
+                venta.setIdVenta(id);
+//                Inmueble inm = iData.buscarInmueble(rs.getInt("idInmueble"));
+                Cliente cli = cData.buscarCliente(rs.getInt("idCliente"));
+                Propietario pro = pData.buscarId(rs.getInt("idPropietario"));
+//                venta.setInmueble(inm);
+                venta.setCliente(cli);
+                venta.setProp(pro);
+                venta.setFechaPagoInicial(rs.getDate("fechaPagoInicial").toLocalDate());
+                venta.setPrecioAcordado(rs.getDouble("precioAcordado"));
+                venta.setPagoInicial(rs.getDouble("pagoInicial"));
+                venta.setPagoRestante(rs.getDouble("pagoRestante"));
+                venta.setEstadoPago(rs.getString("estadoPago"));
+                venta.setFechaCancelacion(rs.getDate("fechaCancelacion").toLocalDate());
+                venta.setImporteGastos(rs.getDouble("importeGastos"));
+                venta.setImporteComision(rs.getDouble("importeComision"));
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "No existe la venta en la base de datos.");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla venta.");
+        }
+        return venta;
         
     }
 }

@@ -1,4 +1,3 @@
-
 package accesoDatos;
 
 import entidades.Inmueble;
@@ -11,24 +10,24 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class InmuebleData {
-    
+
     Connection con = null;
 
     public InmuebleData() {
         con = Conexion.getConexion();
     }
-    
-    public void agregarInmueble(Inmueble inmueble){
+
+    public void agregarInmueble(Inmueble inmueble) {
         String sql = "INSERT INTO inmueble(idPropietario, tipoInmueble, alquilerVenta, "
                 + "direccion, zona, descripcion, superficie, precioTasado, accesibilidad, cantAmbientes,"
                 + " cantDomitorios, cantBaños, patio, cochera, quincho, pileta, mascotas, niños,"
                 + " disponible) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        
+
         try {
             PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            
+
             ps.setInt(1, inmueble.getProp().getIdPropietario());
-            ps.setObject(2,inmueble.getTipo().toString());
+            ps.setObject(2, inmueble.getTipo().toString());
             ps.setString(3, inmueble.getAlquilerVenta());
             ps.setString(4, inmueble.getDireccion());
             ps.setObject(5, inmueble.getZona().toString());
@@ -46,20 +45,18 @@ public class InmuebleData {
             ps.setBoolean(17, inmueble.isMascotas());
             ps.setBoolean(18, inmueble.isNiños());
             ps.setBoolean(19, inmueble.isDisponible());
-            
+
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 inmueble.setIdInmueble(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Inmueble guardado correctamente");
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(InmuebleData.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
     }
-    
 }
