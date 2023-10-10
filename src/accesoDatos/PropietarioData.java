@@ -1,7 +1,6 @@
 package accesoDatos;
 
 import Enums.TipoCliente;
-import entidades.Cliente;
 import entidades.Propietario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,8 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class PropietarioData {
@@ -182,14 +179,14 @@ public class PropietarioData {
         }
     }//modifica un propietario juridico
 
-    public void reactivarPropietario(long cuilCuit) {
+    public void reactivarPropietario(int idPro) {
 
-        String sql = "UPDATE propietario SET estado = 1 WHERE cuilCuit = ? AND estado = 0;";
+        String sql = "UPDATE propietario SET estado = 1 WHERE idPropietario = ? AND estado = 0;";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
 
-            ps.setLong(1, cuilCuit);
+            ps.setLong(1, idPro);
 
             int exito = ps.executeUpdate();//Como la sentencia devuelve un entero creamos una variable tipo Int
 
@@ -219,8 +216,6 @@ public class PropietarioData {
                 Propietario propietario = new Propietario();//se crea un propietario y luego se le cargan sus datos
                 propietario.setIdPropietario(rs.getInt("idPropietario"));
                 propietario.setTipo(TipoCliente.valueOf(rs.getString("tipo")));// que hermosa linea
-                
-
 
                 propietario.setNombre(rs.getString("nombreRsocial"));
                 propietario.setDni(rs.getInt("dni"));
@@ -235,7 +230,7 @@ public class PropietarioData {
 
                 propietarios.add(propietario);//En cada vuelta del While va a ir agregando un propietario
 
-               System.out.println(propietario);
+                //System.out.println(propietario);
             }
 
         } catch (SQLException ex) {
@@ -272,6 +267,7 @@ public class PropietarioData {
 
                 propietarios.add(propietario);//En cada vuelta del While va a ir agregando un propietario
 
+                // System.out.println(propietario);
             }
 
         } catch (SQLException ex) {
@@ -308,6 +304,7 @@ public class PropietarioData {
 
                 propietarios.add(propietario);//En cada vuelta del While va a ir agregando un propietario
 
+                // System.out.println(propietario);
             }
 
         } catch (SQLException ex) {
@@ -319,7 +316,7 @@ public class PropietarioData {
 
     public List<Propietario> listarProJuridicosA() {//Metodo que devuelve una lista de propietarios
         List<Propietario> propietarios = new ArrayList<>();
-        String sql = "SELECT idPropietario, nombreRsocial,cuilCuit,lugarTrabajo,domicilio,ciudad,codigoPostal,telefono,mail,estado FROM propietario WHERE estado = 1 AND tipo= 'PERSONA_JURIDICA' ";
+        String sql = "SELECT idPropietario,tipo, nombreRsocial,cuilCuit,lugarTrabajo,domicilio,ciudad,codigoPostal,telefono,mail,estado FROM propietario WHERE estado = 1 AND tipo = 'PERSONA_JURIDICA' ";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -343,6 +340,7 @@ public class PropietarioData {
 
                 propietarios.add(propietario);//En cada vuelta del While va a ir agregando un propietario
 
+                // System.out.println(propietario);
             }
 
         } catch (SQLException ex) {
@@ -354,7 +352,7 @@ public class PropietarioData {
 
     public List<Propietario> listarProJuridicosI() {//Metodo que devuelve una lista de propietarios
         List<Propietario> propietarios = new ArrayList<>();
-        String sql = "SELECT idPropietario, nombreRsocial,cuilCuit,lugarTrabajo,domicilio,ciudad,codigoPostal,telefono,mail,estado FROM propietario WHERE estado = 0 AND tipo = 'PERSONA_JURIDICA' ";
+        String sql = "SELECT idPropietario,tipo, nombreRsocial,cuilCuit,lugarTrabajo,domicilio,ciudad,codigoPostal,telefono,mail,estado FROM propietario WHERE estado = 0 AND tipo = 'PERSONA_JURIDICA' ";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -378,6 +376,7 @@ public class PropietarioData {
 
                 propietarios.add(propietario);//En cada vuelta del While va a ir agregando un propietario
 
+                // System.out.println(propietario);
             }
 
         } catch (SQLException ex) {
@@ -389,7 +388,7 @@ public class PropietarioData {
 
     public List<Propietario> listarProJuridicosT() {//Metodo que devuelve una lista de propietarios
         List<Propietario> propietarios = new ArrayList<>();
-        String sql = "SELECT idPropietario, nombreRsocial,cuilCuit,lugarTrabajo,domicilio,ciudad,codigoPostal,telefono,mail,estado FROM propietario WHERE tipo = 'PERSONA_JURIDICA' ";
+        String sql = "SELECT idPropietario,tipo, nombreRsocial,cuilCuit,lugarTrabajo,domicilio,ciudad,codigoPostal,telefono,mail,estado FROM propietario WHERE tipo = 'PERSONA_JURIDICA' ";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -413,6 +412,7 @@ public class PropietarioData {
 
                 propietarios.add(propietario);//En cada vuelta del While va a ir agregando un propietario
 
+                // System.out.println(propietario);
             }
 
         } catch (SQLException ex) {
@@ -448,7 +448,7 @@ public class PropietarioData {
                 propietario.setEstado(true);
 
                 propietarios.add(propietario);//En cada vuelta del While va a ir agregando un propietario
-//System.out.println(propietario);
+                // System.out.println(propietario);
             }
 
         } catch (SQLException ex) {
@@ -484,7 +484,7 @@ public class PropietarioData {
                 propietario.setEstado(false);
 
                 propietarios.add(propietario);//En cada vuelta del While va a ir agregando un propietario
-System.out.println(propietario);
+                // System.out.println(propietario);
             }
 
         } catch (SQLException ex) {
@@ -520,7 +520,7 @@ System.out.println(propietario);
                 propietario.setEstado(rs.getBoolean("estado"));
 
                 propietarios.add(propietario);//En cada vuelta del While va a ir agregando un propietario
-//System.out.println(propietario);
+                //System.out.println(propietario);
             }
 
         } catch (SQLException ex) {
@@ -556,7 +556,6 @@ System.out.println(propietario);
                 propietario.setTelefono(rs.getString("telefono"));
                 propietario.setMail(rs.getString("mail"));
                 propietario.setEstado(true);
-                
 
             } else {
 
@@ -566,11 +565,11 @@ System.out.println(propietario);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-        System.out.println(propietario);
+        //System.out.println(propietario);
         return propietario;
     }//busca un propietario tanto juridico como fisico
-    
-    public Propietario buscarId (int idProp){
+
+    public Propietario buscarId(int idProp) {
         String sql = "SELECT * FROM propietario "
                 + "WHERE idPropietario = ? AND estado = 1";
         Propietario propietario = null;
@@ -595,7 +594,6 @@ System.out.println(propietario);
                 propietario.setTelefono(rs.getString("telefono"));
                 propietario.setMail(rs.getString("mail"));
                 propietario.setEstado(true);
-                
 
             } else {
 
@@ -605,7 +603,7 @@ System.out.println(propietario);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-        System.out.println(propietario);
+        //System.out.println(propietario);
         return propietario;
     }
 
@@ -618,7 +616,7 @@ System.out.println(propietario);
             // Configura el parámetro de la letra
             ps.setString(1, "tipo");
             ps.setString(2, letra + "%");
-            
+
             ResultSet rs = ps.executeQuery();
             /*Como el ResultSet va a devolver mas de una fila,
             recorremos el resultado con un While.*/
@@ -656,9 +654,9 @@ System.out.println(propietario);
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             // Configura el parámetro de la letra
-                ps.setString(1, "tipo");
+            ps.setString(1, "tipo");
             ps.setString(2, letra + "%");
-        
+
             ResultSet rs = ps.executeQuery();
             /*Como el ResultSet va a devolver mas de una fila,
             recorremos el resultado con un While.*/
@@ -725,9 +723,9 @@ System.out.println(propietario);
         return propietarios;
 
     }//lista todos los propietarios por nombre
-    
-     public List<Propietario> listarTodosPropietariosPorCuilCuit(char cuil) {
-        List<Cliente> propietarios = new ArrayList<>();
+
+    public List<Propietario> listarTodosPropietariosPorCuilCuit(char cuil) {
+        List<Propietario> propietarios = new ArrayList<>();
         String sql = "SELECT * FROM propietario WHERE cuilCuit = ?";
 
         try {
@@ -761,17 +759,86 @@ System.out.println(propietario);
         }
         return propietarios;
 
-    }
-    
-    
-    
-    //faltaria agregar algun metodo mas creo y tambien arreglar lo del rs.get valor del enum q no se como se hace
-    
+    }//activos e inactivos juridicos i fisicos
 
+    public List<Propietario> propietariosActivosCuilCuit(char letra) {
+        List<Propietario> propietarios = new ArrayList<>();
+        String sql = "SELECT * FROM propietario WHERE estado = 1 AND tipo = ? AND CuilCuit LIKE ?";
 
-    
-    
-    
-    
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            // Configura el parámetro de la letra
+            ps.setString(1, "tipo");
+            ps.setString(2, letra + "%");
+
+            ResultSet rs = ps.executeQuery();
+            /*Como el ResultSet va a devolver mas de una fila,
+            recorremos el resultado con un While.*/
+            while (rs.next()) {
+
+                Propietario propietario = new Propietario();//se crea un propietario y luego se le cargan sus datos
+                propietario.setIdPropietario(rs.getInt("idPropietario"));
+                propietario.setTipo(TipoCliente.valueOf(rs.getString("tipo")));
+                propietario.setNombre(rs.getString("nombreRsocial"));
+                propietario.setDni(rs.getInt("dni"));
+                propietario.setCuilCuit(rs.getLong("cuilCuit"));
+                propietario.setLugarTrabajo(rs.getString("lugarTrabajo"));
+                propietario.setDomicilio(rs.getString("domicilio"));
+                propietario.setCiudad(rs.getString("ciudad"));
+                propietario.setCodigoPostal(rs.getString("codigoPostal"));
+                propietario.setTelefono(rs.getString("telefono"));
+                propietario.setMail(rs.getString("mail"));
+                propietario.setEstado(true);
+
+                propietarios.add(propietario);//En cada vuelta del While va a ir agregando un propietario
+
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla propietario" + ex.getMessage());
+        }
+        return propietarios;//retorna el arraylist
+
+    }//activos juridicos i fisicos
+
+    public List<Propietario> propietariosInactivosCuilCuit(char letra) {
+        List<Propietario> propietarios = new ArrayList<>();
+        String sql = "SELECT * FROM propietario WHERE estado = 0 AND tipo = ? AND CuilCuit LIKE ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            // Configura el parámetro de la letra
+            ps.setString(1, "tipo");
+            ps.setString(2, letra + "%");
+
+            ResultSet rs = ps.executeQuery();
+            /*Como el ResultSet va a devolver mas de una fila,
+            recorremos el resultado con un While.*/
+            while (rs.next()) {
+
+                Propietario propietario = new Propietario();//se crea un propietario y luego se le cargan sus datos
+                propietario.setIdPropietario(rs.getInt("idPropietario"));
+                propietario.setTipo(TipoCliente.valueOf(rs.getString("tipo")));
+                propietario.setNombre(rs.getString("nombreRsocial"));
+                propietario.setDni(rs.getInt("dni"));
+                propietario.setCuilCuit(rs.getLong("cuilCuit"));
+                propietario.setLugarTrabajo(rs.getString("lugarTrabajo"));
+                propietario.setDomicilio(rs.getString("domicilio"));
+                propietario.setCiudad(rs.getString("ciudad"));
+                propietario.setCodigoPostal(rs.getString("codigoPostal"));
+                propietario.setTelefono(rs.getString("telefono"));
+                propietario.setMail(rs.getString("mail"));
+                propietario.setEstado(true);
+
+                propietarios.add(propietario);//En cada vuelta del While va a ir agregando un propietario
+
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla propietario" + ex.getMessage());
+        }
+        return propietarios;//retorna el arraylist
+
+    }//inactivos juridicos i fisicos
 
 }
