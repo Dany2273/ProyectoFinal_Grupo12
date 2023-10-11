@@ -59,4 +59,9 @@ public class InmuebleData {
         }
 
     }
+    
+    public Inmueble buscarInmueble(int id){
+        return null;
+        
+    }
 }

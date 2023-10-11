@@ -1,7 +1,6 @@
 package accesoDatos;
 
 import Enums.TipoCliente;
-import entidades.Cliente;
 import entidades.Garante;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,31 +24,30 @@ public class GaranteData {
                 + " codigoPostal, lugarTrabajo,  telefono, mail,  estado) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
-            PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-
-            ps.setObject(1, garante.getTipo().toString());
-            ps.setString(2, garante.getNombre());
-            ps.setInt(3, garante.getDni());
-            ps.setInt(4, garante.getCuilCuit());
-            ps.setString(5, garante.getDomicilio());
-            ps.setString(6, garante.getCiudad());
-            ps.setString(7, garante.getCodigoPostal());
-            ps.setString(8, garante.getLugarTrabajo());
-            ps.setString(9, garante.getTelefono());
-            ps.setString(10, garante.getMail());
-            ps.setBoolean(11, garante.isEstado());
-
-            ps.executeUpdate();
-
-            ResultSet rs = ps.getGeneratedKeys();
-
-            if (rs.next()) {
-                garante.setIdGarante(rs.getInt(1));
-
-                JOptionPane.showMessageDialog(null, "Garante guardado correctamente");
-                //Generamos un mje de comprobacion, pero antes creamos un alumno en el main del proyecto
+            try (PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+                ps.setObject(1, garante.getTipo().toString());
+                ps.setString(2, garante.getNombre());
+                ps.setInt(3, garante.getDni());
+                ps.setLong(4, garante.getCuilCuit());
+                ps.setString(5, garante.getDomicilio());
+                ps.setString(6, garante.getCiudad());
+                ps.setString(7, garante.getCodigoPostal());
+                ps.setString(8, garante.getLugarTrabajo());
+                ps.setString(9, garante.getTelefono());
+                ps.setString(10, garante.getMail());
+                ps.setBoolean(11, garante.isEstado());
+                
+                ps.executeUpdate();
+                
+                ResultSet rs = ps.getGeneratedKeys();
+                
+                if (rs.next()) {
+                    garante.setIdGarante(rs.getInt(1));
+                    
+                    JOptionPane.showMessageDialog(null, "Garante guardado correctamente");
+                    //Generamos un mje de comprobacion, pero antes creamos un alumno en el main del proyecto
+                }
             }
-            ps.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla garante");
@@ -64,31 +62,30 @@ public class GaranteData {
                 + " codigoPostal, lugarTrabajo,  telefono, mail,  estado) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
         try {
-            PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-
-            ps.setObject(1, garante.getTipo().toString());
-            ps.setString(2, garante.getNombre());
-            ps.setInt(3, garante.getDni());
-            ps.setInt(4, garante.getCuilCuit());
-            ps.setString(5, garante.getDomicilio());
-            ps.setString(6, garante.getCiudad());
-            ps.setString(7, garante.getCodigoPostal());
-            ps.setString(8, garante.getLugarTrabajo());
-            ps.setString(9, garante.getTelefono());
-            ps.setString(10, garante.getMail());
-            ps.setBoolean(11, garante.isEstado());
-
-            ps.executeUpdate();
-
-            ResultSet rs = ps.getGeneratedKeys();
-
-            if (rs.next()) {
-                garante.setIdGarante(rs.getInt(1));
-
-                JOptionPane.showMessageDialog(null, "Garante guardado correctamente");
-                //Generamos un mje de comprobacion, pero antes creamos un alumno en el main del proyecto
+            try (PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+                ps.setObject(1, garante.getTipo().toString());
+                ps.setString(2, garante.getNombre());
+                ps.setInt(3, garante.getDni());
+                ps.setLong(4, garante.getCuilCuit());
+                ps.setString(5, garante.getDomicilio());
+                ps.setString(6, garante.getCiudad());
+                ps.setString(7, garante.getCodigoPostal());
+                ps.setString(8, garante.getLugarTrabajo());
+                ps.setString(9, garante.getTelefono());
+                ps.setString(10, garante.getMail());
+                ps.setBoolean(11, garante.isEstado());
+                
+                ps.executeUpdate();
+                
+                ResultSet rs = ps.getGeneratedKeys();
+                
+                if (rs.next()) {
+                    garante.setIdGarante(rs.getInt(1));
+                    
+                    JOptionPane.showMessageDialog(null, "Garante guardado correctamente");
+                    //Generamos un mje de comprobacion, pero antes creamos un alumno en el main del proyecto
+                }
             }
-            ps.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla garante");
@@ -107,7 +104,7 @@ public void modificarGaranteFisico(Garante garante) {
             ps.setObject(1, garante.getTipo().toString());
             ps.setString(2, garante.getNombre());
             ps.setInt(3, garante.getDni());
-            ps.setInt(4, garante.getCuilCuit());
+            ps.setLong(4, garante.getCuilCuit());
             ps.setString(5, garante.getDomicilio());
             ps.setString(6, garante.getCiudad());
             ps.setString(7, garante.getCodigoPostal());
@@ -146,7 +143,7 @@ public void modificarGaranteFisico(Garante garante) {
             ps.setObject(1, garante.getTipo().toString());
             ps.setString(2, garante.getNombre());
             ps.setInt(3, garante.getDni());
-            ps.setInt(4, garante.getCuilCuit());
+            ps.setLong(4, garante.getCuilCuit());
             ps.setString(5, garante.getDomicilio());
             ps.setString(6, garante.getCiudad());
             ps.setString(7, garante.getCodigoPostal());
@@ -190,7 +187,7 @@ public void modificarGaranteFisico(Garante garante) {
                 ps.setObject(1, garante.getTipo().toString());
                 ps.setString(2, garante.getNombre());
                 ps.setInt(3, garante.getDni());
-                ps.setInt(4, garante.getCuilCuit());
+                ps.setLong(4, garante.getCuilCuit());
                 ps.setString(5, garante.getDomicilio());
                 ps.setString(6, garante.getCiudad());
                 ps.setString(7, garante.getCodigoPostal());
@@ -225,7 +222,7 @@ public void modificarGaranteFisico(Garante garante) {
                 ps.setObject(1, garante.getTipo().toString());
                 ps.setString(2, garante.getNombre());
                 ps.setInt(3, garante.getDni());
-                ps.setInt(4, garante.getCuilCuit());
+                ps.setLong(4, garante.getCuilCuit());
                 ps.setString(5, garante.getDomicilio());
                 ps.setString(6, garante.getCiudad());
                 ps.setString(7, garante.getCodigoPostal());
@@ -260,7 +257,7 @@ public void modificarGaranteFisico(Garante garante) {
                 ps.setObject(1, garante.getTipo().toString());
                 ps.setString(2, garante.getNombre());
                 ps.setInt(3, garante.getDni());
-                ps.setInt(4, garante.getCuilCuit());
+                ps.setLong(4, garante.getCuilCuit());
                 ps.setString(5, garante.getDomicilio());
                 ps.setString(6, garante.getCiudad());
                 ps.setString(7, garante.getCodigoPostal());
@@ -295,7 +292,7 @@ public void modificarGaranteFisico(Garante garante) {
                 ps.setObject(1, garante.getTipo().toString());
                 ps.setString(2, garante.getNombre());
                 ps.setInt(3, garante.getDni());
-                ps.setInt(4, garante.getCuilCuit());
+                ps.setLong(4, garante.getCuilCuit());
                 ps.setString(5, garante.getDomicilio());
                 ps.setString(6, garante.getCiudad());
                 ps.setString(7, garante.getCodigoPostal());
@@ -331,7 +328,7 @@ public void modificarGaranteFisico(Garante garante) {
                 ps.setObject(1, garante.getTipo().toString());
                 ps.setString(2, garante.getNombre());
                 ps.setInt(3, garante.getDni());
-                ps.setInt(4, garante.getCuilCuit());
+                ps.setLong(4, garante.getCuilCuit());
                 ps.setString(5, garante.getDomicilio());
                 ps.setString(6, garante.getCiudad());
                 ps.setString(7, garante.getCodigoPostal());
@@ -366,7 +363,7 @@ public void modificarGaranteFisico(Garante garante) {
                 ps.setObject(1, garante.getTipo().toString());
                 ps.setString(2, garante.getNombre());
                 ps.setInt(3, garante.getDni());
-                ps.setInt(4, garante.getCuilCuit());
+                ps.setLong(4, garante.getCuilCuit());
                 ps.setString(5, garante.getDomicilio());
                 ps.setString(6, garante.getCiudad());
                 ps.setString(7, garante.getCodigoPostal());
@@ -401,7 +398,7 @@ public void modificarGaranteFisico(Garante garante) {
                 ps.setObject(1, garante.getTipo().toString());
                 ps.setString(2, garante.getNombre());
                 ps.setInt(3, garante.getDni());
-                ps.setInt(4, garante.getCuilCuit());
+                ps.setLong(4, garante.getCuilCuit());
                 ps.setString(5, garante.getDomicilio());
                 ps.setString(6, garante.getCiudad());
                 ps.setString(7, garante.getCodigoPostal());
@@ -437,7 +434,7 @@ public void modificarGaranteFisico(Garante garante) {
                 ps.setObject(1, garante.getTipo().toString());
                 ps.setString(2, garante.getNombre());
                 ps.setInt(3, garante.getDni());
-                ps.setInt(4, garante.getCuilCuit());
+                ps.setLong(4, garante.getCuilCuit());
                 ps.setString(5, garante.getDomicilio());
                 ps.setString(6, garante.getCiudad());
                 ps.setString(7, garante.getCodigoPostal());
@@ -474,7 +471,7 @@ public void modificarGaranteFisico(Garante garante) {
                 ps.setObject(1, garante.getTipo().toString());
                 ps.setString(2, garante.getNombre());
                 ps.setInt(3, garante.getDni());
-                ps.setInt(4, garante.getCuilCuit());
+                ps.setLong(4, garante.getCuilCuit());
                 ps.setString(5, garante.getDomicilio());
                 ps.setString(6, garante.getCiudad());
                 ps.setString(7, garante.getCodigoPostal());
@@ -510,7 +507,7 @@ public void modificarGaranteFisico(Garante garante) {
                 ps.setObject(1, garante.getTipo().toString());
                 ps.setString(2, garante.getNombre());
                 ps.setInt(3, garante.getDni());
-                ps.setInt(4, garante.getCuilCuit());
+                ps.setLong(4, garante.getCuilCuit());
                 ps.setString(5, garante.getDomicilio());
                 ps.setString(6, garante.getCiudad());
                 ps.setString(7, garante.getCodigoPostal());
@@ -545,7 +542,7 @@ public void modificarGaranteFisico(Garante garante) {
                 ps.setObject(1, garante.getTipo().toString());
                 ps.setString(2, garante.getNombre());
                 ps.setInt(3, garante.getDni());
-                ps.setInt(4, garante.getCuilCuit());
+                ps.setLong(4, garante.getCuilCuit());
                 ps.setString(5, garante.getDomicilio());
                 ps.setString(6, garante.getCiudad());
                 ps.setString(7, garante.getCodigoPostal());
@@ -581,7 +578,7 @@ public void modificarGaranteFisico(Garante garante) {
                 ps.setObject(1, garante.getTipo().toString());
                 ps.setString(2, garante.getNombre());
                 ps.setInt(3, garante.getDni());
-                ps.setInt(4, garante.getCuilCuit());
+                ps.setLong(4, garante.getCuilCuit());
                 ps.setString(5, garante.getDomicilio());
                 ps.setString(6, garante.getCiudad());
                 ps.setString(7, garante.getCodigoPostal());
@@ -604,30 +601,30 @@ public void modificarGaranteFisico(Garante garante) {
         Garante garante = null; //Variable garante para mostrar los datos
 
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-
-                garante = new Garante();
-
-                ps.setObject(1, garante.getTipo().toString());
-                ps.setString(2, garante.getNombre());
-                ps.setInt(3, garante.getDni());
-                ps.setInt(4, garante.getCuilCuit());
-                ps.setString(5, garante.getDomicilio());
-                ps.setString(6, garante.getCiudad());
-                ps.setString(7, garante.getCodigoPostal());
-                ps.setString(8, garante.getLugarTrabajo());
-                ps.setString(9, garante.getTelefono());
-                ps.setString(10, garante.getMail());
-                ps.setBoolean(11, garante.isEstado());
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe ese garante");
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setInt(1, id);
+                
+                ResultSet rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    
+                    garante = new Garante();
+                    
+                    ps.setObject(1, garante.getTipo().toString());
+                    ps.setString(2, garante.getNombre());
+                    ps.setInt(3, garante.getDni());
+                    ps.setLong(4, garante.getCuilCuit());
+                    ps.setString(5, garante.getDomicilio());
+                    ps.setString(6, garante.getCiudad());
+                    ps.setString(7, garante.getCodigoPostal());
+                    ps.setString(8, garante.getLugarTrabajo());
+                    ps.setString(9, garante.getTelefono());
+                    ps.setString(10, garante.getMail());
+                    ps.setBoolean(11, garante.isEstado());
+                } else {
+                    JOptionPane.showMessageDialog(null, "No existe ese garante");
+                }
             }
-            ps.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla garante");
@@ -642,30 +639,30 @@ public void modificarGaranteFisico(Garante garante) {
         Garante garante = null; //Variable garante para mostrar los datos
 
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(3, nombre);
-
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-
-                garante = new Garante();
-
-                ps.setObject(1, garante.getTipo().toString());
-                ps.setString(2, garante.getNombre());
-                ps.setInt(3, garante.getDni());
-                ps.setInt(4, garante.getCuilCuit());
-                ps.setString(5, garante.getDomicilio());
-                ps.setString(6, garante.getCiudad());
-                ps.setString(7, garante.getCodigoPostal());
-                ps.setString(8, garante.getLugarTrabajo());
-                ps.setString(9, garante.getTelefono());
-                ps.setString(10, garante.getMail());
-                ps.setBoolean(11, garante.isEstado());
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe un garante con ese nombre");
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setString(3, nombre);
+                
+                ResultSet rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    
+                    garante = new Garante();
+                    
+                    ps.setObject(1, garante.getTipo().toString());
+                    ps.setString(2, garante.getNombre());
+                    ps.setInt(3, garante.getDni());
+                    ps.setLong(4, garante.getCuilCuit());
+                    ps.setString(5, garante.getDomicilio());
+                    ps.setString(6, garante.getCiudad());
+                    ps.setString(7, garante.getCodigoPostal());
+                    ps.setString(8, garante.getLugarTrabajo());
+                    ps.setString(9, garante.getTelefono());
+                    ps.setString(10, garante.getMail());
+                    ps.setBoolean(11, garante.isEstado());
+                } else {
+                    JOptionPane.showMessageDialog(null, "No existe un garante con ese nombre");
+                }
             }
-            ps.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla garante");
@@ -681,31 +678,31 @@ public void modificarGaranteFisico(Garante garante) {
         Garante garante = null; //Variable garante para mostrar los datos
 
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-
-                garante = new Garante();
- 
-                ps.setInt(1, garante.getIdGarante());
-                ps.setObject(2, garante.getTipo().toString());
-                ps.setString(3, garante.getNombre());
-                ps.setInt(4, garante.getDni());
-                ps.setInt(5, garante.getCuilCuit());
-                ps.setString(6, garante.getDomicilio());
-                ps.setString(7, garante.getCiudad());
-                ps.setString(8, garante.getCodigoPostal());
-                ps.setString(9, garante.getLugarTrabajo());
-                ps.setString(10, garante.getTelefono());
-                ps.setString(11, garante.getMail());
-                ps.setBoolean(12, garante.isEstado());
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe ese garante");
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setInt(1, id);
+                
+                ResultSet rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    
+                    garante = new Garante();
+                    
+                    ps.setInt(1, garante.getIdGarante());
+                    ps.setObject(2, garante.getTipo().toString());
+                    ps.setString(3, garante.getNombre());
+                    ps.setInt(4, garante.getDni());
+                    ps.setLong(5, garante.getCuilCuit());
+                    ps.setString(6, garante.getDomicilio());
+                    ps.setString(7, garante.getCiudad());
+                    ps.setString(8, garante.getCodigoPostal());
+                    ps.setString(9, garante.getLugarTrabajo());
+                    ps.setString(10, garante.getTelefono());
+                    ps.setString(11, garante.getMail());
+                    ps.setBoolean(12, garante.isEstado());
+                } else {
+                    JOptionPane.showMessageDialog(null, "No existe ese garante");
+                }
             }
-            ps.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla garante");
@@ -721,31 +718,31 @@ public void modificarGaranteFisico(Garante garante) {
         Garante garante = null; //Variable garante para mostrar los datos
 
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, cuilCuit);
-
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-
-                garante = new Garante();
- 
-                ps.setInt(1, garante.getIdGarante());
-                ps.setObject(2, garante.getTipo().toString());
-                ps.setString(3, garante.getNombre());
-                ps.setInt(4, garante.getDni());
-                ps.setInt(5, garante.getCuilCuit());
-                ps.setString(6, garante.getDomicilio());
-                ps.setString(7, garante.getCiudad());
-                ps.setString(8, garante.getCodigoPostal());
-                ps.setString(9, garante.getLugarTrabajo());
-                ps.setString(10, garante.getTelefono());
-                ps.setString(11, garante.getMail());
-                ps.setBoolean(12, garante.isEstado());
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe ese garante");
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setInt(1, cuilCuit);
+                
+                ResultSet rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    
+                    garante = new Garante();
+                    
+                    ps.setInt(1, garante.getIdGarante());
+                    ps.setObject(2, garante.getTipo().toString());
+                    ps.setString(3, garante.getNombre());
+                    ps.setInt(4, garante.getDni());
+                    ps.setLong(5, garante.getCuilCuit());
+                    ps.setString(6, garante.getDomicilio());
+                    ps.setString(7, garante.getCiudad());
+                    ps.setString(8, garante.getCodigoPostal());
+                    ps.setString(9, garante.getLugarTrabajo());
+                    ps.setString(10, garante.getTelefono());
+                    ps.setString(11, garante.getMail());
+                    ps.setBoolean(12, garante.isEstado());
+                } else {
+                    JOptionPane.showMessageDialog(null, "No existe ese garante");
+                }
             }
-            ps.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla garante");

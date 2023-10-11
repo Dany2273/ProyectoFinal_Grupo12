@@ -46,6 +46,18 @@ public class Persona {
         this.estado = estado;
     }
 
+    public Persona(String nombre, int dni, long cuilCuit, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
+        this.nombre = nombre;
+        this.dni = dni;
+        this.cuilCuit = cuilCuit;
+        this.domicilio = domicilio;
+        this.ciudad = ciudad;
+        this.codigoPostal = codigoPostal;
+        this.telefono = telefono;
+        this.mail = mail;
+        this.estado = estado;
+    }
+
     
 
     public TipoCliente getTipo() {

@@ -2,11 +2,15 @@
 package proyectofinal_grupo12;
 
 import Enums.TipoCliente;
+import static Enums.TipoCliente.PERSONA_FISICA;
 import static Enums.TipoCliente.PERSONA_JURIDICA;
 import accesoDatos.ClienteData;
+import accesoDatos.ConyugueData;
+import accesoDatos.InmuebleData;
 import accesoDatos.PropietarioData;
 import accesoDatos.VentaData;
 import entidades.Cliente;
+import entidades.Conyugue;
 import entidades.Propietario;
 import entidades.Venta;
 import java.time.LocalDate;
@@ -126,7 +130,18 @@ public class ProyectoFinal_Grupo12 {
 
 
 //-------------------------------------****************************--------------------------------------------------------
+//      InmuebleData iData = new InmuebleData();
+      Conyugue co = new Conyugue();
+      ConyugueData coData = new ConyugueData();
+      co = coData.buscar(1);
+      Cliente c = new Cliente(co, PERSONA_FISICA, "Daniel", 123211, 1213111, "Particular", "Paso 123", "Tigre", "12121", "920129211", "sjiaisais", true);
+      cData.agregarClienteFisico(c);
 
+
+//Venta venta = new Venta(LocalDate.of(2023, 12, 12), iData.buscarInmueble(1), pData.buscarId(1), cData.buscarCliente(1), null, null, 100, "pesos", "venta total", "pendiente");
+//       
+//       VentaData vData = new VentaData();
+//       vData.agregarVenta(venta);
     }
     
 }

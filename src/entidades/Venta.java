@@ -1,61 +1,75 @@
 
 package entidades;
 
-import entidades.Cliente;
 import java.time.LocalDate;
 
 public class Venta {
     private int idVenta;
+    private LocalDate fecha;
     private Inmueble inmueble;
+    private Propietario propietario;
     private Cliente cliente;
-    private Propietario prop;
-    private LocalDate fechaPagoInicial;
-    private double precioAcordado;
-    private double pagoInicial;
-    private double pagoRestante;
-    private String estadoPago;
-    private LocalDate fechaCancelacion;
-    private double importeGastos;
-    private double importeComision;
+    private Conyugue conyugue;
+    private Escribano escribano;
+    private double precioVenta;
+    private String moneda;
+    private String detallesVenta;
+    private String estadoEscriturizacion;
+   
 
     public Venta() {
     }
 
-    public Venta(int idVenta, Inmueble inmueble, Cliente cliente, Propietario prop, LocalDate fechaPagoInicial, double precioAcordado, double pagoInicial,double pagoRestante, String estadoPago, LocalDate fechaCancelacion, double importeGastos, double importeComision) {
+    public Venta(LocalDate fecha, Inmueble inmueble, Propietario propietario, Cliente cliente, Escribano escribano, double precioVenta, String moneda, String detallesVenta, String estadoEscriturizacion) {
+        this.fecha = fecha;
+        this.inmueble = inmueble;
+        this.propietario = propietario;
+        this.cliente = cliente;
+        this.escribano = escribano;
+        this.precioVenta = precioVenta;
+        this.moneda = moneda;
+        this.detallesVenta = detallesVenta;
+        this.estadoEscriturizacion = estadoEscriturizacion;
+    }
+
+    public Venta(int idVenta, LocalDate fecha, Inmueble inmueble, Propietario propietario, Cliente cliente, Escribano escribano, double precioVenta, String moneda, String detallesVenta, String estadoEscriturizacion) {
         this.idVenta = idVenta;
+        this.fecha = fecha;
         this.inmueble = inmueble;
+        this.propietario = propietario;
         this.cliente = cliente;
-        this.prop = prop;
-        this.fechaPagoInicial = fechaPagoInicial;
-        this.precioAcordado = precioAcordado;
-        this.pagoInicial = pagoInicial;
-        this.estadoPago = estadoPago;
-        this.fechaCancelacion = fechaCancelacion;
-        this.importeGastos = importeGastos;
-        this.importeComision = importeComision;
-        this.pagoRestante = pagoRestante;
+        this.escribano = escribano;
+        this.precioVenta = precioVenta;
+        this.moneda = moneda;
+        this.detallesVenta = detallesVenta;
+        this.estadoEscriturizacion = estadoEscriturizacion;
     }
 
-    public Venta(Inmueble inmueble, Cliente cliente, Propietario prop, LocalDate fechaPagoInicial, double precioAcordado, double pagoInicial,double pagoRestante, String estadoPago, LocalDate fechaCancelacion, double importeGastos, double importeComision) {
+    public Venta(LocalDate fecha, Inmueble inmueble, Propietario propietario, Cliente cliente, Conyugue conyugue, Escribano escribano, double precioVenta, String moneda, String detallesVenta, String estadoEscriturizacion) {
+        this.fecha = fecha;
         this.inmueble = inmueble;
+        this.propietario = propietario;
         this.cliente = cliente;
-        this.prop = prop;
-        this.fechaPagoInicial = fechaPagoInicial;
-        this.precioAcordado = precioAcordado;
-        this.pagoInicial = pagoInicial;
-        this.estadoPago = estadoPago;
-        this.fechaCancelacion = fechaCancelacion;
-        this.importeGastos = importeGastos;
-        this.importeComision = importeComision;
-        this.pagoRestante = pagoRestante;
+        this.conyugue = conyugue;
+        this.escribano = escribano;
+        this.precioVenta = precioVenta;
+        this.moneda = moneda;
+        this.detallesVenta = detallesVenta;
+        this.estadoEscriturizacion = estadoEscriturizacion;
     }
 
-    public double getPagoRestante() {
-        return pagoRestante;
-    }
-
-    public void setPagoRestante(double pagoRestante) {
-        this.pagoRestante = pagoRestante;
+    public Venta(int idVenta, LocalDate fecha, Inmueble inmueble, Propietario propietario, Cliente cliente, Conyugue conyugue, Escribano escribano, double precioVenta, String moneda, String detallesVenta, String estadoEscriturizacion) {
+        this.idVenta = idVenta;
+        this.fecha = fecha;
+        this.inmueble = inmueble;
+        this.propietario = propietario;
+        this.cliente = cliente;
+        this.conyugue = conyugue;
+        this.escribano = escribano;
+        this.precioVenta = precioVenta;
+        this.moneda = moneda;
+        this.detallesVenta = detallesVenta;
+        this.estadoEscriturizacion = estadoEscriturizacion;
     }
 
     public int getIdVenta() {
@@ -66,12 +80,28 @@ public class Venta {
         this.idVenta = idVenta;
     }
 
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
     public Inmueble getInmueble() {
         return inmueble;
     }
 
     public void setInmueble(Inmueble inmueble) {
         this.inmueble = inmueble;
+    }
+
+    public Propietario getPropietario() {
+        return propietario;
+    }
+
+    public void setPropietario(Propietario propietario) {
+        this.propietario = propietario;
     }
 
     public Cliente getCliente() {
@@ -82,75 +112,59 @@ public class Venta {
         this.cliente = cliente;
     }
 
-    public Propietario getProp() {
-        return prop;
+    public Conyugue getConyugue() {
+        return conyugue;
     }
 
-    public void setProp(Propietario prop) {
-        this.prop = prop;
+    public void setConyugue(Conyugue conyugue) {
+        this.conyugue = conyugue;
     }
 
-    public LocalDate getFechaPagoInicial() {
-        return fechaPagoInicial;
+    public Escribano getEscribano() {
+        return escribano;
     }
 
-    public void setFechaPagoInicial(LocalDate fechaPagoInicial) {
-        this.fechaPagoInicial = fechaPagoInicial;
+    public void setEscribano(Escribano escribano) {
+        this.escribano = escribano;
     }
 
-    public double getPrecioAcordado() {
-        return precioAcordado;
+    public double getPrecioVenta() {
+        return precioVenta;
     }
 
-    public void setPrecioAcordado(double precioAcordado) {
-        this.precioAcordado = precioAcordado;
+    public void setPrecioVenta(double precioVenta) {
+        this.precioVenta = precioVenta;
     }
 
-    public double getPagoInicial() {
-        return pagoInicial;
+    public String getMoneda() {
+        return moneda;
     }
 
-    public void setPagoInicial(double pagoInicial) {
-        this.pagoInicial = pagoInicial;
+    public void setMoneda(String moneda) {
+        this.moneda = moneda;
     }
 
-    public String getEstadoPago() {
-        return estadoPago;
+    public String getDetallesVenta() {
+        return detallesVenta;
     }
 
-    public void setEstadoPago(String estadoPago) {
-        this.estadoPago = estadoPago;
+    public void setDetallesVenta(String detallesVenta) {
+        this.detallesVenta = detallesVenta;
     }
 
-    public LocalDate getFechaCancelacion() {
-        return fechaCancelacion;
+    public String getEstadoEscriturizacion() {
+        return estadoEscriturizacion;
     }
 
-    public void setFechaCancelacion(LocalDate fechaCancelacion) {
-        this.fechaCancelacion = fechaCancelacion;
-    }
-
-    public double getImporteGastos() {
-        return importeGastos;
-    }
-
-    public void setImporteGastos(double importeGastos) {
-        this.importeGastos = importeGastos;
-    }
-
-    public double getImporteComision() {
-        return importeComision;
-    }
-
-    public void setImporteComision(double importeComision) {
-        this.importeComision = importeComision;
+    public void setEstadoEscriturizacion(String estadoEscriturizacion) {
+        this.estadoEscriturizacion = estadoEscriturizacion;
     }
 
     @Override
     public String toString() {
-        return "Venta{" + "idVenta=" + idVenta + ", inmueble=" + inmueble + ", cliente=" + cliente + ", prop=" + prop + ", fechaPagoInicial=" + fechaPagoInicial + ", precioAcordado=" + precioAcordado + ", pagoInicial=" + pagoInicial + ", estadoPago=" + estadoPago + ", fechaCancelacion=" + fechaCancelacion + ", importeGastos=" + importeGastos + ", importeComision=" + importeComision + '}';
+        return "Venta{" + "idVenta=" + idVenta + ", fecha=" + fecha + ", inmueble=" + inmueble + ", propietario=" + propietario + ", cliente=" + cliente + ", conyugue=" + conyugue + ", escribano=" + escribano + ", precioVenta=" + precioVenta + ", moneda=" + moneda + ", detallesVenta=" + detallesVenta + ", estadoEscriturizacion=" + estadoEscriturizacion + '}';
     }
-    
-    
-    
-    }
+
+   
+   
+}

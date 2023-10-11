@@ -2,6 +2,7 @@ package accesoDatos;
 
 import Enums.TipoCliente;
 import entidades.Cliente;
+import entidades.Conyugue;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,34 +16,37 @@ import javax.swing.JOptionPane;
 public class ClienteData {
 
     private Connection con = null;
+    private ConyugueData coData= null;
 
     public ClienteData() {
 
         con = Conexion.getConexion();
+        coData = new ConyugueData();
 
     }
 
     public void agregarClienteFisico(Cliente cliente) {
 
-        String sql = "INSERT INTO cliente(tipo, nombreRsocial, dni, cuilCuit, domicilio,ciudad,"
-                + " codigoPostal, lugarTrabajo,  telefono, mail,  estado) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO cliente(idConyugue, tipo, nombreRsocial, dni, cuilCuit, domicilio,ciudad,"
+                + " codigoPostal, lugarTrabajo,  telefono, mail,  estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
 //            System.out.println(cliente.toString());
             PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 //            System.out.println(cliente.toString());
 
-            ps.setString(1, cliente.getTipo().toString());
-            ps.setString(2, cliente.getNombre());
-            ps.setInt(3, cliente.getDni());
-            ps.setLong(4, cliente.getCuilCuit());
-            ps.setString(5, cliente.getDomicilio());
-            ps.setString(6, cliente.getCiudad());
-            ps.setString(7, cliente.getCodigoPostal());
-            ps.setString(8, cliente.getLugarTrabajo());
-            ps.setString(9, cliente.getTelefono());
-            ps.setString(10, cliente.getMail());
-            ps.setBoolean(11, cliente.isEstado());
+            ps.setInt(1, cliente.getConyugue().getIdConyugue());
+            ps.setString(2, cliente.getTipo().toString());
+            ps.setString(3, cliente.getNombre());
+            ps.setInt(4, cliente.getDni());
+            ps.setLong(5, cliente.getCuilCuit());
+            ps.setString(6, cliente.getDomicilio());
+            ps.setString(7, cliente.getCiudad());
+            ps.setString(8, cliente.getCodigoPostal());
+            ps.setString(9, cliente.getLugarTrabajo());
+            ps.setString(10, cliente.getTelefono());
+            ps.setString(11, cliente.getMail());
+            ps.setBoolean(12, cliente.isEstado());
 
             ps.executeUpdate();
 
@@ -57,7 +61,7 @@ public class ClienteData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente"+ex);
         }
     }
 
@@ -100,23 +104,24 @@ public class ClienteData {
     }
 
     public void modificarClienteFisico(Cliente cliente) {
-        String sql = "UPDATE cliente SET  tipo= ?,nombreRsocial = ?,dni=? ,cuilCuit= ?,domicilio = ?,ciudad = ?"
+        String sql = "UPDATE cliente SET  idConyugue = ?,tipo= ?,nombreRsocial = ?,dni=? ,cuilCuit= ?,domicilio = ?,ciudad = ?"
                 + ",codigoPostal = ?,lugarTrabajo = ?,telefono= ?,mail= ? WHERE idCliente = ? AND estado = 1";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
 
-            ps.setString(1, cliente.getTipo().toString());
-            ps.setString(2, cliente.getNombre());
-            ps.setInt(3, cliente.getDni());
-            ps.setLong(4, cliente.getCuilCuit());
-            ps.setString(5, cliente.getDomicilio());
-            ps.setString(6, cliente.getCiudad());
-            ps.setString(7, cliente.getCodigoPostal());
-            ps.setString(8, cliente.getLugarTrabajo());
-            ps.setString(9, cliente.getTelefono());
-            ps.setString(10, cliente.getMail());
-            ps.setInt(11, cliente.getIdCliente());
+            ps.setInt(1, cliente.getConyugue().getIdConyugue());
+            ps.setString(2, cliente.getTipo().toString());
+            ps.setString(3, cliente.getNombre());
+            ps.setInt(4, cliente.getDni());
+            ps.setLong(5, cliente.getCuilCuit());
+            ps.setString(6, cliente.getDomicilio());
+            ps.setString(7, cliente.getCiudad());
+            ps.setString(8, cliente.getCodigoPostal());
+            ps.setString(9, cliente.getLugarTrabajo());
+            ps.setString(10, cliente.getTelefono());
+            ps.setString(11, cliente.getMail());
+            ps.setBoolean(12, cliente.isEstado());
 
             int exito = ps.executeUpdate();//Como la sentencia devuelve un entero creamos una variable tipo Int
 
@@ -190,25 +195,21 @@ public class ClienteData {
     }
 
     public Cliente buscarCliente(int id) {
-        String sql = "SELECT tipo, nombreRsocial, dni, cuilCuit, domicilio, ciudad, codigoPostal,"
+        String sql = "SELECT idConyugue, tipo, nombreRsocial, dni, cuilCuit, domicilio, ciudad, codigoPostal,"
                 + " lugarTrabajo, telefono, mail, estado FROM cliente WHERE idCliente = ?";
         Cliente cliente = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);//Reemplazamos el comodin "?" por el id del alumno que ingresamos por parametro
-
-            /*Cada vez que necesitemos buscar y mostrar datos necesitamos usar la 
-            sentencia ResulSet, que nos va a mostrar el resultado en la terminal*/
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {//Comprobamos si hay algun elemento
 
-                cliente = new Cliente();//Creo un alumno con el constructor vacio
-                //Y a continuacion le seteo todos los datos
+                cliente = new Cliente();
                 cliente.setIdCliente(id);
-                String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
-                TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
-                cliente.setTipo(tipoCliente);
+//                String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
+//                TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
+                cliente.setTipo(TipoCliente.valueOf(rs.getString("tipo")));
                 cliente.setNombre(rs.getString("nombreRsocial"));
                 cliente.setDni(rs.getInt("dni"));
                 cliente.setCuilCuit(rs.getLong("cuilCuit"));
@@ -219,7 +220,8 @@ public class ClienteData {
                 cliente.setTelefono(rs.getString("telefono"));
                 cliente.setMail(rs.getString("mail"));
                 cliente.setEstado(rs.getBoolean("estado"));
-                System.out.println(cliente.toString());
+                Conyugue co = coData.buscar(rs.getInt("idConyugue"));
+                cliente.setConyugue(co);
             } else {
                 JOptionPane.showMessageDialog(null, "No existe ese Cliente");
             }
@@ -245,14 +247,13 @@ public class ClienteData {
 
             if (rs.next()) {//Comprobamos si hay algun elemento
 
-                cliente = new Cliente();//Creo un alumno con el constructor vacio
-                //Y a continuacion le seteo todos los datos
+                cliente = new Cliente();
                 cliente.setIdCliente(rs.getInt("idCliente"));
-                String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
-                TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
-                cliente.setTipo(tipoCliente);
+//                String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
+//                TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
+                cliente.setTipo(TipoCliente.valueOf(rs.getString("tipo")));
                 cliente.setNombre(rs.getString("nombreRsocial"));
-                cliente.setDni(rs.getInt(dni));
+                cliente.setDni(rs.getInt("dni"));
                 cliente.setCuilCuit(rs.getLong("cuilCuit"));
                 cliente.setLugarTrabajo(rs.getString("lugarTrabajo"));
                 cliente.setDomicilio(rs.getString("domicilio"));
@@ -261,6 +262,8 @@ public class ClienteData {
                 cliente.setTelefono(rs.getString("telefono"));
                 cliente.setMail(rs.getString("mail"));
                 cliente.setEstado(rs.getBoolean("estado"));
+                int idConyugue = rs.getInt("idConyugue");
+                cliente.getConyugue().setIdConyugue(idConyugue);
             } else {
                 JOptionPane.showMessageDialog(null, "No existe ese Cliente");
             }
@@ -286,15 +289,14 @@ public class ClienteData {
 
             if (rs.next()) {//Comprobamos si hay algun elemento
 
-                cliente = new Cliente();//Creo un alumno con el constructor vacio
-                //Y a continuacion le seteo todos los datos
+                cliente = new Cliente();
                 cliente.setIdCliente(rs.getInt("idCliente"));
-                String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
-                TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
-                cliente.setTipo(tipoCliente);
+//                String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
+//                TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
+                cliente.setTipo(TipoCliente.valueOf(rs.getString("tipo")));
                 cliente.setNombre(rs.getString("nombreRsocial"));
                 cliente.setDni(rs.getInt("dni"));
-                cliente.setCuilCuit(cuilCuit);
+                cliente.setCuilCuit(rs.getLong("cuilCuit"));
                 cliente.setLugarTrabajo(rs.getString("lugarTrabajo"));
                 cliente.setDomicilio(rs.getString("domicilio"));
                 cliente.setCiudad(rs.getString("ciudad"));
@@ -302,6 +304,8 @@ public class ClienteData {
                 cliente.setTelefono(rs.getString("telefono"));
                 cliente.setMail(rs.getString("mail"));
                 cliente.setEstado(rs.getBoolean("estado"));
+                int idConyugue = rs.getInt("idConyugue");
+                cliente.getConyugue().setIdConyugue(idConyugue);
             } else {
                 JOptionPane.showMessageDialog(null, "No existe ese Cliente");
             }
@@ -313,8 +317,7 @@ public class ClienteData {
     }
 
     public Cliente buscarClientePorNombre(String nombre) {
-        String sql = "SELECT tipo, nombreRsocial, dni, cuilCuit, domicilio, ciudad, codigoPostal,"
-                + " lugarTrabajo, telefono, mail, estado FROM cliente WHERE nombreRsocial = ?";
+        String sql = "SELECT * FROM cliente WHERE nombreRsocial = ?";
         Cliente cliente = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -326,12 +329,11 @@ public class ClienteData {
 
             if (rs.next()) {//Comprobamos si hay algun elemento
 
-                cliente = new Cliente();//Creo un alumno con el constructor vacio
-                //Y a continuacion le seteo todos los datos
-//                cliente.setIdCliente(rs.getInt("idCliente"));
-                String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
-                TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
-                cliente.setTipo(tipoCliente);
+                cliente = new Cliente();
+                cliente.setIdCliente(rs.getInt("idCliente"));
+//                String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
+//                TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
+                cliente.setTipo(TipoCliente.valueOf(rs.getString("tipo")));
                 cliente.setNombre(rs.getString("nombreRsocial"));
                 cliente.setDni(rs.getInt("dni"));
                 cliente.setCuilCuit(rs.getLong("cuilCuit"));
@@ -342,6 +344,8 @@ public class ClienteData {
                 cliente.setTelefono(rs.getString("telefono"));
                 cliente.setMail(rs.getString("mail"));
                 cliente.setEstado(rs.getBoolean("estado"));
+                int idConyugue = rs.getInt("idConyugue");
+                cliente.getConyugue().setIdConyugue(idConyugue);
             } else {
                 JOptionPane.showMessageDialog(null, "No existe ese Cliente");
             }
@@ -364,8 +368,10 @@ public class ClienteData {
             recorremos el resultado con un While.*/
             while (rs.next()) {
 
-                Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
+                Cliente cliente = new Cliente();//Creo un cliente y voy seteando los atributos
 //                cliente.setIdCliente(rs.getInt("idCliente"));
+                int idConyugue = rs.getInt("idConyugue");
+                cliente.getConyugue().setIdConyugue(idConyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -402,8 +408,10 @@ public class ClienteData {
             recorremos el resultado con un While.*/
             while (rs.next()) {
 
-                Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
+                Cliente cliente = new Cliente();//Creo un cliente y voy seteando los atributos
 //                cliente.setIdCliente(rs.getInt("idCliente"));
+                int idConyugue = rs.getInt("idConyugue");
+                cliente.getConyugue().setIdConyugue(idConyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -441,8 +449,11 @@ public class ClienteData {
             recorremos el resultado con un While.*/
             while (rs.next()) {
 
-                Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
+                Cliente cliente = new Cliente();//Creo un cliente y voy seteando los atributos
+
                 cliente.setIdCliente(rs.getInt("idCliente"));
+                int idConyugue = rs.getInt("idConyugue");
+                cliente.getConyugue().setIdConyugue(idConyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -483,6 +494,8 @@ public class ClienteData {
 
                 Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
                 cliente.setIdCliente(rs.getInt("idCliente"));
+                int idConyugue = rs.getInt("idConyugue");
+                cliente.getConyugue().setIdConyugue(idConyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -522,6 +535,8 @@ public class ClienteData {
 
                 Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
                 cliente.setIdCliente(rs.getInt("idCliente"));
+                int idConyugue = rs.getInt("idConyugue");
+                cliente.getConyugue().setIdConyugue(idConyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -562,6 +577,8 @@ public class ClienteData {
 
                 Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
                 cliente.setIdCliente(rs.getInt("idCliente"));
+                int idConyugue = rs.getInt("idConyugue");
+                cliente.getConyugue().setIdConyugue(idConyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -600,7 +617,7 @@ public class ClienteData {
             recorremos el resultado con un While.*/
             while (rs.next()) {
 
-                Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
+                Cliente cliente = new Cliente();//Creo un cliente y voy seteando los atributos
                 cliente.setIdCliente(rs.getInt("idCliente"));
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
@@ -642,6 +659,8 @@ public class ClienteData {
 
                 Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
                 cliente.setIdCliente(rs.getInt("idCliente"));
+                int idConyugue = rs.getInt("idConyugue");
+                cliente.getConyugue().setIdConyugue(idConyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -681,6 +700,8 @@ public class ClienteData {
 
                 Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
                 cliente.setIdCliente(rs.getInt("idCliente"));
+                int idConyugue = rs.getInt("idConyugue");
+                cliente.getConyugue().setIdConyugue(idConyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -720,6 +741,8 @@ public class ClienteData {
 
                 Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
                 cliente.setIdCliente(rs.getInt("idCliente"));
+                int idConyugue = rs.getInt("idConyugue");
+                cliente.getConyugue().setIdConyugue(idConyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -733,7 +756,6 @@ public class ClienteData {
                 cliente.setTelefono(rs.getString("telefono"));
                 cliente.setMail(rs.getString("mail"));
                 cliente.setEstado(rs.getBoolean("estado"));
-
                 clientes.add(cliente);
 
             }
@@ -760,6 +782,8 @@ public class ClienteData {
 
                 Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
                 cliente.setIdCliente(rs.getInt("idCliente"));
+                int idConyugue = rs.getInt("idConyugue");
+                cliente.getConyugue().setIdConyugue(idConyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -800,6 +824,8 @@ public class ClienteData {
 
                 Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
                 cliente.setIdCliente(rs.getInt("idCliente"));
+                int idConyugue = rs.getInt("idConyugue");
+                cliente.getConyugue().setIdConyugue(idConyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -813,7 +839,6 @@ public class ClienteData {
                 cliente.setTelefono(rs.getString("telefono"));
                 cliente.setMail(rs.getString("mail"));
                 cliente.setEstado(rs.getBoolean("estado"));
-
                 clientes.add(cliente);
 
             }
