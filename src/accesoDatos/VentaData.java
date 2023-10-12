@@ -114,7 +114,7 @@ public class VentaData {
     }
 
     public Venta buscarVenta(int id) {
-        String sql = "SELECT * FROM venta WHERE idCliente = ?";
+        String sql = "SELECT * FROM venta WHERE idVenta = ?";
 
         Venta venta = null;
         try {

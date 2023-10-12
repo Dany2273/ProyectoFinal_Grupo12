@@ -4,13 +4,16 @@ package proyectofinal_grupo12;
 import Enums.TipoCliente;
 import static Enums.TipoCliente.PERSONA_FISICA;
 import static Enums.TipoCliente.PERSONA_JURIDICA;
+import Vistas.Menu;
 import accesoDatos.ClienteData;
 import accesoDatos.ConyugueData;
 import accesoDatos.InmuebleData;
+import accesoDatos.PagoVentaData;
 import accesoDatos.PropietarioData;
 import accesoDatos.VentaData;
 import entidades.Cliente;
 import entidades.Conyugue;
+import entidades.PagoVenta;
 import entidades.Propietario;
 import entidades.Venta;
 import java.time.LocalDate;
@@ -18,8 +21,13 @@ import java.time.LocalDate;
 public class ProyectoFinal_Grupo12 {
 
     public static void main(String[] args) {
-        ClienteData cData = new ClienteData();
-        PropietarioData pData = new PropietarioData();
+        
+        Menu menu = new Menu();
+        menu.setVisible(true);
+        
+        
+//        ClienteData cData = new ClienteData();
+//        PropietarioData pData = new PropietarioData();
         //  Cliente cli1 = new Cliente(TipoCliente.PERSONA_JURIDICA, "Pizzeria", 30609980024L, "Pizzeria", "Belgrano 1023", "Escobar", "1921", "1190229012", "pizzeria@gmail.com", true);
 
 //        Cliente cli4 = new Cliente(TipoCliente.PERSONA_JURIDICA, "Eventos", 30127893214L, "Eventos", "Ayacucho 820", "Tigre", "1652", "1142022631", "eventos@gmail.com", true);
@@ -131,17 +139,24 @@ public class ProyectoFinal_Grupo12 {
 
 //-------------------------------------****************************--------------------------------------------------------
 //      InmuebleData iData = new InmuebleData();
-      Conyugue co = new Conyugue();
-      ConyugueData coData = new ConyugueData();
-      co = coData.buscar(1);
-      Cliente c = new Cliente(co, PERSONA_FISICA, "Daniel", 123211, 1213111, "Particular", "Paso 123", "Tigre", "12121", "920129211", "sjiaisais", true);
-      cData.agregarClienteFisico(c);
+//      Conyugue co = new Conyugue();
+//      ConyugueData coData = new ConyugueData();
+//      co = coData.buscar(1);
+//      Cliente c = new Cliente(co, PERSONA_FISICA, "Daniel", 123211, 1213111, "Particular", "Paso 123", "Tigre", "12121", "920129211", "sjiaisais", true);
+//      cData.agregarClienteFisico(c);
 
 
 //Venta venta = new Venta(LocalDate.of(2023, 12, 12), iData.buscarInmueble(1), pData.buscarId(1), cData.buscarCliente(1), null, null, 100, "pesos", "venta total", "pendiente");
 //       
-//       VentaData vData = new VentaData();
-//       vData.agregarVenta(venta);
+   VentaData vData = new VentaData();
+   Venta ven = new Venta();
+       ven = vData.buscarVenta(1);
+        System.out.println(ven);
+//        PagoVentaData pData = new PagoVentaData();
+//        PagoVenta pago = new PagoVenta(ven, "onoanosaa", "efectivo", LocalDate.of(2023, 10, 10), 1000000, "peso", 10000, 10000);
+//        
+//        pData.agregarPagoVenta(pago);
+
     }
     
 }

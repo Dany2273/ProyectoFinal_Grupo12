@@ -9,14 +9,16 @@ public class Escribano extends Persona {
     public Escribano() {
     }
 
-    public Escribano(int idEscribano, String nombre, int dni, long cuilCuit, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
-        super(nombre, dni, cuilCuit, domicilio, ciudad, codigoPostal, telefono, mail, estado);
+    public Escribano(int idEscribano, String nombre, int dni, long cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
+        super(nombre, dni, cuilCuit, lugarTrabajo, domicilio, ciudad, codigoPostal, telefono, mail, estado);
         this.idEscribano = idEscribano;
     }
 
-    public Escribano(String nombre, int dni, long cuilCuit, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
-        super(nombre, dni, cuilCuit, domicilio, ciudad, codigoPostal, telefono, mail, estado);
+    public Escribano(String nombre, int dni, long cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
+        super(nombre, dni, cuilCuit, lugarTrabajo, domicilio, ciudad, codigoPostal, telefono, mail, estado);
     }
+
+    
 
     public int getIdEscribano() {
         return idEscribano;
@@ -32,7 +34,7 @@ public class Escribano extends Persona {
 
     @Override
     public String toString() {
-        return  "idEscribano=" + idEscribano + super.toString();
+        return   idEscribano + super.toString();
     }
     
 }

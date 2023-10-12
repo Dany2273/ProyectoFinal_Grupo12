@@ -1,24 +1,23 @@
-
 package entidades;
 
 import Enums.TipoCliente;
 
 public class Cliente extends Persona {
-    
+
     private int idCliente;
     private Conyugue conyugue;
 
     public Cliente() {
     }
 
-    public Cliente(int idCliente, Conyugue conyugue, TipoCliente tipo, String nombre, int dni, long cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
+    public Cliente(Conyugue conyugue, TipoCliente tipo, String nombre, int dni, long cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
         super(tipo, nombre, dni, cuilCuit, lugarTrabajo, domicilio, ciudad, codigoPostal, telefono, mail, estado);
-        this.idCliente = idCliente;
         this.conyugue = conyugue;
     }
 
-    public Cliente(Conyugue conyugue, TipoCliente tipo, String nombre, int dni, long cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
+    public Cliente(int idCliente, Conyugue conyugue, TipoCliente tipo, String nombre, int dni, long cuilCuit, String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
         super(tipo, nombre, dni, cuilCuit, lugarTrabajo, domicilio, ciudad, codigoPostal, telefono, mail, estado);
+        this.idCliente = idCliente;
         this.conyugue = conyugue;
     }
 
@@ -52,6 +51,4 @@ public class Cliente extends Persona {
         return "Cliente{" + "idCliente=" + idCliente + ", conyugue=" + conyugue + super.toString();
     }
 
-   
 }
- 

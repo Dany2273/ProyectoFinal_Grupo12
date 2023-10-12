@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -16,7 +17,7 @@ import javax.swing.JOptionPane;
 public class ClienteData {
 
     private Connection con = null;
-    private ConyugueData coData= null;
+    private ConyugueData coData = null;
 
     public ClienteData() {
 
@@ -35,7 +36,11 @@ public class ClienteData {
             PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 //            System.out.println(cliente.toString());
 
-            ps.setInt(1, cliente.getConyugue().getIdConyugue());
+            if (cliente.getConyugue() != null) {
+                ps.setInt(1, cliente.getConyugue().getIdConyugue());
+            } else {
+                ps.setNull(1, Types.INTEGER); // Si no hay conyugue, establece el valor como nulo en la base de datos
+            }
             ps.setString(2, cliente.getTipo().toString());
             ps.setString(3, cliente.getNombre());
             ps.setInt(4, cliente.getDni());
@@ -61,7 +66,7 @@ public class ClienteData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente"+ex);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente" + ex);
         }
     }
 

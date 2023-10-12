@@ -46,7 +46,7 @@ public class Persona {
         this.estado = estado;
     }
 
-    public Persona(String nombre, int dni, long cuilCuit, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
+    public Persona(String nombre, int dni, long cuilCuit,String lugarTrabajo, String domicilio, String ciudad, String codigoPostal, String telefono, String mail, boolean estado) {
         this.nombre = nombre;
         this.dni = dni;
         this.cuilCuit = cuilCuit;
@@ -56,6 +56,7 @@ public class Persona {
         this.telefono = telefono;
         this.mail = mail;
         this.estado = estado;
+        this.lugarTrabajo = lugarTrabajo;
     }
 
     
@@ -150,7 +151,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return ", Tipo Persona: " + tipo + ", Nombre: " + nombre + ", Dni: " + dni + ", Cuil/Cuit: " + cuilCuit ;
+        return ", " + nombre + ", " + dni + ", " + cuilCuit ;
     }
 
     
