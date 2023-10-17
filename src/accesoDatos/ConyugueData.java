@@ -50,7 +50,7 @@ public class ConyugueData {
     }
     
    public Conyugue buscar(int id){
-       String sql = "SELECT * FROM conyugue";
+       String sql = "SELECT * FROM conyugue WHERE idConyugue = ?";
        Conyugue co = null;
        
         try {
@@ -63,7 +63,7 @@ public class ConyugueData {
                 co.setIdConyugue(id);
                 co.setNombre(rs.getString("nombre"));
                 co.setDni(rs.getInt("dni"));
-                co.setCuilCuit(rs.getInt("cuil"));
+                co.setCuilCuit(rs.getLong("cuil"));
                 co.setLugarTrabajo(rs.getString("lugarTrabajo"));
                 co.setDomicilio(rs.getString("domicilio"));
                 co.setCiudad(rs.getString("ciudad"));

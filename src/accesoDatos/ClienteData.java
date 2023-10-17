@@ -10,19 +10,18 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ClienteData {
 
     private Connection con = null;
     private ConyugueData coData = null;
-
+    private Conyugue c = null;
     public ClienteData() {
 
         con = Conexion.getConexion();
         coData = new ConyugueData();
+        c = new Conyugue();
 
     }
 
@@ -108,40 +107,37 @@ public class ClienteData {
         }
     }
 
-    public void modificarClienteFisico(Cliente cliente) {
-        String sql = "UPDATE cliente SET  idConyugue = ?,tipo= ?,nombreRsocial = ?,dni=? ,cuilCuit= ?,domicilio = ?,ciudad = ?"
-                + ",codigoPostal = ?,lugarTrabajo = ?,telefono= ?,mail= ? WHERE idCliente = ? AND estado = 1";
+   public void modificarClienteFisico(Cliente cliente) {
+    String sql = "UPDATE cliente SET tipo = ?,nombreRsocial = ?,dni = ?,cuilCuit = ?,"
+            + "lugarTrabajo = ?, domicilio = ?, ciudad = ?, codigoPostal = ?, telefono = ?, mail = ? "
+            + "WHERE idCliente = ? AND estado = 1";
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
 
-            ps.setInt(1, cliente.getConyugue().getIdConyugue());
-            ps.setString(2, cliente.getTipo().toString());
-            ps.setString(3, cliente.getNombre());
-            ps.setInt(4, cliente.getDni());
-            ps.setLong(5, cliente.getCuilCuit());
-            ps.setString(6, cliente.getDomicilio());
-            ps.setString(7, cliente.getCiudad());
-            ps.setString(8, cliente.getCodigoPostal());
-            ps.setString(9, cliente.getLugarTrabajo());
-            ps.setString(10, cliente.getTelefono());
-            ps.setString(11, cliente.getMail());
-            ps.setBoolean(12, cliente.isEstado());
+        ps.setString(1, cliente.getTipo().toString());
+        ps.setString(2, cliente.getNombre());
+        ps.setInt(3, cliente.getDni());
+        ps.setLong(4, cliente.getCuilCuit());
+        ps.setString(5, cliente.getLugarTrabajo());
+        ps.setString(6, cliente.getDomicilio());
+        ps.setString(7, cliente.getCiudad());
+        ps.setString(8, cliente.getCodigoPostal());
+        ps.setString(9, cliente.getTelefono());
+        ps.setString(10, cliente.getMail());
+        ps.setInt(11, cliente.getIdCliente());
 
-            int exito = ps.executeUpdate();//Como la sentencia devuelve un entero creamos una variable tipo Int
+        int exito = ps.executeUpdate();
 
-            if (exito == 1) {
-
-                JOptionPane.showMessageDialog(null, "Cliente modificado con exito.");
-
-                /*Guardamos los cambios y ejecutamos desde el main*/
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente" + ex);
+        if (exito == 1) {
+            JOptionPane.showMessageDialog(null, "Cliente modificado con éxito.");
+            // Realiza las operaciones necesarias después de la actualización
         }
-
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente: " + ex);
     }
+}
+
 
     public void modificarClienteJuridico(Cliente cliente) {
         String sql = "UPDATE cliente SET  tipo= ?,nombreRsocial = ?,cuilCuit= ?,domicilio = ?,ciudad = ?"
@@ -194,7 +190,7 @@ public class ClienteData {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente"+ex);
         }
 
     }
@@ -233,14 +229,13 @@ public class ClienteData {
             ps.close();
 
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
         }
         return cliente;
     }
 
-    public Cliente buscarClientePorDni(char dni) {
-        String sql = "SELECT tipo, nombreRsocial, dni, cuilCuit, domicilio, ciudad, codigoPostal,"
-                + " lugarTrabajo, telefono, mail, estado FROM cliente WHERE dni = ?";
+    public Cliente buscarClientePorDni(int dni) {
+        String sql = "SELECT * FROM cliente WHERE dni = ?";
         Cliente cliente = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -267,26 +262,25 @@ public class ClienteData {
                 cliente.setTelefono(rs.getString("telefono"));
                 cliente.setMail(rs.getString("mail"));
                 cliente.setEstado(rs.getBoolean("estado"));
-                int idConyugue = rs.getInt("idConyugue");
-                cliente.getConyugue().setIdConyugue(idConyugue);
+                Conyugue conyugue = coData.buscar(rs.getInt("idConyugue"));//Recupero los datos de conyugue
+                cliente.setConyugue(conyugue);
             } else {
                 JOptionPane.showMessageDialog(null, "No existe ese Cliente");
             }
             ps.close();
 
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente"+ex);
         }
         return cliente;
     }
 
-    public Cliente buscarClientePorCuilCuit(char cuilCuit) {
-        String sql = "SELECT tipo, nombreRsocial, dni, cuilCuit, domicilio, ciudad, codigoPostal,"
-                + " lugarTrabajo, telefono, mail, estado FROM cliente WHERE cuilCuit = ?";
+    public Cliente buscarClientePorCuilCuit(long cuilCuit) {
+        String sql = "SELECT * FROM cliente WHERE cuilCuit = ?";
         Cliente cliente = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, cuilCuit);//Reemplazamos el comodin "?" por el id del alumno que ingresamos por parametro
+            ps.setLong(1, cuilCuit);//Reemplazamos el comodin "?" por el id del alumno que ingresamos por parametro
 
             /*Cada vez que necesitemos buscar y mostrar datos necesitamos usar la 
             sentencia ResulSet, que nos va a mostrar el resultado en la terminal*/
@@ -309,14 +303,14 @@ public class ClienteData {
                 cliente.setTelefono(rs.getString("telefono"));
                 cliente.setMail(rs.getString("mail"));
                 cliente.setEstado(rs.getBoolean("estado"));
-                int idConyugue = rs.getInt("idConyugue");
-                cliente.getConyugue().setIdConyugue(idConyugue);
+                Conyugue conyugue = coData.buscar(rs.getInt("idConyugue"));//Recupero los datos de conyugue
+                cliente.setConyugue(conyugue);
             } else {
                 JOptionPane.showMessageDialog(null, "No existe ese Cliente");
             }
             ps.close();
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
         }
         return cliente;
     }
@@ -349,14 +343,14 @@ public class ClienteData {
                 cliente.setTelefono(rs.getString("telefono"));
                 cliente.setMail(rs.getString("mail"));
                 cliente.setEstado(rs.getBoolean("estado"));
-                int idConyugue = rs.getInt("idConyugue");
-                cliente.getConyugue().setIdConyugue(idConyugue);
+                Conyugue conyugue = coData.buscar(rs.getInt("idConyugue"));//Recupero los datos de conyugue
+                cliente.setConyugue(conyugue);
             } else {
                 JOptionPane.showMessageDialog(null, "No existe ese Cliente");
             }
             ps.close();
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
         }
         return cliente;
     }
@@ -372,11 +366,10 @@ public class ClienteData {
             /*Como el ResultSet va a devolver mas de una fila,
             recorremos el resultado con un While.*/
             while (rs.next()) {
-
-                Cliente cliente = new Cliente();//Creo un cliente y voy seteando los atributos
-//                cliente.setIdCliente(rs.getInt("idCliente"));
-                int idConyugue = rs.getInt("idConyugue");
-                cliente.getConyugue().setIdConyugue(idConyugue);
+                Cliente cliente = new Cliente();
+                Conyugue conyugue = coData.buscar(rs.getInt("idConyugue"));//Recupero los datos de conyugue
+                cliente.setConyugue(conyugue);
+                cliente.setIdCliente(rs.getInt("idCliente"));
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -390,12 +383,12 @@ public class ClienteData {
                 cliente.setTelefono(rs.getString("telefono"));
                 cliente.setMail(rs.getString("mail"));
                 cliente.setEstado(rs.getBoolean("estado"));
-
+               
                 clientes.add(cliente);
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
         }
 
         return clientes;
@@ -414,9 +407,9 @@ public class ClienteData {
             while (rs.next()) {
 
                 Cliente cliente = new Cliente();//Creo un cliente y voy seteando los atributos
-//                cliente.setIdCliente(rs.getInt("idCliente"));
-                int idConyugue = rs.getInt("idConyugue");
-                cliente.getConyugue().setIdConyugue(idConyugue);
+                cliente.setIdCliente(rs.getInt("idCliente"));
+                Conyugue conyugue = coData.buscar(rs.getInt("idConyugue"));//Recupero los datos de conyugue
+                cliente.setConyugue(conyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -435,7 +428,7 @@ public class ClienteData {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
         }
 
         return clientes;
@@ -457,8 +450,8 @@ public class ClienteData {
                 Cliente cliente = new Cliente();//Creo un cliente y voy seteando los atributos
 
                 cliente.setIdCliente(rs.getInt("idCliente"));
-                int idConyugue = rs.getInt("idConyugue");
-                cliente.getConyugue().setIdConyugue(idConyugue);
+                Conyugue conyugue = coData.buscar(rs.getInt("idConyugue"));//Recupero los datos de conyugue
+                cliente.setConyugue(conyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -477,14 +470,14 @@ public class ClienteData {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
         }
 
         return clientes;
 
     }
 
-    public List<Cliente> listarTodosClientesPorNombre(String nombre) {
+    public List<Cliente> listarTodosClientesPorNombre(char nombre) {
         List<Cliente> clientes = new ArrayList<>();
         String sql = "SELECT * FROM cliente WHERE nombreRsocial = ?";
 
@@ -499,8 +492,8 @@ public class ClienteData {
 
                 Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
                 cliente.setIdCliente(rs.getInt("idCliente"));
-                int idConyugue = rs.getInt("idConyugue");
-                cliente.getConyugue().setIdConyugue(idConyugue);
+               Conyugue conyugue = coData.buscar(rs.getInt("idConyugue"));//Recupero los datos de conyugue
+                cliente.setConyugue(conyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -519,15 +512,15 @@ public class ClienteData {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
         }
 
         return clientes;
     }
 
-    public List<Cliente> listarClientesActivosPorNombre(String nombre) {
+    public List<Cliente> listarClientesActivosPorNombre(char nombre) {
         List<Cliente> clientes = new ArrayList<>();
-        String sql = "SELECT * FROM cliente WHERE nombreRsocial = ? AND estado = 1";
+        String sql = "SELECT * FROM cliente WHERE  estado = 1  AND nombreRsocial LIKE ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -540,8 +533,8 @@ public class ClienteData {
 
                 Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
                 cliente.setIdCliente(rs.getInt("idCliente"));
-                int idConyugue = rs.getInt("idConyugue");
-                cliente.getConyugue().setIdConyugue(idConyugue);
+                Conyugue conyugue = coData.buscar(rs.getInt("idConyugue"));//Recupero los datos de conyugue
+                cliente.setConyugue(conyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -560,16 +553,16 @@ public class ClienteData {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
         }
 
         return clientes;
 
     }
 
-    public List<Cliente> listarClientesNoActivosPorNombre(String nombre) {
+    public List<Cliente> listarClientesNoActivosPorNombre(char nombre) {
         List<Cliente> clientes = new ArrayList<>();
-        String sql = "SELECT * FROM cliente WHERE nombreRsocial = ? AND estado = 0";
+        String sql = "SELECT * FROM cliente WHERE  estado = 0 AND nombreRsocial LIKE ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -582,8 +575,8 @@ public class ClienteData {
 
                 Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
                 cliente.setIdCliente(rs.getInt("idCliente"));
-                int idConyugue = rs.getInt("idConyugue");
-                cliente.getConyugue().setIdConyugue(idConyugue);
+                Conyugue conyugue = coData.buscar(rs.getInt("idConyugue"));//Recupero los datos de conyugue
+                cliente.setConyugue(conyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -602,7 +595,7 @@ public class ClienteData {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
         }
 
         return clientes;
@@ -624,6 +617,8 @@ public class ClienteData {
 
                 Cliente cliente = new Cliente();//Creo un cliente y voy seteando los atributos
                 cliente.setIdCliente(rs.getInt("idCliente"));
+                Conyugue conyugue = coData.buscar(rs.getInt("idConyugue"));//Recupero los datos de conyugue
+                cliente.setConyugue(conyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -642,7 +637,7 @@ public class ClienteData {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
         }
 
         return clientes;
@@ -651,7 +646,7 @@ public class ClienteData {
 
     public List<Cliente> listarClientesActivosPorCuilCuit(char cuil) {
         List<Cliente> clientes = new ArrayList<>();
-        String sql = "SELECT * FROM cliente WHERE cuilCuit = ? AND estado = 1";
+        String sql = "SELECT * FROM cliente WHERE estado = 1 AND cuilCuit LIKE ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -664,8 +659,8 @@ public class ClienteData {
 
                 Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
                 cliente.setIdCliente(rs.getInt("idCliente"));
-                int idConyugue = rs.getInt("idConyugue");
-                cliente.getConyugue().setIdConyugue(idConyugue);
+               Conyugue conyugue = coData.buscar(rs.getInt("idConyugue"));//Recupero los datos de conyugue
+                cliente.setConyugue(conyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -684,7 +679,7 @@ public class ClienteData {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
         }
 
         return clientes;
@@ -692,7 +687,7 @@ public class ClienteData {
 
     public List<Cliente> listarClientesNoActivosPorCuilCuit(char cuil) {
         List<Cliente> clientes = new ArrayList<>();
-        String sql = "SELECT * FROM cliente WHERE cuilCuit = ? AND estado = 0";
+        String sql = "SELECT * FROM cliente WHERE estado = 0 AND cuilCuit LIKE ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -705,8 +700,8 @@ public class ClienteData {
 
                 Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
                 cliente.setIdCliente(rs.getInt("idCliente"));
-                int idConyugue = rs.getInt("idConyugue");
-                cliente.getConyugue().setIdConyugue(idConyugue);
+                Conyugue conyugue = coData.buscar(rs.getInt("idConyugue"));//Recupero los datos de conyugue
+                cliente.setConyugue(conyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -725,7 +720,7 @@ public class ClienteData {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
         }
 
         return clientes;
@@ -733,7 +728,7 @@ public class ClienteData {
 
     public List<Cliente> listarTodosClientesDni(char dni) {
         List<Cliente> clientes = new ArrayList<>();
-        String sql = "SELECT * FROM cliente WHERE cuilCuit = ? ";
+        String sql = "SELECT * FROM cliente WHERE dni = ? ";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -746,8 +741,8 @@ public class ClienteData {
 
                 Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
                 cliente.setIdCliente(rs.getInt("idCliente"));
-                int idConyugue = rs.getInt("idConyugue");
-                cliente.getConyugue().setIdConyugue(idConyugue);
+               Conyugue conyugue = coData.buscar(rs.getInt("idConyugue"));//Recupero los datos de conyugue
+                cliente.setConyugue(conyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -765,7 +760,7 @@ public class ClienteData {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
         }
 
         return clientes;
@@ -774,7 +769,7 @@ public class ClienteData {
 
     public List<Cliente> listarClientesActivosDni(char dni) {
         List<Cliente> clientes = new ArrayList<>();
-        String sql = "SELECT * FROM cliente WHERE cuilCuit = ? AND estado = 1";
+        String sql = "SELECT * FROM cliente WHERE estado = 1 AND dni LIKE ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -787,8 +782,8 @@ public class ClienteData {
 
                 Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
                 cliente.setIdCliente(rs.getInt("idCliente"));
-                int idConyugue = rs.getInt("idConyugue");
-                cliente.getConyugue().setIdConyugue(idConyugue);
+                Conyugue conyugue = coData.buscar(rs.getInt("idConyugue"));//Recupero los datos de conyugue
+                cliente.setConyugue(conyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -807,7 +802,7 @@ public class ClienteData {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
         }
 
         return clientes;
@@ -816,7 +811,7 @@ public class ClienteData {
 
     public List<Cliente> listarClientesNoActivosDni(char dni) {
         List<Cliente> clientes = new ArrayList<>();
-        String sql = "SELECT * FROM cliente WHERE cuilCuit = ? AND estado = 0";
+        String sql = "SELECT * FROM cliente WHERE estado = 0 AND dni LIKE ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -829,8 +824,8 @@ public class ClienteData {
 
                 Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
                 cliente.setIdCliente(rs.getInt("idCliente"));
-                int idConyugue = rs.getInt("idConyugue");
-                cliente.getConyugue().setIdConyugue(idConyugue);
+               Conyugue conyugue = coData.buscar(rs.getInt("idConyugue"));//Recupero los datos de conyugue
+                cliente.setConyugue(conyugue);
                 String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
                 TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
                 cliente.setTipo(tipoCliente);
@@ -848,131 +843,137 @@ public class ClienteData {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
         }
 
         return clientes;
 
     }
 
-//    public List<Cliente> listarClientesPorTipo(String tipo) {
-//        List<Cliente> clientes = new ArrayList<>();
-//        String sql = "SELECT * FROM cliente WHERE tipo = ?";
-//
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql);
-//
-//            ps.setString(1, tipo + "%");
-//            ResultSet rs = ps.executeQuery();
-//            /*Como el ResultSet va a devolver mas de una fila,
-//            recorremos el resultado con un While.*/
-//            while (rs.next()) {
-//
-//                Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
-//                cliente.setIdCliente(rs.getInt("idCliente"));
-//                String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
-//                TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
-//                cliente.setTipo(tipoCliente);
-//                cliente.setNombre(rs.getString("nombreRsocial"));
-//                cliente.setDni(rs.getInt("dni"));
-//                cliente.setCuilCuit(rs.getLong("cuilCuit"));
-//                cliente.setLugarTrabajo(rs.getString("lugarTrabajo"));
-//                cliente.setDomicilio(rs.getString("domicilio"));
-//                cliente.setCiudad(rs.getString("ciudad"));
-//                cliente.setCodigoPostal(rs.getString("codigoPostal"));
-//                cliente.setTelefono(rs.getString("telefono"));
-//                cliente.setMail(rs.getString("mail"));
-//                cliente.setEstado(rs.getBoolean("estado"));
-//
-//                clientes.add(cliente);
-//
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        return clientes;
-//
-//    }
-//
-//    public List<Cliente> listarClientesPorTipoActivos(String tipo) {
-//        List<Cliente> clientes = new ArrayList<>();
-//        String sql = "SELECT * FROM cliente WHERE tipo = ? AND estado = 1";
-//
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql);
-//
-//            ps.setString(1, tipo + "%");
-//            ResultSet rs = ps.executeQuery();
-//            /*Como el ResultSet va a devolver mas de una fila,
-//            recorremos el resultado con un While.*/
-//            while (rs.next()) {
-//
-//                Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
-//                cliente.setIdCliente(rs.getInt("idCliente"));
-//                String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
-//                TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
-//                cliente.setTipo(tipoCliente);
-//                cliente.setNombre(rs.getString("nombreRsocial"));
-//                cliente.setDni(rs.getInt("dni"));
-//                cliente.setCuilCuit(rs.getLong("cuilCuit"));
-//                cliente.setLugarTrabajo(rs.getString("lugarTrabajo"));
-//                cliente.setDomicilio(rs.getString("domicilio"));
-//                cliente.setCiudad(rs.getString("ciudad"));
-//                cliente.setCodigoPostal(rs.getString("codigoPostal"));
-//                cliente.setTelefono(rs.getString("telefono"));
-//                cliente.setMail(rs.getString("mail"));
-//                cliente.setEstado(rs.getBoolean("estado"));
-//
-//                clientes.add(cliente);
-//
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        return clientes;
-//
-//    }
-//
-//    public List<Cliente> listarClientesPorTipoNoActivos(TipoCliente tipo) {
-//        List<Cliente> clientes = new ArrayList<>();
-//        String sql = "SELECT * FROM cliente WHERE tipo = ? AND estado = 0";
-//
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql);
-//
-//            ps.setString(1, tipo + "%");
-//            ResultSet rs = ps.executeQuery();
-//            /*Como el ResultSet va a devolver mas de una fila,
-//            recorremos el resultado con un While.*/
-//            while (rs.next()) {
-//
-//                Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
-//                cliente.setIdCliente(rs.getInt("idCliente"));
-//                String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
-//                TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
-//                cliente.setTipo(tipoCliente);
-//                cliente.setNombre(rs.getString("nombreRsocial"));
-//                cliente.setDni(rs.getInt("dni"));
-//                cliente.setCuilCuit(rs.getLong("cuilCuit"));
-//                cliente.setLugarTrabajo(rs.getString("lugarTrabajo"));
-//                cliente.setDomicilio(rs.getString("domicilio"));
-//                cliente.setCiudad(rs.getString("ciudad"));
-//                cliente.setCodigoPostal(rs.getString("codigoPostal"));
-//                cliente.setTelefono(rs.getString("telefono"));
-//                cliente.setMail(rs.getString("mail"));
-//                cliente.setEstado(rs.getBoolean("estado"));
-//
-//                clientes.add(cliente);
-//
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        return clientes;
-//
-//    }
-//
+    public List<Cliente> listarClientesPorTipo(TipoCliente tipo) {
+        List<Cliente> clientes = new ArrayList<>();
+        String sql = "SELECT * FROM cliente WHERE tipo = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, tipo.toString()); // convierto el enum a cadena antes de establecerlo en el PreparedStatement
+            ResultSet rs = ps.executeQuery();
+            /*Como el ResultSet va a devolver mas de una fila,
+            recorremos el resultado con un While.*/
+            while (rs.next()) {
+
+                Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
+                cliente.setIdCliente(rs.getInt("idCliente"));
+                Conyugue conyugue = coData.buscar(rs.getInt("idConyugue"));//Recupero los datos de conyugue
+                cliente.setConyugue(conyugue);
+                String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
+                TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
+                cliente.setTipo(tipoCliente);
+                cliente.setNombre(rs.getString("nombreRsocial"));
+                cliente.setDni(rs.getInt("dni"));
+                cliente.setCuilCuit(rs.getLong("cuilCuit"));
+                cliente.setLugarTrabajo(rs.getString("lugarTrabajo"));
+                cliente.setDomicilio(rs.getString("domicilio"));
+                cliente.setCiudad(rs.getString("ciudad"));
+                cliente.setCodigoPostal(rs.getString("codigoPostal"));
+                cliente.setTelefono(rs.getString("telefono"));
+                cliente.setMail(rs.getString("mail"));
+                cliente.setEstado(rs.getBoolean("estado"));
+
+                clientes.add(cliente);
+
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
+        }
+
+        return clientes;
+
+    }
+
+    public List<Cliente> listarClientesPorTipoActivos(TipoCliente tipo) {
+        List<Cliente> clientes = new ArrayList<>();
+        String sql = "SELECT * FROM cliente WHERE tipo = ? AND estado = 1";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, tipo.toString()); // convierto el enum a cadena antes de establecerlo en el PreparedStatement
+            ResultSet rs = ps.executeQuery();
+            /*Como el ResultSet va a devolver mas de una fila,
+            recorremos el resultado con un While.*/
+            while (rs.next()) {
+
+                Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
+                cliente.setIdCliente(rs.getInt("idCliente"));
+                Conyugue conyugue = coData.buscar(rs.getInt("idConyugue"));//Recupero los datos de conyugue
+                cliente.setConyugue(conyugue);
+                String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
+                TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
+                cliente.setTipo(tipoCliente);
+                cliente.setNombre(rs.getString("nombreRsocial"));
+                cliente.setDni(rs.getInt("dni"));
+                cliente.setCuilCuit(rs.getLong("cuilCuit"));
+                cliente.setLugarTrabajo(rs.getString("lugarTrabajo"));
+                cliente.setDomicilio(rs.getString("domicilio"));
+                cliente.setCiudad(rs.getString("ciudad"));
+                cliente.setCodigoPostal(rs.getString("codigoPostal"));
+                cliente.setTelefono(rs.getString("telefono"));
+                cliente.setMail(rs.getString("mail"));
+                cliente.setEstado(rs.getBoolean("estado"));
+
+                clientes.add(cliente);
+
+            }
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
+        }
+
+        return clientes;
+
+    }
+
+    public List<Cliente> listarClientesPorTipoNoActivos(TipoCliente tipo) {
+        List<Cliente> clientes = new ArrayList<>();
+        String sql = "SELECT * FROM cliente WHERE tipo = ? AND estado = 0";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, tipo.toString()); // convierto el enum a cadena antes de establecerlo en el PreparedStatement
+            ResultSet rs = ps.executeQuery();
+            /*Como el ResultSet va a devolver mas de una fila,
+            recorremos el resultado con un While.*/
+            while (rs.next()) {
+
+                Cliente cliente = new Cliente();//Creo un alumno y voy seteando los atributos
+                cliente.setIdCliente(rs.getInt("idCliente"));
+                Conyugue conyugue = coData.buscar(rs.getInt("idConyugue"));//Recupero los datos de conyugue
+                cliente.setConyugue(conyugue);
+                String tipoClienteStr = rs.getString("tipo");//Primero obtengo el valor de la columna tipo
+                TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr); // Convierte la cadena a TipoCliente (Enum)
+                cliente.setTipo(tipoCliente);
+                cliente.setNombre(rs.getString("nombreRsocial"));
+                cliente.setDni(rs.getInt("dni"));
+                cliente.setCuilCuit(rs.getLong("cuilCuit"));
+                cliente.setLugarTrabajo(rs.getString("lugarTrabajo"));
+                cliente.setDomicilio(rs.getString("domicilio"));
+                cliente.setCiudad(rs.getString("ciudad"));
+                cliente.setCodigoPostal(rs.getString("codigoPostal"));
+                cliente.setTelefono(rs.getString("telefono"));
+                cliente.setMail(rs.getString("mail"));
+                cliente.setEstado(rs.getBoolean("estado"));
+
+                clientes.add(cliente);
+
+            }
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
+        }
+
+        return clientes;
+
+    }
+
 }
