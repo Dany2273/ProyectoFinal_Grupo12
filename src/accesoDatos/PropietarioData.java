@@ -90,6 +90,38 @@ public class PropietarioData {
 
         }
     }//agrega un propietario juridico
+    public void modificarPropietarioP(Propietario propietario) {//Recibe por parametro un Propietario ya existente en la BD
+
+        String sql = "UPDATE propietario SET  nombreRsocial = ?, dni= ? ,cuilCuit = ?, lugarTrabajo = ?, domicilio = ?, ciudad = ?, codigoPostal = ?, telefono = ?, mail = ? "
+                + "WHERE idPropietario = ?";
+        //Nuevamente como los datos se recibe por parametros, utilizamos un caracter comodin
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            
+            ps.setString(1, propietario.getNombre());
+            ps.setInt(2, propietario.getDni());
+            ps.setLong(3, propietario.getCuilCuit());
+            ps.setString(4, propietario.getLugarTrabajo());
+            ps.setString(5, propietario.getDomicilio());
+            ps.setString(6, propietario.getCiudad());
+            ps.setString(7, propietario.getCodigoPostal());
+            ps.setString(8, propietario.getTelefono());
+            ps.setString(9, propietario.getMail());
+            ps.setInt(10, propietario.getIdPropietario());
+
+            int exito = ps.executeUpdate();//Como la sentencia devuelve un entero creamos una variable tipo Int
+
+            if (exito == 1) {
+
+                JOptionPane.showMessageDialog(null, "Propietario modificado con exito.");
+
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Propietario");
+        }
+    }
 
     public void eliminarPropietario(int id) {//Solo vamos a hacer un eliminado logico, o sea, cambiar estado a 0.
         //Recibimos por parametro el id del propietario que va a ser eliminado
@@ -533,11 +565,12 @@ public class PropietarioData {
     public Propietario buscarProPorCuilC(long cuilCuit) {
 
         String sql = "SELECT * FROM propietario "
-                + "WHERE cuilCuit = ? AND estado = 1";
+                + "WHERE cuilCuit = ? ";
         Propietario propietario = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setLong(1, cuilCuit);
+        
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -555,7 +588,7 @@ public class PropietarioData {
                 propietario.setCodigoPostal(rs.getString("codigoPostal"));
                 propietario.setTelefono(rs.getString("telefono"));
                 propietario.setMail(rs.getString("mail"));
-                propietario.setEstado(true);
+                propietario.setEstado(rs.getBoolean("estado"));
 
             } else {
 
@@ -568,10 +601,49 @@ public class PropietarioData {
         //System.out.println(propietario);
         return propietario;
     }//busca un propietario tanto juridico como fisico
+    public Propietario buscarProPorDni(int dni) {
+
+        String sql = "SELECT * FROM propietario "
+                + "WHERE dni = ? ";
+        Propietario propietario = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setLong(1, dni);
+        
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                propietario = new Propietario();
+
+                propietario.setIdPropietario(rs.getInt("idPropietario"));
+                propietario.setTipo(TipoCliente.valueOf(rs.getString("tipo")));
+                propietario.setNombre(rs.getString("nombreRsocial"));
+                propietario.setDni(rs.getInt("dni"));
+                propietario.setCuilCuit(rs.getLong("cuilCuit"));
+                propietario.setLugarTrabajo(rs.getString("lugarTrabajo"));
+                propietario.setDomicilio(rs.getString("domicilio"));
+                propietario.setCiudad(rs.getString("ciudad"));
+                propietario.setCodigoPostal(rs.getString("codigoPostal"));
+                propietario.setTelefono(rs.getString("telefono"));
+                propietario.setMail(rs.getString("mail"));
+                propietario.setEstado(rs.getBoolean("estado"));
+
+            } else {
+
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        //System.out.println(propietario);
+        return propietario;
+    }
 
     public Propietario buscarId(int idProp) {
         String sql = "SELECT * FROM propietario "
-                + "WHERE idPropietario = ? AND estado = 1";
+                + "WHERE idPropietario = ? ";
         Propietario propietario = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -593,7 +665,7 @@ public class PropietarioData {
                 propietario.setCodigoPostal(rs.getString("codigoPostal"));
                 propietario.setTelefono(rs.getString("telefono"));
                 propietario.setMail(rs.getString("mail"));
-                propietario.setEstado(true);
+                propietario.setEstado(rs.getBoolean("estado"));
 
             } else {
 
