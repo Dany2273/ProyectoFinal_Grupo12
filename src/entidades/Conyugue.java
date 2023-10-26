@@ -2,7 +2,7 @@
 package entidades;
 
 public class Conyugue extends Persona{
-    private int idConyugue;
+     private int idConyugue;
 
     public Conyugue() {
     }
@@ -27,7 +27,7 @@ public class Conyugue extends Persona{
 
     @Override
     public String toString() {
-        return  idConyugue + super.toString();
+        return  super.toString();
     }
     
 }

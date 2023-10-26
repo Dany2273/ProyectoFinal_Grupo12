@@ -138,6 +138,25 @@ public class ClienteData {
     }
 }
 
+   public void reingresarCliente(int id){
+       String sql = "UPDATE cliente SET estado = 1 WHERE idCliente = ? AND estado = 0";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+           
+             ps.setInt(1, id);
+
+            int exito = ps.executeUpdate();//Como la sentencia devuelve un entero creamos una variable tipo Int
+
+            if (exito == 1) {
+
+                JOptionPane.showMessageDialog(null, "Cliente reingresado con exito.");
+
+                /*Guardamos los cambios y ejecutamos desde el main*/
+            }
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente: " + ex);
+        }
+   }
 
     public void modificarClienteJuridico(Cliente cliente) {
         String sql = "UPDATE cliente SET  tipo= ?,nombreRsocial = ?,cuilCuit= ?,domicilio = ?,ciudad = ?"

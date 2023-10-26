@@ -4,7 +4,7 @@ package entidades;
 import Enums.TipoCliente;
 
 public class Escribano extends Persona {
-    private int idEscribano;
+private int idEscribano;
 
     public Escribano() {
     }
@@ -34,7 +34,7 @@ public class Escribano extends Persona {
 
     @Override
     public String toString() {
-        return   idEscribano + super.toString();
+        return   super.toString();
     }
     
 }

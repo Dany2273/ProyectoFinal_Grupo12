@@ -9,7 +9,6 @@ import Enums.TipoCliente;
 import accesoDatos.ClienteData;
 import entidades.Cliente;
 import entidades.Conyugue;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -20,15 +19,17 @@ public class AltaClientes extends javax.swing.JInternalFrame {
 
     Cliente cli = new Cliente();
     ClienteData cData = new ClienteData();
+// Declarar una variable de instancia para el JInternalFrame
+    private Conyugues conyuguesFrame;
 
     public AltaClientes() {
 
         jConyugue = new JComboBox<>();
-
         initComponents();
-jLabel2.setToolTipText("Dato obligatorio");
+        jLabel2.setToolTipText("Dato obligatorio");
         cargarCombo();
-
+        jReingresar.setVisible(false);
+        llenarEstado();
     }
 
     /**
@@ -78,6 +79,7 @@ jLabel2.setToolTipText("Dato obligatorio");
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jReingresar = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -198,8 +200,11 @@ jLabel2.setToolTipText("Dato obligatorio");
             }
         });
 
-        jEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Casada/o", "Soltera/o", "Concubinato" }));
-        jEstado.setSelectedIndex(-1);
+        jEstado.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jEstadoItemStateChanged(evt);
+            }
+        });
         jEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jEstadoActionPerformed(evt);
@@ -212,6 +217,7 @@ jLabel2.setToolTipText("Dato obligatorio");
         jLabel11.setText("Estado Civil");
 
         jSalir.setText("Salir");
+        jSalir.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jSalirActionPerformed(evt);
@@ -268,6 +274,13 @@ jLabel2.setToolTipText("Dato obligatorio");
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Alta Cliente.");
 
+        jReingresar.setText("Reingresar");
+        jReingresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jReingresarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -275,14 +288,11 @@ jLabel2.setToolTipText("Dato obligatorio");
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(213, 213, 213)
+                        .addComponent(jLabel12))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDni, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -306,9 +316,18 @@ jLabel2.setToolTipText("Dato obligatorio");
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCuil, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jCuil, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jDni, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(49, 49, 49)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -332,18 +351,14 @@ jLabel2.setToolTipText("Dato obligatorio");
                                             .addComponent(jLabel8)
                                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(27, 27, 27)
-                                        .addComponent(jTel))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(131, 131, 131)
-                                .addComponent(jMail, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(jGuardar)
-                        .addGap(186, 186, 186)
-                        .addComponent(jSalir))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(213, 213, 213)
-                        .addComponent(jLabel12)))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jMail)
+                                            .addComponent(jTel)))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jReingresar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -430,16 +445,17 @@ jLabel2.setToolTipText("Dato obligatorio");
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))))
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jGuardar)
-                            .addComponent(jSalir)))
+                                    .addComponent(jLabel2)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(150, 150, 150)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jConyugue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jGuardar)
+                    .addComponent(jSalir)
+                    .addComponent(jReingresar))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -447,13 +463,11 @@ jLabel2.setToolTipText("Dato obligatorio");
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -566,14 +580,44 @@ jLabel2.setToolTipText("Dato obligatorio");
                 return;
             }
 
+            long cuilExistente;
+            for (Cliente c : cData.listarTodosClientes()) {
+                cuilExistente = c.getCuilCuit();
+                if (cuilExistente == Long.parseLong(jCuil.getText()) && c.isEstado() == true) {
+                    JOptionPane.showMessageDialog(null, "El cliente ya se encuentra activo en la base de datos");
+                    return;
+                } else if (cuilExistente == Long.parseLong(jCuil.getText()) && c.isEstado() == false) {
+                    int resp4 = JOptionPane.showConfirmDialog(null, "El cliente se encuentra inactivo en la base de datos.\n"
+                            + "¿Desea dar de alta nuevamente al cliente?", "Atención!",
+                            JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if (resp4 == 0) {
+                        jReingresar.setVisible(true);
+                        jEstado.setSelectedItem("");
+                        jDni.setText("");
+                        jDomi.setText("");
+                        jConyugue.setSelectedItem("");
+                        jCiuda.setText("");
+                        jcp.setText("");
+                        jNombre.setText("");
+                        jTrabajo.setText("");
+                        jTel.setText("");
+                        jMail.setText("");
+                        return;
+                    } else {
+                        return;
+                    }
+                }
+            }
+
             int resp = JOptionPane.showConfirmDialog(null, "¿Desea guardar los datos ingresados?", "Atención!",
                     JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
             if (resp == 0) {
-
                 tipo = (TipoCliente) jTipo.getSelectedItem();
+
                 Conyugue con;
                 if (jConyugue == null) {
+
                     con = null;
                 } else {
                     con = (Conyugue) jConyugue.getSelectedItem();
@@ -591,7 +635,7 @@ jLabel2.setToolTipText("Dato obligatorio");
                     cli = new Cliente(con, tipo, nom, dni, cuil, trabajo, dom, ciu, cp, tel, mail, est);
 
                     cData.agregarClienteFisico(cli);
-                    
+
                 }
             }
             borrar();
@@ -670,13 +714,39 @@ jLabel2.setToolTipText("Dato obligatorio");
                 return;
             }
 
+            long cuilExistente;
+            for (Cliente c : cData.listarTodosClientes()) {
+                cuilExistente = c.getCuilCuit();
+                if (cuilExistente == Long.parseLong(jCuil.getText()) && c.isEstado() == true) {
+                    JOptionPane.showMessageDialog(null, "El cliente ya se encuentra activo en la base de datos");
+                    return;
+                } else if (cuilExistente == Long.parseLong(jCuil.getText()) && c.isEstado() == false) {
+                    int resp3 = JOptionPane.showConfirmDialog(null, "El cliente se encuentra inactivo en la base de datos.\n"
+                            + "¿Desea dar de alta nuevamente al cliente?", "Atención!",
+                            JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if (resp3 == 0) {
+                        jReingresar.setVisible(true);
+                        jEstado.setSelectedItem("");
+                        jDni.setText("");
+                        jDomi.setText("");
+                        jConyugue.setSelectedItem("");
+                        jCiuda.setText("");
+                        jcp.setText("");
+                        jNombre.setText("");
+                        jTrabajo.setText("");
+                        jTel.setText("");
+                        jMail.setText("");
+                        return;
+                    } else {
+                        return;
+                    }
+                }
+            }
+
             int resp2 = JOptionPane.showConfirmDialog(null, "¿Desea guardar los datos ingresados?", "Atención!",
                     JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
             if (resp2 == 0) {
-
-                tipo = (TipoCliente) jTipo.getSelectedItem();
-
                 tipo = (TipoCliente) jTipo.getSelectedItem();
                 String nom = jNombre.getText();
                 long cuil = Long.parseLong(jCuil.getText());
@@ -699,13 +769,24 @@ jLabel2.setToolTipText("Dato obligatorio");
 
     private void jEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEstadoActionPerformed
         // TODO add your handling code here:
-        if (jEstado.getSelectedItem().equals("Casada/o") || jEstado.getSelectedItem().equals("Concubinato")) {
+        if (jEstado != null) { // Verifica si jEstado no es null
+            if (jEstado.getSelectedItem().equals("Soltero/a")) {
+                if (jConyugue != null) { // Verifica si jConyugue no es null
+                    jConyugue.setEnabled(false);
+                }
+                if (conyuguesFrame != null && conyuguesFrame.isVisible()) {
+                    conyuguesFrame.dispose();
+                }
+            } else if (jEstado.getSelectedItem().equals("Casado/a") || jEstado.getSelectedItem().equals("Concubinato")) {
+                if (conyuguesFrame != null && conyuguesFrame.isVisible()) {
+                    conyuguesFrame.dispose();
+                }
 
-            Conyugues conyu = new Conyugues(); //Creo un objeto del internalFrame
-            Menu.Escritorio.add(conyu);//llamo al escritorio del menu y agrego el internal
-            conyu.toFront();//con este metodo hago que el internal se muestre delante del internal que lo llama
-            conyu.setVisible(true);//metodo para mostrar el internal
-
+                conyuguesFrame = new Conyugues();
+                Menu.Escritorio.add(conyuguesFrame);
+                conyuguesFrame.toFront();
+                conyuguesFrame.setVisible(true);
+            }
         }
     }//GEN-LAST:event_jEstadoActionPerformed
 
@@ -749,40 +830,65 @@ jLabel2.setToolTipText("Dato obligatorio");
 
     private void jLDNIMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDNIMouseEntered
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jLDNIMouseEntered
 
     private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
         // TODO add your handling code here:
         jLabel2 = new javax.swing.JLabel();
-       jLabel2.setText("(*)");
+        jLabel2.setText("(*)");
         jLabel2.setToolTipText("Dato obligatorio");
     }//GEN-LAST:event_jLabel2MouseEntered
 
     private void jLabel13MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseEntered
         // TODO add your handling code here:
         jLabel2 = new javax.swing.JLabel();
-       jLabel2.setText("(*)");
+        jLabel2.setText("(*)");
         jLabel2.setToolTipText("Dato obligatorio");
     }//GEN-LAST:event_jLabel13MouseEntered
 
     private void jLabel15MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseEntered
         // TODO add your handling code here:
         jLabel2 = new javax.swing.JLabel();
-       jLabel2.setText("(*)");
+        jLabel2.setText("(*)");
         jLabel2.setToolTipText("Dato obligatorio");
     }//GEN-LAST:event_jLabel15MouseEntered
 
     private void jLabel16MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseEntered
         // TODO add your handling code here:
         jLabel2 = new javax.swing.JLabel();
-       jLabel2.setText("(*)");
+        jLabel2.setText("(*)");
         jLabel2.setToolTipText("Dato obligatorio");
     }//GEN-LAST:event_jLabel16MouseEntered
 
     private void jNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jNombreActionPerformed
+
+    private void jEstadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jEstadoItemStateChanged
+        // TODO add your handling code here:
+        if (jEstado.getSelectedItem().equals("Soltero/a")) {
+
+            if (conyuguesFrame != null && conyuguesFrame.isVisible()) {
+                conyuguesFrame.dispose(); // Cierra el JInternalFrame si ya está abierto
+            }
+        } else if (jEstado.getSelectedItem().equals("Casado/a") || jEstado.getSelectedItem().equals("Concubinato")) {
+            if (conyuguesFrame != null && conyuguesFrame.isVisible()) {
+                conyuguesFrame.dispose(); // Cierra el JInternalFrame si ya está abierto
+            }
+
+        }
+
+    }//GEN-LAST:event_jEstadoItemStateChanged
+
+    private void jReingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jReingresarActionPerformed
+        // TODO add your handling code here:
+
+        long cuil = Long.parseLong(jCuil.getText());
+        cli = cData.buscarClientePorCuilCuit(cuil);
+        cData.reingresarCliente(cli.getIdCliente());
+        borrar();
+    }//GEN-LAST:event_jReingresarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -813,6 +919,7 @@ jLabel2.setToolTipText("Dato obligatorio");
     private javax.swing.JTextField jMail;
     private javax.swing.JTextField jNombre;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jReingresar;
     private javax.swing.JButton jSalir;
     private javax.swing.JTextField jTel;
     private javax.swing.JComboBox<TipoCliente> jTipo;
@@ -831,11 +938,19 @@ jLabel2.setToolTipText("Dato obligatorio");
         jConyugue.addItem(elemento);
     }
 
+    public void llenarEstado() {
+        jEstado.addItem("");
+        jEstado.addItem("Soltero/a");
+        jEstado.addItem("Casado/a");
+        jEstado.addItem("Concubinato");
+    }
+
     public void borrar() {
-//        jEstado.setSelectedIndex(-1);
+        jTipo.removeAll();
+        jEstado.setSelectedItem("");
         jDni.setText("");
         jDomi.setText("");
-        jConyugue.setSelectedIndex(-1);
+        jConyugue.setSelectedItem("");
         jCiuda.setText("");
         jcp.setText("");
         jNombre.setText("");

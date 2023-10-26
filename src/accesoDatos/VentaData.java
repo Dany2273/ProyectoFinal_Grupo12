@@ -3,6 +3,8 @@ package accesoDatos;
 import Enums.TipoInmueble;
 import Enums.Zona;
 import entidades.Cliente;
+import entidades.Conyugue;
+import entidades.Escribano;
 import entidades.Inmueble;
 import entidades.Propietario;
 import entidades.Venta;
@@ -11,6 +13,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,19 +22,23 @@ import javax.swing.JOptionPane;
 
 public class VentaData {
 
-    private Connection con = null;
+     private Connection con = null;
     private InmuebleData iData = null;
     private ClienteData cData = null;
     private PropietarioData pData = null;
+    private ConyugueData coData = null;
+    private EscribanoData eData = null;
 
     public VentaData() {
         con = Conexion.getConexion();
         iData = new InmuebleData();
         cData = new ClienteData();
         pData = new PropietarioData();
+        coData = new ConyugueData();
+        eData = new EscribanoData();
     }
 
-    public void agregarVenta(Venta venta) {
+   public void agregarVenta(Venta venta) {
         String sql = "INSERT INTO venta( fechaVenta, idInmueble, idPropietario, idCliente, "
                 + "idConyugue, idEscribano, precioVenta, moneda, detallesVenta, estadoEscriturizacion)"
                 + " VALUES(?,?,?,?,?,?,?,?,?,?)";
@@ -44,7 +51,14 @@ public class VentaData {
             ps.setInt(2, venta.getInmueble().getIdInmueble());
             ps.setInt(3, venta.getPropietario().getIdPropietario());
             ps.setInt(4, venta.getCliente().getIdCliente());
-            ps.setInt(5, venta.getConyugue().getIdConyugue());
+
+            // Comprueba si el conyugue es nulo y, si no lo es, establece su valor en la sentencia preparada.
+            if (venta.getConyugue() != null) {
+                ps.setInt(5, venta.getConyugue().getIdConyugue());
+            } else {
+                ps.setNull(5, Types.INTEGER); // Establece el valor como nulo en la base de datos.
+            }
+
             ps.setInt(6, venta.getEscribano().getIdEscribano());
             ps.setDouble(7, venta.getPrecioVenta());
             ps.setString(8, venta.getMoneda());
@@ -75,7 +89,12 @@ public class VentaData {
             ps.setInt(2, venta.getInmueble().getIdInmueble());
             ps.setInt(3, venta.getPropietario().getIdPropietario());
             ps.setInt(4, venta.getCliente().getIdCliente());
-            ps.setInt(5, venta.getConyugue().getIdConyugue());
+             // Comprueba si el conyugue es nulo y, si no lo es, establece su valor en la sentencia preparada.
+            if (venta.getConyugue() != null) {
+                ps.setInt(5, venta.getConyugue().getIdConyugue());
+            } else {
+                ps.setNull(5, Types.INTEGER); // Establece el valor como nulo en la base de datos.
+            }
             ps.setInt(6, venta.getEscribano().getIdEscribano());
             ps.setDouble(7, venta.getPrecioVenta());
             ps.setString(8, venta.getMoneda());
@@ -94,14 +113,12 @@ public class VentaData {
         }
     }
 
-    public void eliminarVenta(int idInmueble, int idCliente, int idPropietario) {
-        String sql = "DELETE FROM venta WHERE idInmueble = ? AND idCliente = ? AND idPropietario = ?";
+    public void eliminarVenta(int id) {
+        String sql = "DELETE FROM venta WHERE idVenta = ?";
 
         try {
             try (PreparedStatement ps = con.prepareStatement(sql)) {
-                ps.setInt(1, idInmueble);
-                ps.setInt(2, idCliente);
-                ps.setInt(3, idPropietario);
+                ps.setInt(1, id);
 
                 int filas = ps.executeUpdate();
                 if (filas > 0) {
@@ -125,17 +142,27 @@ public class VentaData {
                     venta = new Venta();
 
                     venta.setIdVenta(id);
-                    Inmueble inm = iData.buscarInmueble(rs.getInt("idInmueble"));
+                    Inmueble inm = iData.buscarPropiedadId(rs.getInt("idInmueble"));
                     Cliente cli = cData.buscarCliente(rs.getInt("idCliente"));
                     Propietario pro = pData.buscarId(rs.getInt("idPropietario"));
-                    venta.setInmueble(inm);
-                    venta.setCliente(cli);
-                    venta.setPropietario(pro);
+                    Conyugue cony = coData.buscar(rs.getInt("idConyugue"));
+                    Escribano esc = eData.buscar(rs.getInt("idEscribano"));
+
                     venta.setFecha(rs.getDate("fechaVenta").toLocalDate());
+                    venta.setInmueble(inm);
+                    venta.setPropietario(pro);
+                    venta.setCliente(cli);
+                    venta.setConyugue(cony);
+                    venta.setEscribano(esc);
                     venta.setPrecioVenta(rs.getDouble("precioVenta"));
+                    venta.setMoneda(rs.getString("moneda"));
+                    venta.setDetallesVenta(rs.getString("detallesVenta"));
+                    venta.setEstadoEscriturizacion(rs.getString("estadoEscriturizacion"));
+
                 } else {
                     JOptionPane.showMessageDialog(null, "No existe la venta en la base de datos.");
                 }
+                ps.close();
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla venta.");
@@ -148,22 +175,31 @@ public class VentaData {
 
         List<Venta> ventas = new ArrayList<>();
         String sql = "SELECT * FROM venta";
-
+        Venta venta = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Venta venta = new Venta();
+                venta = new Venta();
+
                 venta.setIdVenta(rs.getInt("idVenta"));
-                    Inmueble inm = iData.buscarInmueble(rs.getInt("idInmueble"));
-                    Cliente cli = cData.buscarCliente(rs.getInt("idCliente"));
-                    Propietario pro = pData.buscarId(rs.getInt("idPropietario"));
-                    venta.setInmueble(inm);
-                    venta.setCliente(cli);
-                    venta.setPropietario(pro);
-                    venta.setFecha(rs.getDate("fechaVenta").toLocalDate());
-                    venta.setPrecioVenta(rs.getDouble("precioVenta"));
+                Inmueble inm = iData.buscarPropiedadId(rs.getInt("idInmueble"));
+                Cliente cli = cData.buscarCliente(rs.getInt("idCliente"));
+                Propietario pro = pData.buscarId(rs.getInt("idPropietario"));
+                Conyugue cony = coData.buscar(rs.getInt("idConyugue"));
+                Escribano esc = eData.buscar(rs.getInt("idEscribano"));
+
+                venta.setFecha(rs.getDate("fechaVenta").toLocalDate());
+                venta.setInmueble(inm);
+                venta.setPropietario(pro);
+                venta.setCliente(cli);
+                venta.setConyugue(cony);
+                venta.setEscribano(esc);
+                venta.setPrecioVenta(rs.getDouble("precioVenta"));
+                venta.setMoneda(rs.getString("moneda"));
+                venta.setDetallesVenta(rs.getString("detallesVenta"));
+                venta.setEstadoEscriturizacion(rs.getString("estadoEscriturizacion"));
 
                 ventas.add(venta);
             }
@@ -180,7 +216,7 @@ public class VentaData {
 
         List<Venta> ventas = new ArrayList<>();
         String sql = "SELECT * FROM venta WHERE idCliente = ?";
-
+        
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -188,51 +224,73 @@ public class VentaData {
 
             while (rs.next()) {
                 Venta venta = new Venta();
-                venta.setIdVenta(id);
-                    Inmueble inm = iData.buscarInmueble(rs.getInt("idInmueble"));
-                    Cliente cli = cData.buscarCliente(rs.getInt("idCliente"));
-                    Propietario pro = pData.buscarId(rs.getInt("idPropietario"));
-                    venta.setInmueble(inm);
-                    venta.setCliente(cli);
-                    venta.setPropietario(pro);
-                    venta.setFecha(rs.getDate("fechaVenta").toLocalDate());
-                    venta.setPrecioVenta(rs.getDouble("precioVenta"));
+
+                venta.setIdVenta(rs.getInt("idVenta"));
+                Inmueble inm = iData.buscarPropiedadId(rs.getInt("idInmueble"));
+                Cliente cli = cData.buscarCliente(rs.getInt("idCliente"));
+                Propietario pro = pData.buscarId(rs.getInt("idPropietario"));
+                Conyugue cony = coData.buscar(rs.getInt("idConyugue"));
+                Escribano esc = eData.buscar(rs.getInt("idEscribano"));
+
+                venta.setFecha(rs.getDate("fechaVenta").toLocalDate());
+                venta.setInmueble(inm);
+                venta.setPropietario(pro);
+                venta.setCliente(cli);
+                venta.setConyugue(cony);
+                venta.setEscribano(esc);
+                venta.setPrecioVenta(rs.getDouble("precioVenta"));
+                venta.setMoneda(rs.getString("moneda"));
+                venta.setDetallesVenta(rs.getString("detallesVenta"));
+                venta.setEstadoEscriturizacion(rs.getString("estadoEscriturizacion"));
+
+                ventas.add(venta);
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla venta.");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla venta."+ex);
         }
         return ventas;
     }
 
-    public List<Inmueble> obtenerInmueblesNoVendidos(int id) {
+    public List<Venta> obtenerVentasPorPropietario(int id) {
 
-        List<Inmueble> inmueble = new ArrayList<>();
-        String sql = "SELECT * FROM inmueble WHERE idInmueble NOT IN (SELECT idInmueble FROM venta)";
-
+        List<Venta> ventas = new ArrayList<>();
+        String sql = "SELECT * FROM venta WHERE idPropietario = ?";
+        Venta venta = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
+             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Inmueble in = new Inmueble();
+                venta = new Venta();
 
-                in.setIdInmueble(rs.getInt("idInmueble"));
+                venta.setIdVenta(rs.getInt("idVenta"));
+                Inmueble inm = iData.buscarPropiedadId(rs.getInt("idInmueble"));
+                Cliente cli = cData.buscarCliente(rs.getInt("idCliente"));
                 Propietario pro = pData.buscarId(rs.getInt("idPropietario"));
-                in.setProp(pro);
-                in.setTipo(TipoInmueble.valueOf(rs.getString("tipoInmueble")));
-                in.setDireccion(rs.getString("direccion"));
-                in.setZona(Zona.valueOf(rs.getString("zona")));
-                in.setPrecioTasado(rs.getDouble("precioTasado"));
+                Conyugue cony = coData.buscar(rs.getInt("idConyugue"));
+                Escribano esc = eData.buscar(rs.getInt("idEscribano"));
 
-                inmueble.add(in);
+                venta.setFecha(rs.getDate("fechaVenta").toLocalDate());
+                venta.setInmueble(inm);
+                venta.setPropietario(pro);
+                venta.setCliente(cli);
+                venta.setConyugue(cony);
+                venta.setEscribano(esc);
+                venta.setPrecioVenta(rs.getDouble("precioVenta"));
+                venta.setMoneda(rs.getString("moneda"));
+                venta.setDetallesVenta(rs.getString("detallesVenta"));
+                venta.setEstadoEscriturizacion(rs.getString("estadoEscriturizacion"));
+
+                ventas.add(venta);
 
             }
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla venta.");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla venta."+ex);
         }
-        return inmueble;
+        return ventas;
     }
 }

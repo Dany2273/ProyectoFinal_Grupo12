@@ -2,6 +2,7 @@
 package entidades;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Venta {
     private int idVenta;
@@ -15,7 +16,7 @@ public class Venta {
     private String moneda;
     private String detallesVenta;
     private String estadoEscriturizacion;
-   
+    private ArrayList<PagoVenta> pagos;
 
     public Venta() {
     }
@@ -30,6 +31,7 @@ public class Venta {
         this.moneda = moneda;
         this.detallesVenta = detallesVenta;
         this.estadoEscriturizacion = estadoEscriturizacion;
+        this.pagos = new ArrayList<>(); // Inicializo la lista de pagos como vacía
     }
 
     public Venta(int idVenta, LocalDate fecha, Inmueble inmueble, Propietario propietario, Cliente cliente, Escribano escribano, double precioVenta, String moneda, String detallesVenta, String estadoEscriturizacion) {
@@ -43,6 +45,7 @@ public class Venta {
         this.moneda = moneda;
         this.detallesVenta = detallesVenta;
         this.estadoEscriturizacion = estadoEscriturizacion;
+        this.pagos = new ArrayList<>(); // Inicializo la lista de pagos como vacía
     }
 
     public Venta(LocalDate fecha, Inmueble inmueble, Propietario propietario, Cliente cliente, Conyugue conyugue, Escribano escribano, double precioVenta, String moneda, String detallesVenta, String estadoEscriturizacion) {
@@ -56,6 +59,7 @@ public class Venta {
         this.moneda = moneda;
         this.detallesVenta = detallesVenta;
         this.estadoEscriturizacion = estadoEscriturizacion;
+        this.pagos = new ArrayList<>(); // Inicializo la lista de pagos como vacía
     }
 
     public Venta(int idVenta, LocalDate fecha, Inmueble inmueble, Propietario propietario, Cliente cliente, Conyugue conyugue, Escribano escribano, double precioVenta, String moneda, String detallesVenta, String estadoEscriturizacion) {
@@ -70,6 +74,15 @@ public class Venta {
         this.moneda = moneda;
         this.detallesVenta = detallesVenta;
         this.estadoEscriturizacion = estadoEscriturizacion;
+        this.pagos = new ArrayList<>(); // Inicializo la lista de pagos como vacía
+    }
+
+    public ArrayList<PagoVenta> getPagos() {
+        return pagos;
+    }
+
+    public void setPagos(ArrayList<PagoVenta> pagos) {
+        this.pagos = pagos;
     }
 
     public int getIdVenta() {
@@ -162,7 +175,7 @@ public class Venta {
 
     @Override
     public String toString() {
-        return "Venta{" + "idVenta=" + idVenta + ", fecha=" + fecha + ", inmueble=" + inmueble + ", propietario=" + propietario + ", cliente=" + cliente + ", conyugue=" + conyugue + ", escribano=" + escribano + ", precioVenta=" + precioVenta + ", moneda=" + moneda + ", detallesVenta=" + detallesVenta + ", estadoEscriturizacion=" + estadoEscriturizacion + '}';
+        return "Venta: " + idVenta + "Fecha=" + fecha + ", inmueble=" + inmueble + ", propietario=" + propietario + ", cliente=" + cliente + ", conyugue=" + conyugue + ", escribano=" + escribano + ", precioVenta=" + precioVenta + ", moneda=" + moneda + ", detallesVenta=" + detallesVenta + ", estadoEscriturizacion=" + estadoEscriturizacion + ", pagos=" + pagos + '}';
     }
 
    

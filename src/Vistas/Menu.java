@@ -209,13 +209,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu4ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-        Escritorio.removeAll();
-        Escritorio.repaint();
-        NewJInternalFrame dc = new NewJInternalFrame();
-        dc.setVisible(true);
-        Escritorio.add(dc);
-        Escritorio.moveToFront(dc);
+     
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

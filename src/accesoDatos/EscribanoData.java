@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -17,7 +19,7 @@ public class EscribanoData {
         con = Conexion.getConexion();
     }
      
-      public void ingresarEscribano(Escribano escribano) {
+     public void ingresarEscribano(Escribano escribano) {
         String sql = "INSERT INTO conyugue(nombre, dni, cuil, lugarTrabajo, domicilio, ciudad, "
                 + "codigoPostal, telefono, mail, estado) VALUES(?,?,?,?,?,?,?,?,?,?)";
 
@@ -40,17 +42,17 @@ public class EscribanoData {
             if (rs.next()) {
                 escribano.setIdEscribano(rs.getInt(1));
 
-                JOptionPane.showMessageDialog(null, "Conyugue guardado/a correctamente");
+                JOptionPane.showMessageDialog(null, "Escribano guardado/a correctamente");
                 //Generamos un mje de comprobacion, pero antes creamos un alumno en el main del proyecto
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla conyugue");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla escribano");
         }
     }
     
    public Escribano buscar(int id){
-       String sql = "SELECT * FROM conyugue";
+       String sql = "SELECT * FROM escribano";
        Escribano escribano = null;
        
         try {
@@ -74,11 +76,47 @@ public class EscribanoData {
                 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ConyugueData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla escribano"+ex);
         }
        
         return escribano;
        
    }
+     
+   public List<Escribano> listarEscribanos() {
+        List<Escribano> escribanos = new ArrayList<>();
+        String sql = "SELECT * FROM escribano ";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            /*Como el ResultSet va a devolver mas de una fila,
+            recorremos el resultado con un While.*/
+            while (rs.next()) {
+                Escribano esc = new Escribano();
+               
+                esc.setIdEscribano(rs.getInt("idEscribano"));
+                
+                esc.setNombre(rs.getString("nombre"));
+                esc.setDni(rs.getInt("dni"));
+                esc.setCuilCuit(rs.getLong("cuil"));
+                esc.setLugarTrabajo(rs.getString("lugarTrabajo"));
+                esc.setDomicilio(rs.getString("domicilio"));
+                esc.setCiudad(rs.getString("ciudad"));
+                esc.setCodigoPostal(rs.getString("codigoPostal"));
+                esc.setTelefono(rs.getString("telefono"));
+                esc.setMail(rs.getString("mail"));
+                esc.setEstado(rs.getBoolean("estado"));
+               
+                escribanos.add(esc);
+
+            }
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla escribano"+ex);
+        }
+
+        return escribanos;
+    }
      
 }

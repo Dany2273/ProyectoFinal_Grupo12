@@ -22,7 +22,7 @@ public class PagoVentaData {
         con = Conexion.getConexion();
     }
 
-    public void agregarPagoVenta(PagoVenta pago) {
+   public void agregarPagoVenta(PagoVenta pago) {
         String sql = "INSERT INTO pagoventa(idVenta, descripcion, formaPago, fechaPago, "
                 + "montoPagado, cantidadCuotas, valorCuota, fecha1erVto, interesMora, moneda, honorarios,"
                 + " comision) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -36,21 +36,27 @@ public class PagoVentaData {
             ps.setDouble(5, pago.getMontoPagado());
             ps.setInt(6, pago.getCantidadCuotas());
             ps.setDouble(7, pago.getValorCuota());
-            ps.setDate(8, Date.valueOf(pago.getFecha1erVto()));
+            if (pago.getFecha1erVto() != null) {
+                ps.setDate(8, Date.valueOf(pago.getFecha1erVto()));
+            } else {
+                ps.setNull(8, java.sql.Types.DATE); // Establece el valor como NULL en la base de datos
+            }
             ps.setDouble(9, pago.getInteresMora());
             ps.setString(10, pago.getMoneda());
             ps.setDouble(11, pago.getHonorarios());
             ps.setDouble(12, pago.getComision());
 
             ps.executeUpdate();
+            
             ResultSet rs = ps.getGeneratedKeys();
+            
             if (rs.next()) {
-                pago.setIdPagoVenta(rs.getInt("idPagoVenta"));
+                pago.setIdPagoVenta(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Pago guardado correctamente.");
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al ingresar a la tabla PagoVenta.");
+            JOptionPane.showMessageDialog(null, "Error al ingresar a la tabla PagoVenta."+ex);
         }
     }
 
@@ -100,17 +106,17 @@ public class PagoVentaData {
             JOptionPane.showMessageDialog(null, "Error al ingresar a la tabla PagoVenta.");
         }
     }
-    
-    public List<PagoVenta> listarPagosVentas(){
+
+    public List<PagoVenta> listarPagosVentas() {
         List<PagoVenta> pagos = new ArrayList<>();
-        
+
         String sql = "SELECT * FROM pagoventa";
-        
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 PagoVenta pago = new PagoVenta();
                 pago.setIdPagoVenta(rs.getInt("idPagoVenta"));
                 Venta ven = vData.buscarVenta(rs.getInt("idVenta"));
@@ -126,16 +132,16 @@ public class PagoVentaData {
                 pago.setMoneda(rs.getString("moneda"));
                 pago.setHonorarios(rs.getDouble("honorarios"));
                 pago.setComision(rs.getDouble("comision"));
-                
+
                 pagos.add(pago);
-                
+
             }
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pagoVenta.");
         }
-        
+
         return pagos;
-        
+
     }
 }
