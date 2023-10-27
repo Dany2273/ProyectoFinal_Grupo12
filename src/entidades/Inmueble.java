@@ -1,6 +1,7 @@
 
 package entidades;
 
+import Enums.Accesibilidad;
 import Enums.TipoInmueble;
 import Enums.Zona;
 import entidades.Propietario;
@@ -15,7 +16,7 @@ public class Inmueble {
     private String descripcion;
     private int superficie;
     private double precioTasado;    
-    private String accesibilidad; 
+    private Accesibilidad accesibilidad; 
     private int ambientes;
     private int dormitorios;
     private int baños;
@@ -30,7 +31,7 @@ public class Inmueble {
     public Inmueble() {
     }
 
-    public Inmueble(Propietario prop, TipoInmueble tipo, String alquilerVenta, String direccion, Zona zona, String descripcion, int superficie, double precioTasado, String accesibilidad, int ambientes, int dormitorios, int baños, boolean patio, boolean cochera, boolean quincho, boolean pileta, boolean mascotas, boolean niños, boolean disponible) {
+    public Inmueble(Propietario prop, TipoInmueble tipo, String alquilerVenta, String direccion, Zona zona, String descripcion, int superficie, double precioTasado, Accesibilidad accesibilidad, int ambientes, int dormitorios, int baños, boolean patio, boolean cochera, boolean quincho, boolean pileta, boolean mascotas, boolean niños, boolean disponible) {
         this.prop = prop;
         this.tipo = tipo;
         this.alquilerVenta = alquilerVenta;
@@ -52,7 +53,7 @@ public class Inmueble {
         this.disponible = disponible;
     }
 
-    public Inmueble(int idInmueble, Propietario prop, TipoInmueble tipo, String alquilerVenta, String direccion, Zona zona, String descripcion, int superficie, double precioTasado, String accesibilidad, int ambientes, int dormitorios, int baños, boolean patio, boolean cochera, boolean quincho, boolean pileta, boolean mascotas, boolean niños, boolean disponible) {
+    public Inmueble(int idInmueble, Propietario prop, TipoInmueble tipo, String alquilerVenta, String direccion, Zona zona, String descripcion, int superficie, double precioTasado, Accesibilidad accesibilidad, int ambientes, int dormitorios, int baños, boolean patio, boolean cochera, boolean quincho, boolean pileta, boolean mascotas, boolean niños, boolean disponible) {
         this.idInmueble = idInmueble;
         this.prop = prop;
         this.tipo = tipo;
@@ -109,11 +110,11 @@ public class Inmueble {
         this.tipo = tipo;
     }
 
-    public String getAccesibilidad() {
+    public Accesibilidad getAccesibilidad() {
         return accesibilidad;
     }
 
-    public void setAccesibilidad(String accesibilidad) {
+    public void setAccesibilidad(Accesibilidad accesibilidad) {
         this.accesibilidad = accesibilidad;
     }
 

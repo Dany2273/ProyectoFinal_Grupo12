@@ -1,5 +1,9 @@
 package accesoDatos;
 
+<<<<<<< Updated upstream
+=======
+import Enums.Accesibilidad;
+>>>>>>> Stashed changes
 import Enums.TipoInmueble;
 import Enums.Zona;
 import entidades.Inmueble;
@@ -42,7 +46,7 @@ public class InmuebleData {
             ps.setString(6, inmueble.getDescripcion());
             ps.setInt(7, inmueble.getSuperficie());
             ps.setDouble(8, inmueble.getPrecioTasado());
-            ps.setString(9, inmueble.getAccesibilidad());
+            ps.setString(9, inmueble.getAccesibilidad().toString());
             ps.setInt(10, inmueble.getAmbientes());
             ps.setInt(11, inmueble.getDormitorios());
             ps.setInt(12, inmueble.getBaños());
@@ -66,10 +70,13 @@ public class InmuebleData {
             Logger.getLogger(InmuebleData.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+<<<<<<< Updated upstream
     }
 
     public Inmueble buscarPropiedadId(int id) {
         String sql = "SELECT * FROM inmueble WHERE alquilerVenta = 'venta' AND disponible = 1";
+=======
+>>>>>>> Stashed changes
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -164,3 +171,186 @@ public class InmuebleData {
 
     }
     }
+<<<<<<< Updated upstream
+=======
+    
+    public List<Inmueble> buscarPropiedades(Inmueble inm, int superficieI, int superficieF, double precioI, double precioF) {
+        List<Inmueble> in = new ArrayList<>();
+        String sql = "SELECT * FROM inmueble WHERE tipoInmueble = ? OR alquilerVenta = ? OR zona = ? OR (superficie >= ? AND supercifie <= ?) OR (precioTasado >= ? AND precioTasado <= ? )OR accesibilidad = ? OR cantAmbientes = ? OR" + 
+                " cantDormitorios = ? OR cantBaños = ? OR patio = ? OR cochera = ? OR quincho = ? OR pileta = ? OR mascocotas = ? OR niños = ? AND disponible = true";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            // Busqueda completa si no se elije alguno de las opciones se compara con null
+            ps.setString(1, inm.getTipo().toString());
+            ps.setString(2, inm.getAlquilerVenta());
+            ps.setString(3, inm.getZona().toString());
+            ps.setInt(4, superficieI);
+            ps.setInt(5, superficieF);
+            ps.setDouble(6, precioI);
+            ps.setDouble(7, precioF);
+            ps.setString(8, inm.getAccesibilidad().toString());
+            ps.setInt(9, inm.getAmbientes());
+            ps.setInt(10, inm.getDormitorios());
+            ps.setInt(11, inm.getBaños());
+            ps.setBoolean(12, inm.isPatio());
+            ps.setBoolean(13, inm.isCochera());
+            ps.setBoolean(14, inm.isQuincho());
+            ps.setBoolean(15, inm.isPileta());
+            ps.setBoolean(16, inm.isMascotas());
+            ps.setBoolean(17, inm.isNiños());
+            ps.setBoolean(18, inm.isDisponible());
+            
+            ResultSet rs = ps.executeQuery();
+            /*Como el ResultSet va a devolver mas de una fila,
+            recorremos el resultado con un While.*/
+            while (rs.next()) {
+
+                Inmueble inmueble = new Inmueble();//Creo un inmuebley voy seteando los atributos
+                PropietarioData propD = new PropietarioData();
+                
+                inmueble.setIdInmueble(rs.getInt("idInmueble"));
+                inmueble.setProp(propD.buscarId(rs.getInt("idPropietario")));//Hascer metodo que debuelva el Objeto Propietario con el id pasado
+                inmueble.setTipo(TipoInmueble.valueOf(rs.getString("tipoInmueble")));
+                inmueble.setAlquilerVenta(rs.getString("alquilerVenta"));
+                inmueble.setDireccion(rs.getString("direccion"));
+                inmueble.setZona(Zona.valueOf(rs.getString("zona")));
+                inmueble.setDescripcion(rs.getString("descripcion"));
+                inmueble.setSuperficie(rs.getInt("superficie"));
+                inmueble.setPrecioTasado(rs.getDouble("precioTasado"));
+                inmueble.setAccesibilidad(Accesibilidad.valueOf(rs.getString("accesibilidad")));
+                inmueble.setAmbientes(rs.getInt("cantAmbientes"));
+                inmueble.setDormitorios(rs.getInt("cantDormitorios"));
+                inmueble.setBaños(rs.getInt("cantBaños"));
+                inmueble.setPatio(rs.getBoolean("patio"));
+                inmueble.setCochera(rs.getBoolean("cochera"));
+                inmueble.setQuincho(rs.getBoolean("quincho"));
+                inmueble.setPileta(rs.getBoolean("pileta"));
+                inmueble.setMascotas(rs.getBoolean("mascotas"));
+                inmueble.setNiños(rs.getBoolean("niños"));
+                inmueble.setDisponible(rs.getBoolean("disponoble"));
+                in.add(inmueble);
+
+    }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inmuebles" + ex.getMessage());
+}
+        return in;
+
+    }
+    
+    
+    public Inmueble buscarPropiedadId(int idInmueble) {
+        
+        Inmueble inmueble = null;
+        String sql = "SELECT * FROM inmueble WHERE idInmueble = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            PropietarioData propD = new PropietarioData();
+            ps.setInt(1, idInmueble);
+            
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+            inmueble = new Inmueble();
+            
+            inmueble.setIdInmueble(rs.getInt("idInmueble"));
+                inmueble.setProp(propD.buscarId(rs.getInt("idPropietario")));//Hascer metodo que debuelva el Objeto Propietario con el id pasado
+                inmueble.setTipo(TipoInmueble.valueOf(rs.getString("tipoInmueble")));
+                inmueble.setAlquilerVenta(rs.getString("alquilerVenta"));
+                inmueble.setDireccion(rs.getString("direccion"));
+                inmueble.setZona(Zona.valueOf(rs.getString("zona")));
+                inmueble.setDescripcion(rs.getString("descripcion"));
+                inmueble.setSuperficie(rs.getInt("superficie"));
+                inmueble.setPrecioTasado(rs.getDouble("precioTasado"));
+                inmueble.setAccesibilidad(Accesibilidad.valueOf(rs.getString("accesibilidad")));
+                inmueble.setAmbientes(rs.getInt("cantAmbientes"));
+                inmueble.setDormitorios(rs.getInt("cantDormitorios"));
+                inmueble.setBaños(rs.getInt("cantBaños"));
+                inmueble.setPatio(rs.getBoolean("patio"));
+                inmueble.setCochera(rs.getBoolean("cochera"));
+                inmueble.setQuincho(rs.getBoolean("quincho"));
+                inmueble.setPileta(rs.getBoolean("pileta"));
+                inmueble.setMascotas(rs.getBoolean("mascotas"));
+                inmueble.setNiños(rs.getBoolean("niños"));
+                inmueble.setDisponible(rs.getBoolean("disponoble"));
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "No Existe el Inmueble con ese ID ");
+            }
+            
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inmuebles" + ex.getMessage());
+        }
+        return inmueble;
+
+    }
+
+
+    public void modificarInmueble(Inmueble inmueble) {
+        String sql = "UPDATE inmueble SET  idPropietario = ?, tipoInmueble = ?, alquilerVenta = ?, direccion = ?, zona = ?, descripcion = ?,  superficie = ?, precioTasado = ?, accesibilidad = ?, cantAmbientes = ?," + 
+                " cantDormitorios = ?, cantBaños = ?, patio = ?, cochera = ?, quincho = ?, pileta = ?, mascocotas = ?, niños = ?, disponible = ? WHERE idInmueble = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, inmueble.getProp().getIdPropietario());
+            ps.setObject(2,inmueble.getTipo().toString());
+            ps.setString(3, inmueble.getAlquilerVenta());
+            ps.setString(4, inmueble.getDireccion());
+            ps.setObject(5, inmueble.getZona().toString());
+            ps.setString(6, inmueble.getDescripcion());
+            ps.setInt(7, inmueble.getSuperficie());
+            ps.setDouble(8, inmueble.getPrecioTasado());
+            ps.setString(9, inmueble.getAccesibilidad().toString());
+            ps.setInt(10, inmueble.getAmbientes());
+            ps.setInt(11, inmueble.getDormitorios());
+            ps.setInt(12, inmueble.getBaños());
+            ps.setBoolean(13, inmueble.isPatio());
+            ps.setBoolean(14, inmueble.isCochera());
+            ps.setBoolean(15, inmueble.isQuincho());
+            ps.setBoolean(16, inmueble.isPileta());
+            ps.setBoolean(17, inmueble.isMascotas());
+            ps.setBoolean(18, inmueble.isNiños());
+            ps.setBoolean(19, inmueble.isDisponible());
+            ps.setInt(20, inmueble.getIdInmueble());
+            
+
+            int exito = ps.executeUpdate();//Como la sentencia devuelve un entero creamos una variable tipo Int
+
+            if (exito == 1) {
+
+                JOptionPane.showMessageDialog(null, "Cliente modificado con exito.");
+
+                /*Guardamos los cambios y ejecutamos desde el main*/
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente" + ex);
+        }
+
+    }
+    
+    public void eliminarInmueble(int idInmueble) {
+        String sql = "DELETE FROM inmueble WHERE idInmueble = ?";
+
+        try {
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setInt(1, idInmueble);
+                
+                int filas = ps.executeUpdate();
+                if (filas > 0) {
+                    JOptionPane.showMessageDialog(null, "El Inmueble ha sido eliminada con exito.");
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inmueble");
+        }
+    }
+    
+    
+    
+}
+>>>>>>> Stashed changes
