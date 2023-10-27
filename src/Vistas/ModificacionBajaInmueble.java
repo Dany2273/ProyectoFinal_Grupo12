@@ -8,31 +8,37 @@ package Vistas;
 import Enums.Accesibilidad;
 import Enums.TipoInmueble;
 import Enums.Zona;
+import static Vistas.Menu.Escritorio;
 import accesoDatos.InmuebleData;
 import accesoDatos.PropietarioData;
 import entidades.Inmueble;
 import entidades.Propietario;
+import javax.security.auth.callback.ConfirmationCallback;
 import javax.swing.JOptionPane;
 
-
-public class AltaInmueble extends javax.swing.JInternalFrame {
+/**
+ *
+ * @author Usuario
+ */
+public class ModificacionBajaInmueble extends javax.swing.JInternalFrame {
 
     InmuebleData iDa = new InmuebleData(); 
     Inmueble inm = new Inmueble();
     PropietarioData pDa = new PropietarioData();
     Propietario prop = new Propietario();
     
-    public AltaInmueble() {
+    public ModificacionBajaInmueble() {
         initComponents();
-        cargarComboPropietario();
+       /* cargarComboPropietario();
         cargarComboTipoInmueble();
         cargarComboZona();
-        cargarComboAccesibilidad();
-        seteoInicial();
-        jrbAlquiler.setSelected(true);
-        inm.setAlquilerVenta("Alquiler");
-        jrbDisponible.setSelected(true);
-        inm.setDisponible(true);
+        cargarComboAccesibilidad();*/
+        
+        //seteoInicial();
+        //jrbAlquiler.setSelected(true);
+        //inm.setAlquilerVenta("Alquiler");
+        //jrbDisponible.setSelected(true);
+        //inm.setDisponible(true);
     }
 
     /**
@@ -79,13 +85,16 @@ public class AltaInmueble extends javax.swing.JInternalFrame {
         jcbAccesibilidad = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         jtfPrecio = new javax.swing.JTextField();
+        jlIdInmueble = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jbEliminar = new javax.swing.JButton();
 
         setAutoscrolls(true);
-        setPreferredSize(new java.awt.Dimension(750, 650));
+        setPreferredSize(new java.awt.Dimension(850, 650));
 
         jLabel1.setFont(new java.awt.Font("Ebrima", 2, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel1.setText("Alta Inmueble");
+        jLabel1.setText("Modificacion Inmueble");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
@@ -217,7 +226,7 @@ public class AltaInmueble extends javax.swing.JInternalFrame {
 
         jbGuardar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jbGuardar.setForeground(new java.awt.Color(102, 102, 102));
-        jbGuardar.setText("Guardar");
+        jbGuardar.setText("Modificar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGuardarActionPerformed(evt);
@@ -237,6 +246,22 @@ public class AltaInmueble extends javax.swing.JInternalFrame {
         jtfPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfPrecioActionPerformed(evt);
+            }
+        });
+
+        jlIdInmueble.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jlIdInmueble.setForeground(new java.awt.Color(102, 102, 102));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel14.setText("ID Inmueble");
+
+        jbEliminar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jbEliminar.setForeground(new java.awt.Color(102, 102, 102));
+        jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
             }
         });
 
@@ -278,46 +303,41 @@ public class AltaInmueble extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel10)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jtfDormitorios, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(4, 4, 4)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(4, 4, 4))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(570, 570, 570))
+                                .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(89, 89, 89)))
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel8))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jcbAccesibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jcbTipoInmueble, 0, 220, Short.MAX_VALUE)
+                                            .addComponent(jcbZona, 0, 220, Short.MAX_VALUE))))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(23, 23, 23)
+                                    .addComponent(jLabel11)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jtfBaños, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel13)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jtfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel5))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jcbAccesibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jcbTipoInmueble, 0, 220, Short.MAX_VALUE)
-                                                .addComponent(jcbZona, 0, 220, Short.MAX_VALUE))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(23, 23, 23)
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jtfBaños, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel13)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jtfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(85, 85, 85)
+                                .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(105, 105, 105))))
                     .addComponent(jLabel12)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(232, 232, 232)
-                        .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(106, 106, 106)
-                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(267, 267, 267)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(233, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jrbPatio)
@@ -334,59 +354,75 @@ public class AltaInmueble extends javax.swing.JInternalFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jrbDisponible)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14)
+                .addGap(18, 18, 18)
+                .addComponent(jlIdInmueble, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(276, 276, 276)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbTipoInmueble, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbZona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfSuperficie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jrbAlquiler)
-                    .addComponent(jrbVenta)
-                    .addComponent(jcbAccesibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfAmbientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfDormitorios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfBaños, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jrbPatio)
-                    .addComponent(jrbCochera)
-                    .addComponent(jrbQuincho)
-                    .addComponent(jrbPileta)
-                    .addComponent(jrbMascotas)
-                    .addComponent(jrbNiños)
-                    .addComponent(jrbDisponible))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlIdInmueble, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbTipoInmueble, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbZona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfSuperficie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jrbAlquiler)
+                            .addComponent(jrbVenta)
+                            .addComponent(jcbAccesibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfAmbientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfDormitorios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfBaños, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jrbPatio)
+                            .addComponent(jrbCochera)
+                            .addComponent(jrbQuincho)
+                            .addComponent(jrbPileta)
+                            .addComponent(jrbMascotas)
+                            .addComponent(jrbNiños)
+                            .addComponent(jrbDisponible))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         pack();
@@ -423,10 +459,28 @@ public class AltaInmueble extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrbAlquilerActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        ManejoInmuebles mi = new ManejoInmuebles();
+        mi.setVisible(true);
+        Escritorio.add(mi);
+        Escritorio.moveToFront(mi);
         dispose();
+        
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        
+        
+        if(jbGuardar.getText().equals("Modificar")){
+        jbEliminar.setEnabled(false);
+        jbGuardar.setText("Guardar");
+        seteoModificacion();
+        cargarComboTipoInmueble();
+        cargarComboZona();
+        cargarComboAccesibilidad();
+        }else{
         
         if(jcbPropietario.getSelectedIndex() == -1){
         JOptionPane.showMessageDialog(null, "Debe Cargar un Propietario");
@@ -519,12 +573,6 @@ public class AltaInmueble extends javax.swing.JInternalFrame {
             return;
         }
          
-         if(jrbAlquiler.isSelected()){
-        inm.setAlquilerVenta("Alquiler");
-        }else{
-        inm.setAlquilerVenta("Venta");
-        }
-         
         inm.setProp(prop);
         inm.setDireccion(jtfDireccion.getText());
         inm.setDescripcion(jtaDescripcion.getText());
@@ -540,14 +588,32 @@ public class AltaInmueble extends javax.swing.JInternalFrame {
         inm.setMascotas(jrbMascotas.isSelected());
         inm.setNiños(jrbNiños.isSelected());
         inm.setDisponible(jrbDisponible.isSelected());
-        try {
-        iDa.agregarInmueble(inm);    
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No se Pudo Cargar la Propiedad");
+        inm.setIdInmueble(Integer.parseInt(jlIdInmueble.getText()));
+        if(jrbAlquiler.isSelected()){
+        inm.setAlquilerVenta("Alquiler");
+        }else{
+        inm.setAlquilerVenta("Venta");
         }
+        System.out.println(inm.toString());
+       
+        iDa.modificarInmueble(inm);    
         
-       seteoInicial();
-
+        
+       System.out.println(inm.toString());
+        
+       dispose();
+       
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        ManejoInmuebles mi = new ManejoInmuebles();
+        mi.setVisible(true);
+        Escritorio.add(mi);
+        Escritorio.moveToFront(mi);
+       
+       
+       
+        
+        }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jcbZonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbZonaActionPerformed
@@ -573,6 +639,29 @@ public class AltaInmueble extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfPrecioActionPerformed
 
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+
+        int seleccion;
+        /*try {
+          salida = JOptionPane.showInternalConfirmDialog(null, "Esta Seguro que desea Eliminar la Propieded: " + jlIdInmueble.getText(),"ALERTA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE );  
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }*/
+        seleccion = JOptionPane.showConfirmDialog(null, "Esta Seguro que Desea Eliminar el Inmueble Con ID: " + jlIdInmueble.getText(), "Eliminar Inmueble", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (seleccion == 0) {
+            iDa.eliminarInmueble(Integer.parseInt(jlIdInmueble.getText()));
+            Escritorio.removeAll();
+            Escritorio.repaint();
+            ManejoInmuebles mi = new ManejoInmuebles();
+            mi.setVisible(true);
+            Escritorio.add(mi);
+            Escritorio.moveToFront(mi);
+            dispose();
+        } else {
+            return;
+        }
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -580,6 +669,7 @@ public class AltaInmueble extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -588,12 +678,14 @@ public class AltaInmueble extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Accesibilidad> jcbAccesibilidad;
     private javax.swing.JComboBox<Propietario> jcbPropietario;
     private javax.swing.JComboBox<TipoInmueble> jcbTipoInmueble;
     private javax.swing.JComboBox<Zona> jcbZona;
+    private javax.swing.JLabel jlIdInmueble;
     private javax.swing.JRadioButton jrbAlquiler;
     private javax.swing.JRadioButton jrbCochera;
     private javax.swing.JRadioButton jrbDisponible;
@@ -625,7 +717,7 @@ private void cargarComboPropietario() {
 
 private void cargarComboTipoInmueble() {
 
-    jcbTipoInmueble.addItem(null);
+    //jcbTipoInmueble.addItem(null);
     jcbTipoInmueble.addItem(TipoInmueble.CASA);
     jcbTipoInmueble.addItem(TipoInmueble.DEPARTAMENTO);
     jcbTipoInmueble.addItem(TipoInmueble.DUPLEX);
@@ -641,7 +733,7 @@ private void cargarComboTipoInmueble() {
 
 
 private void cargarComboZona() {
-jcbZona.addItem(null);
+//jcbZona.addItem(null);
 jcbZona.addItem(Zona.RESIDENCIAL);
 jcbZona.addItem(Zona.COMERCIAL);
 jcbZona.addItem(Zona.INDUSTRIAL);
@@ -655,7 +747,7 @@ jcbZona.addItem(Zona.RURAL);
 }
 
 private void cargarComboAccesibilidad(){
-jcbAccesibilidad.addItem(null);
+//jcbAccesibilidad.addItem(null);
 jcbAccesibilidad.addItem(Accesibilidad.ESTANDAR);
 jcbAccesibilidad.addItem(Accesibilidad.ESCALERAS);
 jcbAccesibilidad.addItem(Accesibilidad.RAMPA_ACCESO);
@@ -688,5 +780,87 @@ private void seteoInicial(){
     jtfSuperficie.setText("");
 
 }
+
+public void setTextFieldValue(Inmueble in) {//Aca recibe los datos de la tabla
+     jlIdInmueble.setText(String.valueOf(in.getIdInmueble()));
+     jcbPropietario.setEnabled(false);
+     jcbPropietario.addItem(in.getProp());
+     jcbTipoInmueble.setEnabled(false);
+     jcbTipoInmueble.addItem(in.getTipo());
+     
+     jtfDireccion.setEnabled(false);
+     jtfDireccion.setText(in.getDireccion());
+     jcbZona.setEnabled(false);
+     jcbZona.addItem(in.getZona());
+     
+     jrbAlquiler.setEnabled(false);
+     jrbVenta.setEnabled(false);
+     if(in.getAlquilerVenta().equals("Alquiler")){
+     jrbAlquiler.setSelected(true);
+     jrbVenta.setSelected(false);
+     }else{
+     jrbAlquiler.setSelected(false);
+     jrbVenta.setSelected(true);
+     }
+     jtfSuperficie.setEnabled(false);
+     jtfSuperficie.setText(String.valueOf(in.getSuperficie()));
+     jcbAccesibilidad.setEnabled(false);
+     jcbAccesibilidad.addItem(in.getAccesibilidad());
+     
+     jtfAmbientes.setEnabled(false);
+     jtfAmbientes.setText(String.valueOf(in.getAmbientes()));
+     jtfDormitorios.setEditable(false);
+     jtfDormitorios.setText(String.valueOf(in.getDormitorios()));
+     jtfBaños.setEnabled(false);
+     jtfBaños.setText(String.valueOf(in.getBaños()));
+     jtfPrecio.setEditable(false);
+     jtfPrecio.setText(String.valueOf(in.getPrecioTasado()));
+     
+     jrbPatio.setEnabled(false);
+     jrbPatio.setSelected(in.isPatio());
+     jrbCochera.setEnabled(false);
+     jrbCochera.setSelected(in.isCochera());
+     jrbQuincho.setEnabled(false);
+     jrbQuincho.setSelected(in.isQuincho());
+     jrbPileta.setEnabled(false);
+     jrbPileta.setSelected(in.isPileta());
+     jrbMascotas.setEnabled(false);
+     jrbMascotas.setSelected(in.isMascotas());
+     jrbNiños.setEnabled(false);
+     jrbNiños.setSelected(in.isNiños());
+     jrbDisponible.setEnabled(false);
+     jrbDisponible.setSelected(in.isDisponible());
+     
+     jtaDescripcion.setEnabled(false);
+     jtaDescripcion.setText(in.getDescripcion());
+
+    }
+
+    public void seteoModificacion (){
+    
+     jcbPropietario.setEnabled(true);
+     jcbTipoInmueble.setEnabled(true);
+     jtfDireccion.setEnabled(true);
+     jcbZona.setEnabled(true); 
+     jrbAlquiler.setEnabled(true);
+     jrbVenta.setEnabled(true);
+     jtfSuperficie.setEnabled(true);
+     jcbAccesibilidad.setEnabled(true);
+     jtfAmbientes.setEnabled(true);
+     jtfDormitorios.setEditable(true);
+     jtfBaños.setEnabled(true);
+     jtfPrecio.setEditable(true);
+     jrbPatio.setEnabled(true);
+     jrbCochera.setEnabled(true);
+     jrbQuincho.setEnabled(true);
+     jrbPileta.setEnabled(true);
+     jrbMascotas.setEnabled(true);
+     jrbNiños.setEnabled(true);
+     jrbDisponible.setEnabled(true);
+     jtaDescripcion.setEnabled(true);
+     
+    
+    }
+
 
 }
