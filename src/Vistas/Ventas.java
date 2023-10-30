@@ -523,7 +523,7 @@ public class Ventas extends javax.swing.JInternalFrame {
     public void llenarInmueble() {
         jInmueble.addItem(null);
         InmuebleData inData = new InmuebleData();
-        for (Inmueble i : inData.listarInmuebleVenta()) {
+        for (Inmueble i : inData.buscarPropiedadesAlqVta("venta", true)) {
             jInmueble.addItem(i);
             System.out.println(i.getDireccion()+" - "+i.getProp());
         }

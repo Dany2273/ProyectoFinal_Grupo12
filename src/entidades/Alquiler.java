@@ -207,7 +207,7 @@ public class Alquiler {
 
     @Override
     public String toString() {
-        return "idAlquiler=" + idAlquiler + ", inmueble=" + inmueble + ", cliente=" + cliente + ", garante=" + garante + ", tipo=" + tipo +  ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", precioEstimativo="+precioEstimativo+",deposito="+deposito+",gastos ="+gastos+",gastosRecision ="+gastosRecision+ ",precioInicial=" + precioInicial + ", clausula=" + clausula + ", fechaFirma=" + fechaFirma + ", fechaRescision=" + fechaRescision + ", estado=" + estado + '}';
+        return idAlquiler + ", inmueble=" + inmueble + ", cliente=" + cliente + ", garante=" + garante + ", tipo=" + tipo +  ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", precioEstimativo="+precioEstimativo+",deposito="+deposito+",gastos ="+gastos+",gastosRecision ="+gastosRecision+ ",precioInicial=" + precioInicial + ", clausula=" + clausula + ", fechaFirma=" + fechaFirma + ", fechaRescision=" + fechaRescision + ", estado=" + estado + '}';
     }
     
     

@@ -1,22 +1,7 @@
 
 package proyectofinal_grupo12;
 
-import Enums.TipoCliente;
-import static Enums.TipoCliente.PERSONA_FISICA;
-import static Enums.TipoCliente.PERSONA_JURIDICA;
 import Vistas.Menu;
-import accesoDatos.ClienteData;
-import accesoDatos.ConyugueData;
-import accesoDatos.InmuebleData;
-import accesoDatos.PagoVentaData;
-import accesoDatos.PropietarioData;
-import accesoDatos.VentaData;
-import entidades.Cliente;
-import entidades.Conyugue;
-import entidades.PagoVenta;
-import entidades.Propietario;
-import entidades.Venta;
-import java.time.LocalDate;
 
 public class ProyectoFinal_Grupo12 {
 
@@ -148,10 +133,10 @@ public class ProyectoFinal_Grupo12 {
 
 //Venta venta = new Venta(LocalDate.of(2023, 12, 12), iData.buscarInmueble(1), pData.buscarId(1), cData.buscarCliente(1), null, null, 100, "pesos", "venta total", "pendiente");
 //       
-   VentaData vData = new VentaData();
-   Venta ven = new Venta();
-       ven = vData.buscarVenta(1);
-        System.out.println(ven);
+//   VentaData vData = new VentaData();
+//   Venta ven = new Venta();
+//       ven = vData.buscarVenta(1);
+//        System.out.println(ven);
 //        PagoVentaData pData = new PagoVentaData();
 //        PagoVenta pago = new PagoVenta(ven, "onoanosaa", "efectivo", LocalDate.of(2023, 10, 10), 1000000, "peso", 10000, 10000);
 //        

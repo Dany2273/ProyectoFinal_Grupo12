@@ -2,7 +2,7 @@
 package entidades;
 
 public class Conyugue extends Persona{
-     private int idConyugue;
+    private int idConyugue;
 
     public Conyugue() {
     }

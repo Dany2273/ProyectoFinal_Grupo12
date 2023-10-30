@@ -1,6 +1,7 @@
 
 package entidades;
 
+import Enums.MesCorrespondiente;
 import entidades.Alquiler;
 import java.time.LocalDate;
 
@@ -8,7 +9,7 @@ public class CobroAlquiler {
     private int idCobroAlquiler;
     private Alquiler alq;
     private LocalDate fechaCobro;
-    private String mesCobro;
+    private MesCorrespondiente mesCobro;
     private double importe;
     private double comision;
     private double importeMora;
@@ -17,7 +18,7 @@ public class CobroAlquiler {
     public CobroAlquiler() {
     }
 
-    public CobroAlquiler(Alquiler alq, LocalDate fechaCobro, String mesCobro, double importe, double comision, double importeMora, String numComprobante) {
+    public CobroAlquiler(Alquiler alq, LocalDate fechaCobro, MesCorrespondiente mesCobro, double importe, double comision, double importeMora, String numComprobante) {
         
         this.alq = alq;
         this.fechaCobro = fechaCobro;
@@ -28,7 +29,7 @@ public class CobroAlquiler {
         this.numComprobante = numComprobante;
     }
 
-    public CobroAlquiler(int idCobroAlquiler, Alquiler alq, LocalDate fechaCobro, String mesCobro, double importe, double comision, double importeMora, String numComprobante) {
+    public CobroAlquiler(int idCobroAlquiler, Alquiler alq, LocalDate fechaCobro, MesCorrespondiente mesCobro, double importe, double comision, double importeMora, String numComprobante) {
         this.idCobroAlquiler = idCobroAlquiler;
         this.alq = alq;
         this.fechaCobro = fechaCobro;
@@ -63,11 +64,11 @@ public class CobroAlquiler {
         this.fechaCobro = fechaCobro;
     }
 
-    public String getMesCobro() {
+    public MesCorrespondiente getMesCobro() {
         return mesCobro;
     }
 
-    public void setMesCobro(String mesCobro) {
+    public void setMesCobro(MesCorrespondiente mesCobro) {
         this.mesCobro = mesCobro;
     }
 
@@ -107,5 +108,4 @@ public class CobroAlquiler {
     public String toString() {
         return "CobroAlquiler{"+idCobroAlquiler + ", alq=" + alq + ", fechaCobro=" + fechaCobro + ", mesCobro=" + mesCobro + ", importe=" + importe + ", comision=" + comision + ", importeMora=" + importeMora + ", numComprobante=" + numComprobante + '}';
     }
-    
 }

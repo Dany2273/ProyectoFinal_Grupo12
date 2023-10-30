@@ -512,7 +512,7 @@ public class ListaVentas extends javax.swing.JInternalFrame {
         ClienteData cData = new ClienteData();
         for (Cliente c : cData.listarTodosClientesActivos()) {
             jcCliente.addItem(c);
-            System.out.println(c);
+           
         }
     }
 

@@ -40,7 +40,7 @@ public class Propietario extends Persona {
 
     @Override
     public String toString() {
-        return "idPropietario=" + idPropietario + super.toString();
+        return super.toString();
     }
     
 }

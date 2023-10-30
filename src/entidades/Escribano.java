@@ -1,10 +1,8 @@
 
 package entidades;
 
-import Enums.TipoCliente;
-
 public class Escribano extends Persona {
-private int idEscribano;
+    private int idEscribano;
 
     public Escribano() {
     }

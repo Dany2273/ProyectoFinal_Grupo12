@@ -151,7 +151,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return ", " + nombre + ", " + dni + ", " + cuilCuit ;
+        return  nombre + " - " + dni + " - " + cuilCuit + " - " ;
     }
 
     
