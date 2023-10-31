@@ -164,6 +164,11 @@ public class ListaVentas extends javax.swing.JInternalFrame {
                 jcPropietarioItemStateChanged(evt);
             }
         });
+        jcPropietario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcPropietarioActionPerformed(evt);
+            }
+        });
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -466,6 +471,11 @@ public class ListaVentas extends javax.swing.JInternalFrame {
     private void jcClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcClienteActionPerformed
+
+    private void jcPropietarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcPropietarioActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jcPropietarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
