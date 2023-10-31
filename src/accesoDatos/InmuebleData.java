@@ -19,9 +19,10 @@ import javax.swing.JOptionPane;
 public class InmuebleData {
 
     Connection con = null;
-
+//    PropietarioData pData = null;
     public InmuebleData() {
         con = Conexion.getConexion();
+//        pData = new PropietarioData();
     }
 
     public void agregarInmueble(Inmueble inmueble) {
@@ -738,7 +739,53 @@ public class InmuebleData {
 
     }
     
-        
-        
+////        
+////  public List<Inmueble> listarInmuebleVenta() {
+////        List<Inmueble> inmuebles = new ArrayList<>();
+////        String sql = "SELECT * FROM inmueble WHERE alquilerVenta = 'venta' AND disponible = 1";
+////
+////        try {
+////            PreparedStatement ps = con.prepareStatement(sql);
+////
+////            ResultSet rs = ps.executeQuery();
+////
+////            while (rs.next()) {
+////                Inmueble in = new Inmueble();
+////                in.setIdInmueble(rs.getInt("idInmueble"));
+////                Propietario pr = pData.buscarId(rs.getInt("idPropietario"));
+////                in.setProp(pr);
+////                String tipo = rs.getString("tipoInmueble");//Primero obtengo el valor de la columna tipo
+////                TipoInmueble tipoIn = TipoInmueble.valueOf(tipo); // Convierte la cadena a TipoCliente (Enum)
+////                in.setTipo(tipoIn);
+////                in.setAlquilerVenta(rs.getString("alquilerVenta"));
+////                in.setDireccion(rs.getString("direccion"));
+////                String zona = rs.getString("zona");
+////                Zona zon = Zona.valueOf(zona);
+////                in.setZona(zon);
+////                in.setDescripcion(rs.getString("descripcion"));
+////                in.setSuperficie(rs.getInt("superficie"));
+////                in.setPrecioTasado(rs.getDouble("precioTasado"));
+////                in.setAccesibilidad(Accesibilidad.valueOf(rs.getString("accesibilidad")));
+////                in.setAmbientes(rs.getInt("cantAmbientes"));
+////                in.setDormitorios(rs.getInt("cantDormitorios"));
+////                in.setBaños(rs.getInt("cantBaños"));
+////                in.setPatio(rs.getBoolean("patio"));
+////                in.setCochera(rs.getBoolean("cochera"));
+////                in.setQuincho(rs.getBoolean("quincho"));
+////                in.setPileta(rs.getBoolean("pileta"));
+////                in.setMascotas(rs.getBoolean("mascotas"));
+////                in.setNiños(rs.getBoolean("niños"));
+////                in.setDisponible(rs.getBoolean("disponible"));
+////
+////                inmuebles.add(in);
+////
+////            }
+////
+////        } catch (SQLException ex) {
+////            JOptionPane.showMessageDialog(null, "Error" + ex);
+////        }
+////        return inmuebles;
+////
+////    }      
         
 }

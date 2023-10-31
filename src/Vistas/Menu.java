@@ -391,13 +391,13 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         Escritorio.removeAll();
         Escritorio.repaint();
-        ListarAlquileres cli = new ListarAlquileres();
-        cli.setVisible(true);
-        int x = (getWidth() - cli.getWidth()) / 3;
-        int y = (getHeight() - cli.getHeight()) / 3;
-        cli.setLocation(x, y);
-        Escritorio.add(cli);
-        Escritorio.moveToFront(cli);
+        ListarAlquileres alq = new ListarAlquileres();
+        alq.setVisible(true);
+        int x = (getWidth() - alq.getWidth()) / 3;
+        int y = (getHeight() - alq.getHeight()) / 3;
+        alq.setLocation(x, y);
+        Escritorio.add(alq);
+        Escritorio.moveToFront(alq);
     }//GEN-LAST:event_datosAlquilerActionPerformed
 
     private void datosInmueblesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datosInmueblesActionPerformed

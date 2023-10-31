@@ -10,12 +10,17 @@ import Enums.Zona;
 import accesoDatos.AlquilerData;
 import accesoDatos.PropietarioData;
 import entidades.Alquiler;
+import entidades.Cliente;
+import entidades.Garante;
+import entidades.Inmueble;
 import entidades.Propietario;
 import java.awt.Color;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.Format;
+import java.time.LocalDate;
 import java.util.Locale;
+import javax.swing.JInternalFrame;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -103,6 +108,11 @@ public class ListarAlquileres extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTablaMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTabla);
@@ -302,7 +312,7 @@ public class ListarAlquileres extends javax.swing.JInternalFrame {
         jrTipo.setSelected(false);
         jrZona.setSelected(false);
         jrTodos.setSelected(false);
-jrDisponibles.setSelected(false);
+        jrDisponibles.setSelected(false);
         jrNoDisponibles.setSelected(false);
         jcTipo.setEnabled(false);
         jcZona.setEnabled(false);
@@ -350,7 +360,7 @@ jrDisponibles.setSelected(false);
 
         jrZona.setSelected(false);
         jrTodos.setSelected(false);
-jrDisponibles.setSelected(false);
+        jrDisponibles.setSelected(false);
         jrNoDisponibles.setSelected(false);
         jcPropietario.setEnabled(false);
         jcZona.setEnabled(false);
@@ -441,12 +451,12 @@ jrDisponibles.setSelected(false);
             jrNoDisponibles.setSelected(false);
             listarPropietariosActivos();
             jTabla.repaint();
-        }else if (jrTipo.isSelected()) {
+        } else if (jrTipo.isSelected()) {
 //            borrarFilas();
             jrNoDisponibles.setSelected(false);
             listarTipoActivos();
             jTabla.repaint();
-        }else if (jrZona.isSelected()) {
+        } else if (jrZona.isSelected()) {
 //            borrarFilas();
             jrNoDisponibles.setSelected(false);
             listarZonaActivos();
@@ -459,7 +469,7 @@ jrDisponibles.setSelected(false);
     private void jrNoDisponiblesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrNoDisponiblesActionPerformed
         // TODO add your handling code here:
         borrarFilas();
-         if (jrTodos.isSelected()) {
+        if (jrTodos.isSelected()) {
 //            borrarFilas();
             jrDisponibles.setSelected(false);
             listarTodosNoActivos();
@@ -469,18 +479,56 @@ jrDisponibles.setSelected(false);
             jrDisponibles.setSelected(false);
             listarPropietariosNoActivos();
             jTabla.repaint();
-        }else if (jrTipo.isSelected()) {
+        } else if (jrTipo.isSelected()) {
 //            borrarFilas();
             jrDisponibles.setSelected(false);
             listarTipoNoActivos();
             jTabla.repaint();
-        }else if (jrZona.isSelected()) {
+        } else if (jrZona.isSelected()) {
 //            borrarFilas();
             jrDisponibles.setSelected(false);
             listarZonaNoActivos();
             jTabla.repaint();
         }
     }//GEN-LAST:event_jrNoDisponiblesActionPerformed
+
+    private void jTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablaMouseClicked
+        // TODO add your handling code here:                                  
+        if (evt.getClickCount() == 2) {
+            int fila = jTabla.getSelectedRow();
+            if (fila >= 0) {
+                ModificarAlquiler ma = new ModificarAlquiler();
+                Menu.Escritorio.add(ma);
+                ma.toFront();
+                ma.setVisible(true);
+            }
+            if (fila != -1) {
+
+//    
+//            double PrecioIn= Double.parseDouble(this.jTable1.getValueAt(fila,1).toString());
+//             double Deposi = Double.parseDouble(this.jTable1.getValueAt(fila,2).toString());
+//              String gastos =(String)jTable1.getValueAt(fila,3);
+//             
+                int id = (int) jTabla.getValueAt(fila, 0);
+                Inmueble inm = (Inmueble) jTabla.getValueAt(fila, 1);
+                Cliente idCli = (Cliente) jTabla.getValueAt(fila, 2);
+                Garante idGar = (Garante) jTabla.getValueAt(fila, 3);
+//                TipoCliente tipoCli = (TipoCliente) jTabla.getValueAt(fila, 4);
+//                TipoAlquiler tipoAlq = (TipoAlquiler) jTabla.getValueAt(fila, 5);
+                LocalDate fechaIn = (LocalDate) jTabla.getValueAt(fila, 6);
+                LocalDate fechaFin = (LocalDate) jTabla.getValueAt(fila, 7);
+                double PrecioEs = Double.parseDouble(jTabla.getValueAt(fila, 8).toString());
+                double Deposi = Double.parseDouble(jTabla.getValueAt(fila, 9).toString());
+                String claus = jTabla.getValueAt(fila, 10).toString();
+                LocalDate fechaFir = (LocalDate) jTabla.getValueAt(fila, 11);
+                ModificarAlquiler modifA = obtenerModifalqFrame();
+
+                if (modifA != null) {
+                    modifA.setTextFieldValue(id, inm, idCli, idGar,  fechaIn, fechaFin, PrecioEs, Deposi, claus, fechaFir);
+                }
+            }
+        }
+    }//GEN-LAST:event_jTablaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -584,10 +632,10 @@ jrDisponibles.setSelected(false);
         }
 
     }
-    
-    private void listarTipoActivos(){
-         if (jrDisponibles.isSelected()) {
-             TipoAlquiler tipoA = (TipoAlquiler) jcTipo.getSelectedItem();
+
+    private void listarTipoActivos() {
+        if (jrDisponibles.isSelected()) {
+            TipoAlquiler tipoA = (TipoAlquiler) jcTipo.getSelectedItem();
             for (Alquiler alquiler : alqData.ListarTodosAlquileresDisponiblesXtipo(tipoA)) {
                 String estado = alquiler.isEstado() ? "Disponible" : "No Disponible";
                 jTabla.getColumnModel().getColumn(8).setCellRenderer(numberRenderer);
@@ -599,7 +647,7 @@ jrDisponibles.setSelected(false);
                 });
             }
         } else {
-              TipoAlquiler tipoB = (TipoAlquiler) jcTipo.getSelectedItem();
+            TipoAlquiler tipoB = (TipoAlquiler) jcTipo.getSelectedItem();
             for (Alquiler alquiler : alqData.ListarTodosAlquileresXtipo(tipoB)) {
                 String estado = alquiler.isEstado() ? "Disponible" : "No Disponible";
                 jTabla.getColumnModel().getColumn(8).setCellRenderer(numberRenderer);
@@ -612,10 +660,10 @@ jrDisponibles.setSelected(false);
             }
         }
     }
-    
-    private void listarZonaActivos(){
-         if (jrDisponibles.isSelected()) {
-             Zona zonaA = (Zona) jcZona.getSelectedItem();
+
+    private void listarZonaActivos() {
+        if (jrDisponibles.isSelected()) {
+            Zona zonaA = (Zona) jcZona.getSelectedItem();
             for (Alquiler alquiler : alqData.ListarTodosAlquileresDisponiblesXZona(zonaA)) {
                 String estado = alquiler.isEstado() ? "Disponible" : "No Disponible";
                 jTabla.getColumnModel().getColumn(8).setCellRenderer(numberRenderer);
@@ -627,7 +675,7 @@ jrDisponibles.setSelected(false);
                 });
             }
         } else {
-              Zona zonaB = (Zona) jcZona.getSelectedItem();
+            Zona zonaB = (Zona) jcZona.getSelectedItem();
             for (Alquiler alquiler : alqData.ListarTodosAlquileresXZona(zonaB)) {
                 String estado = alquiler.isEstado() ? "Disponible" : "No Disponible";
                 jTabla.getColumnModel().getColumn(8).setCellRenderer(numberRenderer);
@@ -640,11 +688,11 @@ jrDisponibles.setSelected(false);
             }
         }
     }
-    
-    private void listarPropietariosActivos(){
+
+    private void listarPropietariosActivos() {
         if (jrDisponibles.isSelected()) {
-             Propietario prop1 = (Propietario) jcPropietario.getSelectedItem();
-             int id = prop1.getIdPropietario();
+            Propietario prop1 = (Propietario) jcPropietario.getSelectedItem();
+            int id = prop1.getIdPropietario();
             for (Alquiler alquiler : alqData.ListarTodosAlquileresDisponiblesXPropietario(id)) {
                 String estado = alquiler.isEstado() ? "Disponible" : "No Disponible";
                 jTabla.getColumnModel().getColumn(8).setCellRenderer(numberRenderer);
@@ -656,8 +704,8 @@ jrDisponibles.setSelected(false);
                 });
             }
         } else {
-              Propietario prop1 = (Propietario) jcPropietario.getSelectedItem();
-             int id = prop1.getIdPropietario();
+            Propietario prop1 = (Propietario) jcPropietario.getSelectedItem();
+            int id = prop1.getIdPropietario();
             for (Alquiler alquiler : alqData.ListarTodosAlquileresXPropietario(id)) {
                 String estado = alquiler.isEstado() ? "Disponible" : "No Disponible";
                 jTabla.getColumnModel().getColumn(8).setCellRenderer(numberRenderer);
@@ -670,8 +718,8 @@ jrDisponibles.setSelected(false);
             }
         }
     }
-    
-    private void listarTodosNoActivos(){
+
+    private void listarTodosNoActivos() {
         if (jrNoDisponibles.isSelected()) {
             for (Alquiler alquiler : alqData.ListarAlquileresNoDisponible()) {
                 String estado = alquiler.isEstado() ? "Disponible" : "No Disponible";
@@ -696,10 +744,10 @@ jrDisponibles.setSelected(false);
             }
         }
     }
-    
-    private void listarTipoNoActivos(){
-         if (jrNoDisponibles.isSelected()) {
-             TipoAlquiler tipoA = (TipoAlquiler) jcTipo.getSelectedItem();
+
+    private void listarTipoNoActivos() {
+        if (jrNoDisponibles.isSelected()) {
+            TipoAlquiler tipoA = (TipoAlquiler) jcTipo.getSelectedItem();
             for (Alquiler alquiler : alqData.ListarTodosAlquileresNoDisponiblesXtipo(tipoA)) {
                 String estado = alquiler.isEstado() ? "Disponible" : "No Disponible";
                 jTabla.getColumnModel().getColumn(8).setCellRenderer(numberRenderer);
@@ -711,7 +759,7 @@ jrDisponibles.setSelected(false);
                 });
             }
         } else {
-              TipoAlquiler tipoB = (TipoAlquiler) jcTipo.getSelectedItem();
+            TipoAlquiler tipoB = (TipoAlquiler) jcTipo.getSelectedItem();
             for (Alquiler alquiler : alqData.ListarTodosAlquileresXtipo(tipoB)) {
                 String estado = alquiler.isEstado() ? "Disponible" : "No Disponible";
                 jTabla.getColumnModel().getColumn(8).setCellRenderer(numberRenderer);
@@ -724,10 +772,10 @@ jrDisponibles.setSelected(false);
             }
         }
     }
-    
-    private void listarZonaNoActivos(){
-         if (jrNoDisponibles.isSelected()) {
-             Zona zonaB = (Zona) jcZona.getSelectedItem();
+
+    private void listarZonaNoActivos() {
+        if (jrNoDisponibles.isSelected()) {
+            Zona zonaB = (Zona) jcZona.getSelectedItem();
             for (Alquiler alquiler : alqData.ListarTodosAlquileresNoDisponiblesXZona(zonaB)) {
                 String estado = alquiler.isEstado() ? "Disponible" : "No Disponible";
                 jTabla.getColumnModel().getColumn(8).setCellRenderer(numberRenderer);
@@ -739,7 +787,7 @@ jrDisponibles.setSelected(false);
                 });
             }
         } else {
-              Zona zonaB = (Zona) jcZona.getSelectedItem();
+            Zona zonaB = (Zona) jcZona.getSelectedItem();
             for (Alquiler alquiler : alqData.ListarTodosAlquileresXZona(zonaB)) {
                 String estado = alquiler.isEstado() ? "Disponible" : "No Disponible";
                 jTabla.getColumnModel().getColumn(8).setCellRenderer(numberRenderer);
@@ -752,11 +800,11 @@ jrDisponibles.setSelected(false);
             }
         }
     }
-    
-    private void listarPropietariosNoActivos(){
+
+    private void listarPropietariosNoActivos() {
         if (jrNoDisponibles.isSelected()) {
-             Propietario prop2 = (Propietario) jcPropietario.getSelectedItem();
-             int id = prop2.getIdPropietario();
+            Propietario prop2 = (Propietario) jcPropietario.getSelectedItem();
+            int id = prop2.getIdPropietario();
             for (Alquiler alquiler : alqData.ListarTodosAlquileresNoDisponiblesXPropietario(id)) {
                 String estado = alquiler.isEstado() ? "Disponible" : "No Disponible";
                 jTabla.getColumnModel().getColumn(8).setCellRenderer(numberRenderer);
@@ -768,8 +816,8 @@ jrDisponibles.setSelected(false);
                 });
             }
         } else {
-              Propietario prop2 = (Propietario) jcPropietario.getSelectedItem();
-             int id = prop2.getIdPropietario();
+            Propietario prop2 = (Propietario) jcPropietario.getSelectedItem();
+            int id = prop2.getIdPropietario();
             for (Alquiler alquiler : alqData.ListarTodosAlquileresXPropietario(id)) {
                 String estado = alquiler.isEstado() ? "Disponible" : "No Disponible";
                 jTabla.getColumnModel().getColumn(8).setCellRenderer(numberRenderer);
@@ -783,4 +831,18 @@ jrDisponibles.setSelected(false);
         }
     }
 
+    private ModificarAlquiler obtenerModifalqFrame() {
+        JInternalFrame[] frames = getDesktopPane().getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame instanceof ModificarAlquiler) {
+                return (ModificarAlquiler) frame;
+            }
+        }
+        return null; // Devuelve null si no se encuentra el frame "DatosClientes"
+    }
+
+    int getSelectedRow() {
+        int fila = jTabla.getSelectedRow(); //To change body of generated methods, choose Tools | Templates.
+        return fila;
+    }
 }

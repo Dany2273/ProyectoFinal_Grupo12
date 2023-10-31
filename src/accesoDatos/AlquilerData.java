@@ -15,8 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class AlquilerData {
@@ -956,13 +954,15 @@ public class AlquilerData {
 
             while (rs.next()) {
 
-                // Obtengo los valores de la fila actual en el ResultSet
-                int idInmueble = rs.getInt("idInmueble");
-                int idCliente = rs.getInt("idCliente");
-                int idGarante = rs.getInt("idGarante");
+                 alquiler = new Alquiler();
+                Inmueble inmueble = inmData.buscarPropiedadId(rs.getInt("idInmueble"));
+                Cliente cliente = cliData.buscarCliente(rs.getInt("idCliente"));
+                Garante garante = garData.buscarGarante(rs.getInt("idGarante"));
+//              int idInmueble = rs.getInt("idInmueble");
+//                int idCliente = rs.getInt("idCliente");
+//                int idGarante = rs.getInt("idGarante");
                 String tipoA = rs.getString("tipoAlquiler");
                 String tipoC = rs.getString("tipoCliente");
-
                 Date fechaInicio = rs.getDate("fechaInicio");
                 Date fechaFin = rs.getDate("fechaFin");
                 double precioEstimativo = rs.getDouble("precioEstimativo");
@@ -975,14 +975,14 @@ public class AlquilerData {
                 Date fechaRecision = rs.getDate("fechaRecision");
                 boolean estado = rs.getBoolean("estado");
 
-                int idPropietario = rs.getInt("idPropietario");
+                
 
                 //llena el objeto Alquiler con los valores obtenidos
-                alquiler.getInmueble().setIdInmueble(idInmueble);
-                alquiler.getCliente().setIdCliente(idCliente);
-                alquiler.getGarante().setIdGarante(idGarante);
+                alquiler.setInmueble(inmueble);
+                alquiler.setCliente(cliente);
+                alquiler.setGarante(garante);
                 alquiler.setTipo(TipoAlquiler.valueOf(tipoA)); // Tipo es un enum
-                alquiler.setTipoC(TipoCliente.valueOf(tipoC)); // Tipo es un enum
+                alquiler.setTipoC(TipoCliente.valueOf(tipoC)); // Tipo es un enum // Tipo es un enum
                 alquiler.setFechaInicio(fechaInicio.toLocalDate()); // Convierte Date a LocalDate
                 alquiler.setFechaFin(fechaFin.toLocalDate());
                 alquiler.setPrecioEstimativo(precioEstimativo);
@@ -992,20 +992,19 @@ public class AlquilerData {
                 alquiler.setPrecioInicial(precioInicial);
                 alquiler.setClausula(clausula);
                 alquiler.setFechaFirma(fechaFirma.toLocalDate());
-                alquiler.setFechaRescision(fechaRecision.toLocalDate());
+
                 if (fechaRecision != null) {
                     alquiler.setFechaRescision(fechaRecision.toLocalDate());
 
                 } else {
-                    alquiler.setEstado(estado);
+                    alquiler.setFechaRescision(null);
                 }
                 alquiler.setEstado(estado);
-
-                alquiler.getInmueble().getProp().setIdPropietario(idPropietario);
+                
 
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla garante" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla buscar Alquiler" + ex.getMessage());
         }
         return alquiler; //retorna la lista de alquileres
     }
@@ -1077,8 +1076,9 @@ public class AlquilerData {
     }
 
     public void modificarAlquiler(Alquiler alquiler) {
-        String sql = "UPDATE alquiler SET idInmueble = ?,idCliente = ?,idGarante = ?,tipoCliente = ?,tipoAlquiler = ?,fechaInicio = ?,fechaFin=?,precioEstimativo = ?, deposito = ?,gastos = ?,gastosRecision =?,precioInicial = ?,clausula = ?,fechaFirma= ?,fechaRescision =?,estado=?"
-                + "WHERE idAlquiler=? AND estado=1";
+        String sql = "UPDATE alquiler SET idInmueble = ?, idCliente = ?, idGarante = ?, tipoCliente = ?, tipoAlquiler = ?, fechaInicio = ?,"
+                + " fechaFin = ?, precioEstimativo = ?, deposito = ?, clausula = ?, fechaFirma = ?"
+                + " WHERE idAlquiler = ? AND estado = 1 ";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -1086,18 +1086,20 @@ public class AlquilerData {
             ps.setInt(1, alquiler.getInmueble().getIdInmueble());
             ps.setInt(2, alquiler.getCliente().getIdCliente());
             ps.setInt(3, alquiler.getGarante().getIdGarante());
-            ps.setObject(4, alquiler.getTipo().toString());
-            ps.setDate(5, Date.valueOf(alquiler.getFechaInicio()));
-            ps.setDate(6, Date.valueOf(alquiler.getFechaFin()));
-            ps.setDouble(7, alquiler.getPrecioEstimativo());
-            ps.setDouble(8, alquiler.getDeposito());
-            ps.setDouble(9, alquiler.getGastos());
-            ps.setDouble(10, alquiler.getGastosRecision());
-            ps.setDouble(11, alquiler.getPrecioInicial());
-            ps.setString(12, alquiler.getClausula());
-            ps.setDate(13, Date.valueOf(alquiler.getFechaFirma()));
-            ps.setDate(14, Date.valueOf(alquiler.getFechaRescision()));
-            ps.setBoolean(15, alquiler.isEstado());
+            ps.setString(4, alquiler.getTipoC().toString());
+            ps.setString(5, alquiler.getTipo().toString());
+            ps.setDate(6, Date.valueOf(alquiler.getFechaInicio()));
+            ps.setDate(7, Date.valueOf(alquiler.getFechaFin()));
+            ps.setDouble(8, alquiler.getPrecioEstimativo());
+            ps.setDouble(9, alquiler.getDeposito());
+//            ps.setDouble(10, alquiler.getGastos());
+//            ps.setDouble(10, alquiler.getGastosRecision());
+//            ps.setDouble(10, alquiler.getPrecioInicial());
+            ps.setString(10, alquiler.getClausula());
+            ps.setDate(11, Date.valueOf(alquiler.getFechaFirma()));
+            ps.setInt(12, alquiler.getIdAlquiler());
+//            ps.setDate(14, Date.valueOf(alquiler.getFechaRescision()));
+//            ps.setBoolean(14, alquiler.isEstado());
 
             int exito = ps.executeUpdate();
             if (exito == 1) {

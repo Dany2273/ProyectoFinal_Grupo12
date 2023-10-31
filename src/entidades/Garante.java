@@ -42,7 +42,7 @@ public class Garante extends Persona {
 
     @Override
     public String toString() {
-        return "idGarante=" + idGarante + super.toString();
+        return super.toString();
     }
     
 }

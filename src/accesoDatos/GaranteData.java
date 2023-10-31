@@ -180,21 +180,19 @@ public void modificarGaranteFisico(Garante garante) {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Garante garante = new Garante();
-                String tipoClienteStr= rs.getString ("tipo");
-              TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr);
-             garante.setTipo(tipoCliente);
-                ps.setObject(1, garante.getTipo().toString());
-                ps.setString(2, garante.getNombre());
-                ps.setInt(3, garante.getDni());
-                ps.setLong(4, garante.getCuilCuit());
-                ps.setString(5, garante.getDomicilio());
-                ps.setString(6, garante.getCiudad());
-                ps.setString(7, garante.getCodigoPostal());
-                ps.setString(8, garante.getLugarTrabajo());
-                ps.setString(9, garante.getTelefono());
-                ps.setString(10, garante.getMail());
-                ps.setBoolean(11, garante.isEstado());
+               Garante garante = new Garante();
+                    garante.setIdGarante(rs.getInt("idGarante"));
+                    garante.setTipo(TipoCliente.valueOf(rs.getString("tipo")));;
+                    garante.setNombre(rs.getString("nombreRsocial"));
+                    garante.setDni(rs.getInt("dni"));
+                    garante.setCuilCuit(rs.getLong("cuilCuit"));
+                    garante.setDomicilio(rs.getString("domicilio"));
+                    garante.setCiudad(rs.getString("ciudad"));
+                    garante.setCodigoPostal(rs.getString("codigoPostal"));
+                    garante.setLugarTrabajo(rs.getString("lugarTrabajo"));
+                    garante.setTelefono(rs.getString("telefono"));
+                    garante.setMail(rs.getString("mail"));
+                    garante.setEstado(rs.getBoolean("estado"));
 
                 garantes.add(garante);
             }
