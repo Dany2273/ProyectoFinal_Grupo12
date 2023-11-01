@@ -304,6 +304,7 @@ public class ListarAlquileres extends javax.swing.JInternalFrame {
 
     private void jrPropietarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrPropietarioActionPerformed
         // TODO add your handling code here:
+        jcPropietario.removeAllItems();
         borrarFilas();
         jrPropietario.setEnabled(true);
         jcPropietario.setEnabled(true);
@@ -351,6 +352,7 @@ public class ListarAlquileres extends javax.swing.JInternalFrame {
 
     private void jrTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrTipoActionPerformed
         // TODO add your handling code here:
+        jcTipo.removeAllItems();
         jrPropietario.setSelected(false);
         borrarFilas();
 
@@ -393,6 +395,7 @@ public class ListarAlquileres extends javax.swing.JInternalFrame {
 
     private void jrZonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrZonaActionPerformed
         // TODO add your handling code here:
+        jcZona.removeAllItems();
         jrZona.setEnabled(true);
         jcZona.setEnabled(true);
         jrPropietario.setSelected(false);
@@ -509,7 +512,7 @@ public class ListarAlquileres extends javax.swing.JInternalFrame {
 //             double Deposi = Double.parseDouble(this.jTable1.getValueAt(fila,2).toString());
 //              String gastos =(String)jTable1.getValueAt(fila,3);
 //             
-                int id = (int) jTabla.getValueAt(fila, 0);
+//                int id = (int) jTabla.getValueAt(fila, 0);
                 Inmueble inm = (Inmueble) jTabla.getValueAt(fila, 1);
                 Cliente idCli = (Cliente) jTabla.getValueAt(fila, 2);
                 Garante idGar = (Garante) jTabla.getValueAt(fila, 3);
@@ -524,7 +527,7 @@ public class ListarAlquileres extends javax.swing.JInternalFrame {
                 ModificarAlquiler modifA = obtenerModifalqFrame();
 
                 if (modifA != null) {
-                    modifA.setTextFieldValue(id, inm, idCli, idGar,  fechaIn, fechaFin, PrecioEs, Deposi, claus, fechaFir);
+                    modifA.setTextFieldValue(inm, idCli, idGar,  fechaIn, fechaFin, PrecioEs, Deposi, claus, fechaFir);
                 }
             }
         }

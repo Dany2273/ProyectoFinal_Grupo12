@@ -481,6 +481,7 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
                 int valor = (int) modelo.getValueAt(fila, 0); // Obtener el valor como Long
                 //                long cuil = valor.longValue();
                 Alquiler alq = alqData.buscarAlquiler(valor);
+                System.out.println("METODO BUSCAR EN MODIFICAR ALQUILER "+alq.toString());
                 Inmueble nuevoI = (Inmueble) Inmueble2.getSelectedItem();
 //                Propietario nuevoP = (Propietario) prop2.getSelectedItem();
                 Cliente nuevoC = (Cliente) cliente2.getSelectedItem();
@@ -500,6 +501,7 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
                 alq.setCliente(nuevoC);
                 alq.setGarante(nuevogar);
                 alq.setTipoC(nuevoC.getTipo());
+//                System.out.println(alq.getTipoC());
                 alq.setTipo(ntipoAlq);
                 alq.setFechaInicio(nuevafi);
                 alq.setFechaFin(nuevaffin);
@@ -509,7 +511,7 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
                 alq.setFechaFirma(nuevaffir);
 
                 alqData.modificarAlquiler(alq);
-//
+                System.out.println("NUEVO ALQUILER"+alq.toString());
                 // Actualiza los datos en el modelo de la tabla
                 if (fila != -1) {
                     modelo.setValueAt(alq.getIdAlquiler(), fila, 0); // Actualiza el id
@@ -595,7 +597,7 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<TipoAlquiler> tipoalq2;
     // End of variables declaration//GEN-END:variables
 
-    public void setTextFieldValue(int id, Inmueble inm, Cliente cli, Garante gar, LocalDate fecha1, LocalDate fecha2, double precioes,
+    public void setTextFieldValue(Inmueble inm, Cliente cli, Garante gar, LocalDate fecha1, LocalDate fecha2, double precioes,
             double depo, String claus, LocalDate fecha3) {
 
         NumberFormat numberFormat = NumberFormat.getInstance();

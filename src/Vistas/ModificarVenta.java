@@ -483,7 +483,7 @@ public class ModificarVenta extends javax.swing.JInternalFrame {
                
 
                 vData.modificarVenta(venta);
-
+                System.out.println("NUEVA VENTA"+venta.toString());
                 // Actualiza los datos en el modelo de la tabla
                 if (fila != -1) {
                     String  cony;
