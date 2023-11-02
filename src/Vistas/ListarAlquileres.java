@@ -15,11 +15,14 @@ import entidades.Garante;
 import entidades.Inmueble;
 import entidades.Propietario;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.Format;
 import java.time.LocalDate;
 import java.util.Locale;
+import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -72,7 +75,13 @@ public class ListarAlquileres extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel(){
+            ImageIcon icon = new ImageIcon(getClass().getResource("/Iconos/61911070.jpg"));
+            Image image = icon.getImage();
+            public void paintComponent(Graphics g){
+                g.drawImage(image,0,0,getWidth(),getHeight(),this);
+            }
+        };
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTabla = new javax.swing.JTable();
@@ -86,6 +95,8 @@ public class ListarAlquileres extends javax.swing.JInternalFrame {
         jrDisponibles = new javax.swing.JRadioButton();
         jrNoDisponibles = new javax.swing.JRadioButton();
         jbSalir = new javax.swing.JButton();
+
+        setResizable(true);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -205,26 +216,23 @@ public class ListarAlquileres extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(310, 310, 310)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jrTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(120, 120, 120)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jrPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jcPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(140, 140, 140)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jcTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jrTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(141, 141, 141)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jrZona, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jcZona, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1)))
+                        .addGap(360, 360, 360)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jrTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(90, 90, 90)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jrPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(129, 129, 129)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jrTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jrZona, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcZona, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(217, 217, 217)
                         .addComponent(jrDisponibles)
@@ -232,7 +240,11 @@ public class ListarAlquileres extends javax.swing.JInternalFrame {
                         .addComponent(jrNoDisponibles)
                         .addGap(173, 173, 173)
                         .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(40, 40, 40))
+                .addGap(77, 77, 77))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 945, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -506,28 +518,21 @@ public class ListarAlquileres extends javax.swing.JInternalFrame {
                 ma.setVisible(true);
             }
             if (fila != -1) {
-
-//    
-//            double PrecioIn= Double.parseDouble(this.jTable1.getValueAt(fila,1).toString());
-//             double Deposi = Double.parseDouble(this.jTable1.getValueAt(fila,2).toString());
-//              String gastos =(String)jTable1.getValueAt(fila,3);
-//             
-//                int id = (int) jTabla.getValueAt(fila, 0);
+                int id = (int) jTabla.getValueAt(fila, 0);
                 Inmueble inm = (Inmueble) jTabla.getValueAt(fila, 1);
                 Cliente idCli = (Cliente) jTabla.getValueAt(fila, 2);
                 Garante idGar = (Garante) jTabla.getValueAt(fila, 3);
-//                TipoCliente tipoCli = (TipoCliente) jTabla.getValueAt(fila, 4);
-//                TipoAlquiler tipoAlq = (TipoAlquiler) jTabla.getValueAt(fila, 5);
+                TipoAlquiler tipoAlq = (TipoAlquiler) jTabla.getValueAt(fila, 5);
                 LocalDate fechaIn = (LocalDate) jTabla.getValueAt(fila, 6);
                 LocalDate fechaFin = (LocalDate) jTabla.getValueAt(fila, 7);
                 double PrecioEs = Double.parseDouble(jTabla.getValueAt(fila, 8).toString());
                 double Deposi = Double.parseDouble(jTabla.getValueAt(fila, 9).toString());
                 String claus = jTabla.getValueAt(fila, 10).toString();
                 LocalDate fechaFir = (LocalDate) jTabla.getValueAt(fila, 11);
-                ModificarAlquiler modifA = obtenerModifalqFrame();
+                ModificarAlquiler modifAlq = obtenerModifalqFrame();
 
-                if (modifA != null) {
-                    modifA.setTextFieldValue(inm, idCli, idGar,  fechaIn, fechaFin, PrecioEs, Deposi, claus, fechaFir);
+                if (modifAlq != null) {
+                    modifAlq.setTextFieldValue(id, inm, idCli, idGar,  tipoAlq,  fechaIn, fechaFin, PrecioEs, Deposi, claus, fechaFir);
                 }
             }
         }

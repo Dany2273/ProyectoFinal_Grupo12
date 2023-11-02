@@ -11,44 +11,39 @@ import accesoDatos.AlquilerData;
 import accesoDatos.ClienteData;
 import accesoDatos.GaranteData;
 import accesoDatos.InmuebleData;
-import accesoDatos.PropietarioData;
-import com.toedter.calendar.JDateChooser;
 import entidades.Alquiler;
 import entidades.Cliente;
 import entidades.Garante;
 import entidades.Inmueble;
-import entidades.Propietario;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Nicolás
+ * @author Compaq
  */
 public class ModificarAlquiler extends javax.swing.JInternalFrame {
 
-    AlquilerData alqData = new AlquilerData();
+     AlquilerData alqData = new AlquilerData();
     Alquiler alq = new Alquiler();
     InmuebleData inmData = new InmuebleData();
     Inmueble inm = new Inmueble();
     Cliente cli = new Cliente();
     Garante gar = new Garante();
-
+    
     public ModificarAlquiler() {
         initComponents();
-        llenarComboTipo();
+         llenarComboTipo();
         llenarCliente();
         llenarInmueble();
         llenarGarante();
-//        llenarComboProp();
     }
 
     /**
@@ -60,387 +55,464 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        inmueble = new javax.swing.JTextField();
-        prop = new javax.swing.JTextField();
-        cliente = new javax.swing.JTextField();
-        garante = new javax.swing.JTextField();
-        tipoAlq = new javax.swing.JTextField();
-        fechaini = new javax.swing.JTextField();
-        Propietario = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel(){
+            ImageIcon icon = new ImageIcon(getClass().getResource("/Iconos/61911070.jpg"));
+            Image image = icon.getImage();
+            public void paintComponent(Graphics g){
+                g.drawImage(image,0,0,getWidth(),getHeight(),this);
+            }
+        };
+        jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        Cliente = new javax.swing.JLabel();
-        Garante = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        Clausula2 = new javax.swing.JTextPane();
-        jLabel12 = new javax.swing.JLabel();
-        Precioest = new javax.swing.JTextField();
-        fechaFirma = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        FechaFirm2 = new com.toedter.calendar.JDateChooser();
-        fechaFin = new javax.swing.JTextField();
-        FechaIni2 = new com.toedter.calendar.JDateChooser();
-        fechafin2 = new com.toedter.calendar.JDateChooser();
-        Inmueble2 = new javax.swing.JComboBox<>();
-        cliente2 = new javax.swing.JComboBox<>();
-        prop2 = new javax.swing.JComboBox<>();
+        jGarante = new javax.swing.JComboBox<>();
         tipoalq2 = new javax.swing.JComboBox<>();
-        garante2 = new javax.swing.JComboBox<>();
-        deposito2 = new javax.swing.JTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        Clausula1 = new javax.swing.JTextPane();
+        jCliente = new javax.swing.JComboBox<>();
+        jInmueble = new javax.swing.JComboBox<>();
+        inmueble = new javax.swing.JTextField();
+        cliente = new javax.swing.JTextField();
+        garante = new javax.swing.JTextField();
+        tipo = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        alquiler = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel9 = new javax.swing.JLabel();
+        precio = new javax.swing.JTextField();
+        nuevoPrecio = new javax.swing.JTextField();
+        deposito = new javax.swing.JTextField();
+        nuevoDeposito = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        nuevoInicio = new com.toedter.calendar.JDateChooser();
+        nuevoFin = new com.toedter.calendar.JDateChooser();
+        nuevaFirma = new com.toedter.calendar.JDateChooser();
+        inicio = new javax.swing.JTextField();
+        fin = new javax.swing.JTextField();
+        firma = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        nuevaClausula = new javax.swing.JTextPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        clausula = new javax.swing.JTextPane();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jBGuardar = new javax.swing.JButton();
-        precioinu1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        Precioest2 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setText("Modificar Alquiler");
+        jPanel1.setMaximumSize(new java.awt.Dimension(653, 451));
 
-        prop.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Modificar Alquiler");
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Inmueble:");
+
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Cliente: ");
+
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Garante:");
+
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Tipo Alquiler:");
+
+        jGarante.setMinimumSize(new java.awt.Dimension(160, 26));
+        jGarante.setPreferredSize(new java.awt.Dimension(160, 26));
+        jGarante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                propActionPerformed(evt);
-            }
-        });
-
-        fechaini.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fechainiActionPerformed(evt);
-            }
-        });
-
-        Propietario.setText("Propietario");
-
-        jLabel3.setText("Inmuble");
-
-        Cliente.setText("Cliente");
-
-        Garante.setText("Garante");
-
-        jLabel6.setText("Tipo Alquiler");
-
-        jLabel7.setText("Fecha Inicio");
-
-        jLabel8.setText("Fecha Fin");
-
-        jLabel9.setText("Deposito");
-
-        jLabel11.setText("Clausula");
-
-        Clausula2.setPreferredSize(new java.awt.Dimension(160, 22));
-        jScrollPane2.setViewportView(Clausula2);
-
-        jLabel12.setText("Fecha  Firma");
-
-        Precioest.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PrecioestActionPerformed(evt);
-            }
-        });
-
-        jLabel13.setText("Datos Actuales");
-
-        jLabel14.setText("Nuevos Datos");
-
-        FechaFirm2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        FechaFirm2.setPreferredSize(new java.awt.Dimension(160, 29));
-
-        FechaIni2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        FechaIni2.setPreferredSize(new java.awt.Dimension(160, 29));
-
-        fechafin2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        fechafin2.setPreferredSize(new java.awt.Dimension(160, 29));
-
-        Inmueble2.setMinimumSize(new java.awt.Dimension(160, 26));
-        Inmueble2.setPreferredSize(new java.awt.Dimension(160, 26));
-        Inmueble2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Inmueble2ActionPerformed(evt);
-            }
-        });
-
-        cliente2.setMinimumSize(new java.awt.Dimension(160, 26));
-        cliente2.setPreferredSize(new java.awt.Dimension(160, 26));
-        cliente2.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cliente2ItemStateChanged(evt);
-            }
-        });
-        cliente2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cliente2ActionPerformed(evt);
-            }
-        });
-
-        prop2.setMinimumSize(new java.awt.Dimension(160, 26));
-        prop2.setPreferredSize(new java.awt.Dimension(160, 26));
-        prop2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                prop2ActionPerformed(evt);
+                jGaranteActionPerformed(evt);
             }
         });
 
         tipoalq2.setMinimumSize(new java.awt.Dimension(160, 26));
         tipoalq2.setPreferredSize(new java.awt.Dimension(160, 26));
-        tipoalq2.addActionListener(new java.awt.event.ActionListener() {
+
+        jCliente.setMinimumSize(new java.awt.Dimension(160, 26));
+        jCliente.setName(""); // NOI18N
+        jCliente.setPreferredSize(new java.awt.Dimension(160, 26));
+        jCliente.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jClienteItemStateChanged(evt);
+            }
+        });
+        jCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipoalq2ActionPerformed(evt);
+                jClienteActionPerformed(evt);
             }
         });
 
-        garante2.setMinimumSize(new java.awt.Dimension(160, 26));
-        garante2.setPreferredSize(new java.awt.Dimension(160, 26));
-        garante2.addActionListener(new java.awt.event.ActionListener() {
+        jInmueble.setMinimumSize(new java.awt.Dimension(160, 26));
+        jInmueble.setPreferredSize(new java.awt.Dimension(160, 26));
+        jInmueble.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                garante2ActionPerformed(evt);
+                jInmuebleActionPerformed(evt);
             }
         });
 
-        deposito2.setMinimumSize(new java.awt.Dimension(149, 24));
-        deposito2.setPreferredSize(new java.awt.Dimension(160, 24));
+        inmueble.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        inmueble.setToolTipText("");
+        inmueble.setPreferredSize(new java.awt.Dimension(160, 24));
 
-        Clausula1.setPreferredSize(new java.awt.Dimension(160, 22));
-        jScrollPane3.setViewportView(Clausula1);
+        cliente.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        cliente.setToolTipText("");
+        cliente.setPreferredSize(new java.awt.Dimension(160, 24));
 
-        jButton1.setText("Salir");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        garante.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        garante.setToolTipText("");
+        garante.setPreferredSize(new java.awt.Dimension(160, 24));
+        garante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                garanteActionPerformed(evt);
             }
         });
 
-        jBGuardar.setText("Guardar Cambios");
-        jBGuardar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
+        tipo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        tipo.setToolTipText("");
+        tipo.setPreferredSize(new java.awt.Dimension(160, 24));
+        tipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBGuardarActionPerformed(evt);
+                tipoActionPerformed(evt);
             }
         });
 
-        precioinu1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Alquiler Nro.:");
+
+        alquiler.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        alquiler.setPreferredSize(new java.awt.Dimension(40, 24));
+
+        jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Precio:");
+
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Deposito:");
+
+        inicio.setToolTipText("");
+        inicio.setPreferredSize(new java.awt.Dimension(90, 24));
+
+        fin.setToolTipText("");
+        fin.setPreferredSize(new java.awt.Dimension(90, 24));
+
+        firma.setToolTipText("");
+        firma.setPreferredSize(new java.awt.Dimension(90, 24));
+        firma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                precioinu1ActionPerformed(evt);
+                firmaActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Precio Est");
+        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Fecha Inicio:");
+
+        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Fecha Fin:");
+
+        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel14.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Fecha Firma:");
+
+        jScrollPane1.setViewportView(nuevaClausula);
+
+        jScrollPane2.setViewportView(clausula);
+
+        jLabel16.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel16.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Cláusula");
+
+        jLabel15.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel15.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Datos Actuales.");
+
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel12.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Nuevos Datos.");
+
+        jLabel13.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel13.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Datos Actuales.");
+
+        jLabel17.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Nuevos Datos.");
+
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton1.setText("Guardar");
+
+        jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton2.setText("Salir.");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(alquiler, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel7)
+                                                    .addComponent(jLabel5)
+                                                    .addComponent(jLabel6)
+                                                    .addComponent(jLabel9)
+                                                    .addComponent(jLabel4))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(inmueble, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(cliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(garante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(precio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(deposito, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGap(30, 30, 30))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel15)
+                                        .addGap(62, 62, 62)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jInmueble, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jGarante, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(tipoalq2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(nuevoPrecio)
+                                        .addComponent(nuevoDeposito))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(42, 42, 42)
+                                        .addComponent(jLabel12)))
+                                .addGap(26, 26, 26)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(227, 227, 227)
+                                .addComponent(jButton1)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(79, 79, 79)
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel17)
+                                .addGap(64, 64, 64))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton2)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel10)
+                                                .addComponent(jLabel11)
+                                                .addComponent(jLabel14))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(fin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(firma, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jScrollPane2)))
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nuevoInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                                    .addComponent(nuevoFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(nuevaFirma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane1)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(75, 75, 75)
+                                .addComponent(jLabel16)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(40, 40, 40))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(332, 332, 332)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(9, 9, 9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(alquiler, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel12))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(tipoalq2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jInmueble, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inmueble, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
+                                .addComponent(jCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jGarante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(garante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nuevoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nuevoDeposito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(deposito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel17))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(nuevoInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel10)))
+                                .addGap(18, 18, 18)
+                                .addComponent(nuevoFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(fin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel11)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nuevaFirma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(firma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel16)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2)))
+                    .addComponent(jSeparator1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addGap(45, 45, 45))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(363, 363, 363))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(217, 217, 217)
-                        .addComponent(jLabel13)
-                        .addGap(221, 221, 221)
-                        .addComponent(jLabel14))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel3)
-                                    .addComponent(Cliente)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel8)
-                                    .addComponent(Garante)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel1)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(63, 63, 63)
-                                .addComponent(jLabel11))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(Propietario)))
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Precioest, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(garante, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(48, 48, 48)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tipoalq2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(FechaFirm2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fechafin2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(FechaIni2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Precioest2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(prop, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tipoAlq, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fechaini, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fechaFirma, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(precioinu1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inmueble, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(48, 48, 48)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(prop2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Inmueble2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(garante2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(deposito2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jLabel12))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(331, 331, 331)
-                        .addComponent(jLabel2)))
-                .addContainerGap(39, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(89, 89, 89)
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(prop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Propietario)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel14))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(inmueble, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Inmueble2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(prop2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Cliente)
-                            .addComponent(cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(garante2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(garante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Garante)
-                            .addComponent(cliente2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tipoAlq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
-                            .addComponent(tipoalq2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(fechaini, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel8)
-                                        .addComponent(fechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(fechafin2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Precioest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(Precioest2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(deposito2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(precioinu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(FechaIni2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel12)
-                        .addComponent(fechaFirma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(FechaFirm2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void propActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_propActionPerformed
+    private void jGaranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGaranteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_propActionPerformed
+    }//GEN-LAST:event_jGaranteActionPerformed
 
-    private void PrecioestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrecioestActionPerformed
+    private void jClienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jClienteItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_PrecioestActionPerformed
+       
+    }//GEN-LAST:event_jClienteItemStateChanged
 
-    private void Inmueble2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inmueble2ActionPerformed
+    private void jClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jClienteActionPerformed
         // TODO add your handling code here:
-//        Inmueble in = (Inmueble) Inmueble2.getSelectedItem();
-//      prop2.addItem(in.getProp());
-    }//GEN-LAST:event_Inmueble2ActionPerformed
+       
+    }//GEN-LAST:event_jClienteActionPerformed
 
-    private void cliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cliente2ActionPerformed
-        Cliente c = (Cliente) cliente2.getSelectedItem();
-
-
-    }//GEN-LAST:event_cliente2ActionPerformed
-
-    private void prop2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prop2ActionPerformed
+    private void jInmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInmuebleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_prop2ActionPerformed
+        
+    }//GEN-LAST:event_jInmuebleActionPerformed
 
-    private void tipoalq2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoalq2ActionPerformed
+    private void garanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_garanteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tipoalq2ActionPerformed
+    }//GEN-LAST:event_garanteActionPerformed
 
-    private void garante2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_garante2ActionPerformed
+    private void tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_garante2ActionPerformed
+    }//GEN-LAST:event_tipoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void firmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firmaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_firmaActionPerformed
+
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
         // TODO add your handling code here:
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_salirActionPerformed
 
-    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-        if (Inmueble2.getSelectedItem() == null) {
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        // TODO add your handling code here:
+         if (jInmueble.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar el inmueble!!.", "Error!", JOptionPane.ERROR_MESSAGE);
             return;
-        }else if (garante2.getSelectedItem() == null) {
+        }else if (jGarante.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar el cliente.", "Error!", JOptionPane.ERROR_MESSAGE);
             return;
-        } else if (cliente2.getSelectedItem() == null) {
+        } else if (jCliente.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar el garante!.", "Error!", JOptionPane.ERROR_MESSAGE);
             return;
         } //        else if (tipcliente2.getSelectedItem() == null) {
@@ -450,24 +522,24 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
         else if (tipoalq2.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar el tipo de alquiler.", "Error!", JOptionPane.ERROR_MESSAGE);
             return;
-        } else if (FechaIni2.getDate() == null) {
+        } else if (nuevoInicio.getDate() == null) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar la fecha de inicio.", "Error!", JOptionPane.ERROR_MESSAGE);
             return;
-        } else if (fechafin2.getDate() == null) {
+        } else if (nuevoFin.getDate() == null) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar la fecha de fin!!.", "Error!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        else if (!Precioest2.getText().matches("[0-9]+")) {
+        else if (!nuevoPrecio.getText().matches("[0-9]+")) {
             JOptionPane.showMessageDialog(null, "Ingrese un importe válido! (solo números).", "Error", JOptionPane.ERROR_MESSAGE);
             return;
-        } else if (!deposito2.getText().matches("[0-9]+")) {
+        } else if (!nuevoDeposito.getText().matches("[0-9]+")) {
             JOptionPane.showMessageDialog(null, "Ingrese un deposito válido! (solo números).", "Error", JOptionPane.ERROR_MESSAGE);
             return;
-        } else if (Clausula2.getText().equals("")) {
+        } else if (nuevaClausula.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Debe ingresar la clasula de Alquiler!.", "Error!", JOptionPane.ERROR_MESSAGE);
             return;
 
-        } else if (FechaFirm2.getDate() == null) {
+        } else if (nuevaFirma.getDate() == null) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar la fecha firma!!.", "Error!", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -482,18 +554,17 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
                 //                long cuil = valor.longValue();
                 Alquiler alq = alqData.buscarAlquiler(valor);
                 System.out.println("METODO BUSCAR EN MODIFICAR ALQUILER "+alq.toString());
-                Inmueble nuevoI = (Inmueble) Inmueble2.getSelectedItem();
-//                Propietario nuevoP = (Propietario) prop2.getSelectedItem();
-                Cliente nuevoC = (Cliente) cliente2.getSelectedItem();
-                Garante nuevogar = (Garante) garante2.getSelectedItem();
-//              TipoCliente ntipoCli = (TipoCliente) tipcliente2.getSelectedItem();
+                
+                Inmueble nuevoI = (Inmueble) jInmueble.getSelectedItem();
+                Cliente nuevoC = (Cliente) jCliente.getSelectedItem();
+                Garante nuevogar = (Garante) jGarante.getSelectedItem();
                 TipoAlquiler ntipoAlq = (TipoAlquiler) tipoalq2.getSelectedItem();
-                LocalDate nuevafi = FechaIni2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                LocalDate nuevaffin = fechafin2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                double nprecioes = Double.parseDouble(Precioest2.getText());
-                double NDeposito = Double.parseDouble(deposito2.getText());
-                String nclaus = Clausula2.getText();
-                LocalDate nuevaffir = FechaFirm2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate nuevafi = nuevoInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate nuevaffin = nuevoFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                double nprecioes = Double.parseDouble(nuevoPrecio.getText());
+                double NDeposito = Double.parseDouble(nuevoDeposito.getText());
+                String nclaus = nuevaClausula.getText();
+                LocalDate nuevaffir = nuevaFirma.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
                 alq.setInmueble(nuevoI);
 
@@ -501,7 +572,6 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
                 alq.setCliente(nuevoC);
                 alq.setGarante(nuevogar);
                 alq.setTipoC(nuevoC.getTipo());
-//                System.out.println(alq.getTipoC());
                 alq.setTipo(ntipoAlq);
                 alq.setFechaInicio(nuevafi);
                 alq.setFechaFin(nuevaffin);
@@ -515,13 +585,11 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
                 // Actualiza los datos en el modelo de la tabla
                 if (fila != -1) {
                     modelo.setValueAt(alq.getIdAlquiler(), fila, 0); // Actualiza el id
-
                     modelo.setValueAt(alq.getInmueble(), fila, 1); // Actualiza inmueble
                     modelo.setValueAt(alq.getCliente(), fila, 2); // Actualiza cliente
                     modelo.setValueAt(alq.getGarante(), fila, 3); // Actualiza cliente
                     modelo.setValueAt(alq.getTipoC(), fila, 4); // Actualiza tipo
                     modelo.setValueAt(alq.getTipo(), fila, 5); // Actualiza tipo
-
                     modelo.setValueAt(alq.getFechaInicio(), fila, 6); // Actualiza fechain
                     modelo.setValueAt(alq.getFechaFin(), fila, 7); // Actualiza fechafin
                     modelo.setValueAt(alq.getPrecioEstimativo(), fila, 8); // Actualiza el precioes
@@ -529,176 +597,102 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
                     modelo.setValueAt(alq.getClausula(), fila, 10); // Actualiza clau
                     modelo.setValueAt(alq.getFechaFirma(), fila, 11); //actualiza firma
                 }
-
                 //// Notifica a la tabla que los datos han cambiado
                 modelo.fireTableDataChanged();
                 dispose();
-
-                //procesarSeleccion()
-                //HACER VALIDACION
             }
 
         }
-    }//GEN-LAST:event_jBGuardarActionPerformed
-
-    private void cliente2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cliente2ItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cliente2ItemStateChanged
-
-    private void precioinu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioinu1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_precioinu1ActionPerformed
-
-    private void fechainiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechainiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fechainiActionPerformed
+    }//GEN-LAST:event_guardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextPane Clausula1;
-    private javax.swing.JTextPane Clausula2;
-    private javax.swing.JLabel Cliente;
-    private com.toedter.calendar.JDateChooser FechaFirm2;
-    private com.toedter.calendar.JDateChooser FechaIni2;
-    private javax.swing.JLabel Garante;
-    private javax.swing.JComboBox<Inmueble> Inmueble2;
-    private javax.swing.JTextField Precioest;
-    private javax.swing.JTextField Precioest2;
-    private javax.swing.JLabel Propietario;
+    private javax.swing.JTextField alquiler;
+    private javax.swing.JTextPane clausula;
     private javax.swing.JTextField cliente;
-    private javax.swing.JComboBox<Cliente> cliente2;
-    private javax.swing.JTextField deposito2;
-    private javax.swing.JTextField fechaFin;
-    private javax.swing.JTextField fechaFirma;
-    private com.toedter.calendar.JDateChooser fechafin2;
-    private javax.swing.JTextField fechaini;
+    private javax.swing.JTextField deposito;
+    private javax.swing.JTextField fin;
+    private javax.swing.JTextField firma;
     private javax.swing.JTextField garante;
-    private javax.swing.JComboBox<Garante> garante2;
+    private javax.swing.JTextField inicio;
     private javax.swing.JTextField inmueble;
-    private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<Cliente> jCliente;
+    private javax.swing.JComboBox<Garante> jGarante;
+    private javax.swing.JComboBox<Inmueble> jInmueble;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField precioinu1;
-    private javax.swing.JTextField prop;
-    private javax.swing.JComboBox<Propietario> prop2;
-    private javax.swing.JTextField tipoAlq;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextPane nuevaClausula;
+    private com.toedter.calendar.JDateChooser nuevaFirma;
+    private javax.swing.JTextField nuevoDeposito;
+    private com.toedter.calendar.JDateChooser nuevoFin;
+    private com.toedter.calendar.JDateChooser nuevoInicio;
+    private javax.swing.JTextField nuevoPrecio;
+    private javax.swing.JTextField precio;
+    private javax.swing.JTextField tipo;
     private javax.swing.JComboBox<TipoAlquiler> tipoalq2;
     // End of variables declaration//GEN-END:variables
 
-    public void setTextFieldValue(Inmueble inm, Cliente cli, Garante gar, LocalDate fecha1, LocalDate fecha2, double precioes,
+    public void setTextFieldValue(int id, Inmueble inm, Cliente cli, Garante gar,TipoAlquiler tipoAlq, LocalDate fecha1, LocalDate fecha2, double precioes,
             double depo, String claus, LocalDate fecha3) {
 
         NumberFormat numberFormat = NumberFormat.getInstance();
         String formato = numberFormat.format(depo);
         String formato2 = numberFormat.format(precioes);
+        String idAlquiler = numberFormat.format(id);
 
         inmueble.setText(inm.getTipo().toString());
-        Propietario.setText(prop.getName());
         cliente.setText(cli.getNombre());
         garante.setText(gar.getNombre());
 
-        tipoAlq.setText(cli.getTipo().toString());
-        fechaini.setText(String.valueOf(fecha1));
-        fechaFin.setText(String.valueOf(fecha2));
-          fechaFirma.setText(String.valueOf(fecha3));
-        Precioest.setText(String.valueOf(formato2));
-        precioinu1.setText(String.valueOf(formato));
-        Clausula1.setText(claus);
-
-//        // Actualiza JComboBox (jCBTipoAlquiler y otros JComboBox)
-//    jCBTipoAlquiler.setSelectedItem(selectedTipoAlquiler); // Actualiza el JComboBox jCBTipoAlquiler con un elemento seleccionado
-//    jCB_IDinmueble.setSelectedItem(selectedInmueble); // Actualiza el JComboBox jCB_IDinmueble con un elemento seleccionado
-//    jCB_garante.setSelectedItem(selectedGarante); // Actualiza el JComboBox jCB_garante con un elemento seleccionado
-//    
-//    // Actualiza JDateChooser (jDateChooser1 y otros JDateChooser)
-//    jDateChooser1.setDate(selectedDate1); // Actualiza el jDateChooser1 con una fecha seleccionada
-//    jDateChooser2.setDate(selectedDate2); // Actualiza el jDateChooser2 con una fecha seleccionada
-//    jDateChooser4.setDate(selectedDate4); // Actualiza el jDateChooser4 con una fecha seleccionada
+        tipo.setText(String.valueOf(tipoAlq));
+        inicio.setText(String.valueOf(fecha1));
+        fin.setText(String.valueOf(fecha2));
+          firma.setText(String.valueOf(fecha3));
+        precio.setText(String.valueOf(formato2));
+        deposito.setText(String.valueOf(formato));
+        clausula.setText(claus);
+        alquiler.setText(String.valueOf(idAlquiler));
     }
-
-//    private  ListarAlq obtenerDatosFrame(){
-//        JInternalFrame[] frames = getDesktopPane().getAllFrames();
-//        for(JInternalFrame frame: frames){
-//            if(frame instanceof ListarAlq){
-//                return(ListarAlq) frame;
-//           }
-//        return null;
-//    }
-//    private void procesarSeleccion() {
-//        ListarAlquileres listalq = obtenerListasAlqFrame();
-//
-//        if (listalq != null) {
-//            DefaultTableModel modelo = listalq.modelo;
-//            int fila = listalq.getSelectedRow();
-//
-//            if (fila != -1) {
-//                String est = alq.isEstado() ? "Activo" : "Inactivo/a";
-//                modelo.setValueAt(alq.getPrecioInicial(), fila, 0);
-//                modelo.setValueAt(alq.getPrecioEstimativo(), fila, 1);
-//                modelo.setValueAt(alq.getDeposito(), fila, 2);
-//                modelo.setValueAt(alq.getGastos(), fila, 3);
-//                modelo.setValueAt(alq.getClausula(), fila, 4);
-//                modelo.setValueAt(est, fila, 5);
-//
-//            }
-//            modelo.fireTableDataChanged();
-//            dispose();
-//
-//        }
-//
-//    }
-
-    private void llenarCliente() {
-        cliente2.addItem(null);
+    
+     private void llenarCliente() {
+        jCliente.addItem(null);
         ClienteData cData = new ClienteData();
         for (Cliente cli : cData.listarTodosClientesActivos()) {
-            cliente2.addItem(cli);
+            jCliente.addItem(cli);
         }
 
     }
-
-//    private void llenarComboProp() {
-//        PropietarioData propData = new PropietarioData();
-//    prop2.addItem(null);
-//    for(Propietario prop: propData.listarProTodosActivos()){
-//        prop2.addItem(prop);
-//    }
-//    }
-// private void borrar(){
-//         jCB_IDinmueble.removeAllItems();
-//            jCBIDcliente.removeAllItems();
-//           jCB_garante.removeAllItems();
-//           jCBTipoAlquiler.removeAllItems();
-//             jDateChooser1.setDate(null);
-//            jDateChooser2.setDate(null);
-//            cliente.setText("");
-//            garante.setText("");
-//            inmueble.setText("");
-//            tipoAlq.setText("");
-//            jDateChooser4.setDate(null);
-//    }
-    public void llenarInmueble() {
-        Inmueble2.addItem(null);
+    
+      public void llenarInmueble() {
+        jInmueble.addItem(null);
         InmuebleData inmDatas = new InmuebleData();
         for (Inmueble inmueb : inmDatas.buscarPropiedadesAlqVta("venta", true)) {
-            Inmueble2.addItem(inmueb);
+            jInmueble.addItem(inmueb);
         }
 
     }
-
-    private void llenarComboTipo() {
+      
+      private void llenarComboTipo() {
 
         tipoalq2.addItem(null);
         tipoalq2.addItem(TipoAlquiler.RESIDENCIAL);
@@ -710,16 +704,16 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
         tipoalq2.addItem(TipoAlquiler.ESTACIONAMIENTO);
 
     }
-
-    private void llenarGarante() {
-        garante2.addItem(null);
+      
+      private void llenarGarante() {
+        jGarante.addItem(null);
         GaranteData garData = new GaranteData();
         for (Garante gara : garData.ListarTodosGarantes()) {
-            garante2.addItem(gara);
+            jGarante.addItem(gara);
         }
     }
-
-    private ListarAlquileres obtenerListasAlqFrame() {
+      
+      private ListarAlquileres obtenerListasAlqFrame() {
         JInternalFrame[] frames = getDesktopPane().getAllFrames();
         for (JInternalFrame frame : frames) {
             if (frame instanceof ListarAlquileres) {
@@ -728,5 +722,5 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
         }
         return null; // Devuelve null si no se encuentra el frame "DatosClientes"
     }
-
+      
 }

@@ -71,6 +71,7 @@ public class ModificarPropietario extends javax.swing.JInternalFrame {
         jB_Reactivar = new javax.swing.JButton();
 
         setClosable(true);
+        setFrameIcon(null);
 
         jLabel1.setText("Modificar Propietario");
 
