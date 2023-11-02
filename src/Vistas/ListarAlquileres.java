@@ -97,6 +97,7 @@ public class ListarAlquileres extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
 
         setResizable(true);
+        setFrameIcon(null);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));

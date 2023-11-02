@@ -29,6 +29,7 @@ public class Menu extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         // Establece el estado extendido del JFrame para que se maximice en ambas dimensiones (pantalla completa)
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+           setIconImage(new ImageIcon(getClass().getResource("/Iconos/ANCADASI.png")).getImage());//esta linea cambia el icono a uno q esta en la carpeta iconos
     }
 
     /**

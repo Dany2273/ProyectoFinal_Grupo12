@@ -70,6 +70,8 @@ public class ModificarCliente extends javax.swing.JInternalFrame {
         jltipo = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
+        setFrameIcon(null);
+
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));

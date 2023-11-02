@@ -5,22 +5,35 @@
  */
 package Vistas;
 
+import Enums.TipoCliente;
 import accesoDatos.PropietarioData;
 import entidades.Propietario;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableRowSorter;
-//import Vistas.Main;
+
 
 
 public class Propietarios extends javax.swing.JInternalFrame {
 
 int idd;
 int aver;
+int contF=0;
+int contJ=0;
+private int ajustar =0;
+private int modifi =0;
+
  int juriCon=0;
          int fisiCon=0;
 boolean tab;
@@ -68,6 +81,7 @@ private boolean jurifisi;
         jTable1.getColumnModel().getColumn(11).setMinWidth(10);
         jTable1.getColumnModel().getColumn(11).setMaxWidth(30);
         jTable1.getColumnModel().getColumn(11).setPreferredWidth(30);
+
         
         
     }
@@ -93,7 +107,6 @@ private boolean jurifisi;
         jTable1 = new javax.swing.JTable();
         jB_Activos = new javax.swing.JButton();
         jB_Inactivos = new javax.swing.JButton();
-        jB_Todos = new javax.swing.JButton();
         jRadio_Juridicos = new javax.swing.JRadioButton();
         jRadio_Fisicos = new javax.swing.JRadioButton();
         jCombo_buscar = new javax.swing.JComboBox<>();
@@ -104,7 +117,7 @@ private boolean jurifisi;
         jButton_Salir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jL_Solo = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
 
         setClosable(true);
         setFrameIcon(null);
@@ -174,15 +187,6 @@ private boolean jurifisi;
             }
         });
 
-        jB_Todos.setText("Todos");
-        jB_Todos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jB_TodosActionPerformed(evt);
-            }
-        });
-
-        jRadio_Juridicos.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jRadio_Juridicos.setForeground(new java.awt.Color(255, 255, 255));
         jRadio_Juridicos.setText("Juridicos");
         jRadio_Juridicos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,8 +194,6 @@ private boolean jurifisi;
             }
         });
 
-        jRadio_Fisicos.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jRadio_Fisicos.setForeground(new java.awt.Color(255, 255, 255));
         jRadio_Fisicos.setText("Fisicos");
         jRadio_Fisicos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,10 +212,7 @@ private boolean jurifisi;
             }
         });
 
-        jLabel_BuscarPro.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel_BuscarPro.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel_BuscarPro.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_BuscarPro.setText("Buscar por :");
+        jLabel_BuscarPro.setText("Buscar Propietario por :");
 
         jTextField_Buscar.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -238,9 +237,6 @@ private boolean jurifisi;
             }
         });
 
-        jLabel_Ver.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel_Ver.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel_Ver.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_Ver.setText("Ver:");
 
         jButton_Salir.setText("Salir");
@@ -252,98 +248,103 @@ private boolean jurifisi;
 
         jLabel1.setText("(Doble click para modificar Propietario seleccionado.)");
 
-        jL_Solo.setBackground(new java.awt.Color(255, 255, 255));
-        jL_Solo.setForeground(new java.awt.Color(255, 255, 255));
         jL_Solo.setText("(Solo numeros por favor.)");
 
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Datos Propietarios");
+        jRadioButton1.setText("Fisicos/Juridicos");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(396, 396, 396))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1040, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(12, 12, 12)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(268, 268, 268)
+                                .addComponent(jL_Solo))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel_BuscarPro)
+                                .addGap(37, 37, 37)
+                                .addComponent(jCombo_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCombo_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(29, 29, 29)
-                                        .addComponent(jLabel1))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(47, 47, 47)
-                                        .addComponent(jB_Activos)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jB_Inactivos)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jB_Todos)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton_Eliminar)
-                                        .addGap(59, 59, 59)
-                                        .addComponent(jButton_Salir))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(366, 366, 366)
+                                .addComponent(jTextField_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel_Ver)
-                                .addGap(18, 18, 18)
-                                .addComponent(jRadio_Fisicos)
-                                .addGap(43, 43, 43)
-                                .addComponent(jRadio_Juridicos))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 959, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(294, 294, 294)
-                        .addComponent(jL_Solo))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(396, 396, 396)
-                        .addComponent(jLabel2)))
-                .addGap(40, 40, 40))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButton1)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jRadio_Fisicos)
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jRadio_Juridicos)
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jB_Activos)
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jB_Inactivos)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton_Salir)
+                            .addComponent(jButton_Eliminar))
+                        .addGap(28, 28, 28))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadio_Juridicos)
-                    .addComponent(jRadio_Fisicos)
-                    .addComponent(jLabel_Ver))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jB_Activos)
-                    .addComponent(jB_Inactivos)
-                    .addComponent(jB_Todos)
-                    .addComponent(jLabel_BuscarPro)
-                    .addComponent(jCombo_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_Salir)
-                    .addComponent(jButton_Eliminar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jL_Solo)
-                .addGap(67, 67, 67))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jB_Activos)
+                            .addComponent(jB_Inactivos)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jRadio_Fisicos)
+                                        .addComponent(jLabel_Ver))
+                                    .addComponent(jRadio_Juridicos))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButton1)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel_BuscarPro)
+                            .addComponent(jCombo_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jL_Solo))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton_Eliminar)
+                        .addGap(217, 217, 217)
+                        .addComponent(jButton_Salir)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1039, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1058, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -352,7 +353,7 @@ private boolean jurifisi;
     private void jB_ActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ActivosActionPerformed
         // TODO add your handling code here:
         jTextField_Buscar.setText("");
-        if (!(jRadio_Fisicos.isSelected() || jRadio_Juridicos.isSelected())){
+        if (!(jRadio_Fisicos.isSelected() || jRadio_Juridicos.isSelected() || jRadioButton1.isSelected())){
             
             JOptionPane.showMessageDialog(this, "seleccione un tipo de persona");
             idd=0;
@@ -363,6 +364,11 @@ private boolean jurifisi;
         }
         if(jRadio_Juridicos.isSelected()){
             mostrarja();
+        }
+        if (jRadioButton1.isSelected()) {
+            borrarFilas();
+           mostrarfa();
+           mostrarja();
         }
        
         
@@ -396,7 +402,7 @@ private boolean jurifisi;
     private void jB_InactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_InactivosActionPerformed
         // TODO add your handling code here:
         jTextField_Buscar.setText("");
-        if (!(jRadio_Fisicos.isSelected() || jRadio_Juridicos.isSelected())){
+        if (!(jRadio_Fisicos.isSelected() || jRadio_Juridicos.isSelected() || jRadioButton1.isSelected())){
             
             JOptionPane.showMessageDialog(this, "seleccione un tipo de persona");
             idd=0;
@@ -408,30 +414,23 @@ private boolean jurifisi;
         if(jRadio_Juridicos.isSelected()){
             mostrarji();
         }
+        if (jRadioButton1.isSelected()) {
+            borrarFilas();
+            mostrarfi();
+            mostrarji();
+        }
 
     }//GEN-LAST:event_jB_InactivosActionPerformed
 
     private void jRadio_FisicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadio_FisicosActionPerformed
         // TODO add your handling code here:
+        jRadio_Fisicos.setSelected(true);
+        contF=1;
+        borrarFilas();
+        jRadio_Juridicos.setSelected(false);
+        jRadioButton1.setSelected(false);
+        mostrarft();
     }//GEN-LAST:event_jRadio_FisicosActionPerformed
-
-    private void jB_TodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_TodosActionPerformed
-        // TODO add your handling code here:
-        jTextField_Buscar.setText("");
-        if (!(jRadio_Fisicos.isSelected() || jRadio_Juridicos.isSelected())){
-            
-            JOptionPane.showMessageDialog(this, "seleccione un tipo de persona");
-            idd=0;
-        }
-        limpiarTabla();
-        if(jRadio_Fisicos.isSelected()){
-            mostrarft();
-        }
-        if(jRadio_Juridicos.isSelected()){
-            mostrarjt();
-        }
-
-    }//GEN-LAST:event_jB_TodosActionPerformed
 
     private void jTable1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable1FocusGained
         // TODO add your handling code here:
@@ -447,8 +446,8 @@ private boolean jurifisi;
             int fila = jTable1.getSelectedRow(); // Obtiene la fila seleccionada al hacer doble clic
             if (fila >= 0) {
 
-                Menu.Escritorio.add(mProp);//menu original
-//                  Main.jDesktopPane1.add(mProp);
+               Menu.Escritorio.add(mProp);//menu original
+  //                Main.jDesktopPane1.add(mProp);
                 mProp.toFront();
                 mProp.setVisible(true);
             }
@@ -467,6 +466,7 @@ private boolean jurifisi;
                 mProp.setId((Integer) tablita.getValueAt(fila, 0));
                 mProp.setTipo((Enums.TipoCliente) tablita.getValueAt(fila, 1));
                 mProp.setEstado((boolean) tablita.getValueAt(fila, 11));
+                dispose();//a ver si anda
 
             }
         } else {
@@ -507,11 +507,11 @@ private boolean jurifisi;
             borrarFilas();//gracias robotito me re salvaste
             
 
-            for (Propietario pro8 : proData.listarProTodos()) {
-                if (pro8.getNombre().toLowerCase().startsWith(jTextField_Buscar.getText().toLowerCase())) {
+            for (Propietario pro : proData.listarProTodos()) {
+                if (pro.getNombre().toLowerCase().startsWith(jTextField_Buscar.getText().toLowerCase())) {
                     
                     tablita.addRow(new Object[]{
-                        pro8.getIdPropietario(),pro8.getTipo(),pro8.getNombre(),pro8.getDni(),pro8.getCuilCuit(),pro8.getLugarTrabajo(),pro8.getDomicilio(),pro8.getCiudad(),pro8.getCodigoPostal(),pro8.getTelefono(),pro8.getMail(),pro8.isEstado()
+                        pro.getIdPropietario(),pro.getTipo(),pro.getNombre(),pro.getDni(),pro.getCuilCuit(),pro.getLugarTrabajo(),pro.getDomicilio(),pro.getCiudad(),pro.getCodigoPostal(),pro.getTelefono(),pro.getMail(),pro.isEstado()
             });
                     
                     
@@ -527,12 +527,11 @@ private boolean jurifisi;
             
             
 
-            for (Propietario pro7 : proData.listarProTodos()) {
-                if (String.valueOf(pro7.getCuilCuit()).startsWith(jTextField_Buscar.getText())) {
+            for (Propietario pro : proData.listarProTodos()) {
+                if (String.valueOf(pro.getCuilCuit()).startsWith(jTextField_Buscar.getText())) {
                     
                     tablita.addRow(new Object[]{
-                        pro7.getIdPropietario(),pro7.getTipo(),pro7.getNombre(),pro7.getDni(),pro7.getCuilCuit(),pro7.getLugarTrabajo(),
-                        pro7.getDomicilio(),pro7.getCiudad(),pro7.getCodigoPostal(),pro7.getTelefono(),pro7.getMail(),pro7.isEstado()
+                        pro.getIdPropietario(),pro.getTipo(),pro.getNombre(),pro.getDni(),pro.getCuilCuit(),pro.getLugarTrabajo(),pro.getDomicilio(),pro.getCiudad(),pro.getCodigoPostal(),pro.getTelefono(),pro.getMail(),pro.isEstado()
             });
                     
                     
@@ -557,13 +556,31 @@ private boolean jurifisi;
 
     private void jButton_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EliminarActionPerformed
         // TODO add your handling code here:
-        if(idd<=0){
+        if (idd <= 0) {
             JOptionPane.showMessageDialog(this, "seleccione un propietario de la lista");
-        }else{
-           proData.eliminarPropietario(idd); 
-           
+        } else {
+            if (jRadio_Fisicos.isSelected()) {
+                proData.eliminarPropietario(idd);
+                borrarFilas();
+                mostrarfa();
+            } else {
+                if (jRadio_Juridicos.isSelected()) {
+                    proData.eliminarPropietario(idd);
+                    borrarFilas();
+                    mostrarja();
+                }
+                if (jRadioButton1.isSelected()) {
+                    proData.eliminarPropietario(idd);
+                    borrarFilas();
+                    mostrarft();
+                    mostrarjt();
+                }
+
+            }
+
         }
-        idd=0;
+
+        idd = 0;
         
     }//GEN-LAST:event_jButton_EliminarActionPerformed
 
@@ -580,24 +597,37 @@ private boolean jurifisi;
 
     private void jRadio_JuridicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadio_JuridicosActionPerformed
         // TODO add your handling code here:
-        
+        jRadio_Juridicos.setSelected(true);
+        borrarFilas();
+        jRadio_Fisicos.setSelected(false);
+        jRadioButton1.setSelected(false);
+        mostrarjt();
        
     }//GEN-LAST:event_jRadio_JuridicosActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+        borrarFilas();
+        mostrarft();
+        mostrarjt();
+        jRadioButton1.setSelected(true);
+        jRadio_Fisicos.setSelected(false);
+        jRadio_Juridicos.setSelected(false);
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_Activos;
     private javax.swing.JButton jB_Inactivos;
-    private javax.swing.JButton jB_Todos;
     private javax.swing.JButton jButton_Eliminar;
     private javax.swing.JButton jButton_Salir;
     private javax.swing.JComboBox<String> jCombo_buscar;
     private javax.swing.JLabel jL_Solo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel_BuscarPro;
     private javax.swing.JLabel jLabel_Ver;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadio_Fisicos;
     private javax.swing.JRadioButton jRadio_Juridicos;
     private javax.swing.JScrollPane jScrollPane1;
@@ -642,11 +672,10 @@ private boolean jurifisi;
      }
      public void mostrarfa() {
 
-        for (Propietario pro1 : proData.listarProFisicosA()) {
-            String Estado = pro1.isEstado()? "Activo" : "Inactivo"; // Convierte true en "Activas" y false en "Inactivas" preguntar a daniel q onda jajaj
+        for (Propietario pro : proData.listarProFisicosA()) {
+            String Estado = pro.isEstado()? "Activo" : "Inactivo"; // Convierte true en "Activas" y false en "Inactivas" preguntar a daniel q onda jajaj
             tablita.addRow(new Object[]{
-                pro1.getIdPropietario(),pro1.getTipo(),pro1.getNombre(),pro1.getDni(),pro1.getCuilCuit(),pro1.getLugarTrabajo(),pro1.getDomicilio(),
-                pro1.getCiudad(),pro1.getCodigoPostal(),pro1.getTelefono(),pro1.getMail(),Estado
+                pro.getIdPropietario(),pro.getTipo(),pro.getNombre(),pro.getDni(),pro.getCuilCuit(),pro.getLugarTrabajo(),pro.getDomicilio(),pro.getCiudad(),pro.getCodigoPostal(),pro.getTelefono(),pro.getMail(),pro.isEstado()
             });
         }
     }
@@ -654,51 +683,46 @@ private boolean jurifisi;
 
     public void mostrarfi() {
 
-         for (Propietario pro2 : proData.listarProFisicosI()) {
-            String Estado = pro2.isEstado()? "Activo" : "Inactivo"; // Convierte true en "Activas" y false en "Inactivas" preguntar a daniel q onda jajaj
+         for (Propietario pro : proData.listarProFisicosI()) {
+            String Estado = pro.isEstado()? "Activo" : "Inactivo"; // Convierte true en "Activas" y false en "Inactivas" preguntar a daniel q onda jajaj
             tablita.addRow(new Object[]{
-                pro2.getIdPropietario(),pro2.getTipo(),pro2.getNombre(),pro2.getDni(),pro2.getCuilCuit(),pro2.getLugarTrabajo(),pro2.getDomicilio(),
-                pro2.getCiudad(),pro2.getCodigoPostal(),pro2.getTelefono(),pro2.getMail(),Estado
+                pro.getIdPropietario(),pro.getTipo(),pro.getNombre(),pro.getDni(),pro.getCuilCuit(),pro.getLugarTrabajo(),pro.getDomicilio(),pro.getCiudad(),pro.getCodigoPostal(),pro.getTelefono(),pro.getMail(),pro.isEstado()
             });
         }
     }
     public void mostrarft() {
 
-         for (Propietario pro3 : proData.listarProFisicosT()) {
-            String Estado = pro3.isEstado()? "Activo" : "Inactivo"; // Convierte true en "Activas" y false en "Inactivas" preguntar a daniel q onda jajaj
+         for (Propietario pro : proData.listarProFisicosT()) {
+            String Estado = pro.isEstado()? "Activo" : "Inactivo"; // Convierte true en "Activas" y false en "Inactivas" preguntar a daniel q onda jajaj
             tablita.addRow(new Object[]{
-                pro3.getIdPropietario(),pro3.getTipo(),pro3.getNombre(),pro3.getDni(),pro3.getCuilCuit(),pro3.getLugarTrabajo(),pro3.getDomicilio(),
-                pro3.getCiudad(),pro3.getCodigoPostal(),pro3.getTelefono(),pro3.getMail(),Estado
+                pro.getIdPropietario(),pro.getTipo(),pro.getNombre(),pro.getDni(),pro.getCuilCuit(),pro.getLugarTrabajo(),pro.getDomicilio(),pro.getCiudad(),pro.getCodigoPostal(),pro.getTelefono(),pro.getMail(),pro.isEstado()
             });
         }
     }
     public void mostrarja() {
 
-        for (Propietario pro4 : proData.listarProJuridicosA()) {
-            String Estado = pro4.isEstado()? "Activo" : "Inactivo"; // Convierte true en "Activas" y false en "Inactivas" preguntar a daniel q onda jajaj
+        for (Propietario pro : proData.listarProJuridicosA()) {
+            String Estado = pro.isEstado()? "Activo" : "Inactivo"; // Convierte true en "Activas" y false en "Inactivas" preguntar a daniel q onda jajaj
             tablita.addRow(new Object[]{
-                pro4.getIdPropietario(),pro4.getTipo(),pro4.getNombre(),pro4.getDni(),pro4.getCuilCuit(),pro4.getLugarTrabajo(),pro4.getDomicilio(),
-                pro4.getCiudad(),pro4.getCodigoPostal(),pro4.getTelefono(),pro4.getMail(),Estado
+                pro.getIdPropietario(),pro.getTipo(),pro.getNombre(),pro.getDni(),pro.getCuilCuit(),pro.getLugarTrabajo(),pro.getDomicilio(),pro.getCiudad(),pro.getCodigoPostal(),pro.getTelefono(),pro.getMail(),pro.isEstado()
             });
         }
     }
     public void mostrarji() {
 
-        for (Propietario pro5 : proData.listarProJuridicosI()) {
-            String Estado = pro5.isEstado()? "Activo" : "Inactivo"; // Convierte true en "Activas" y false en "Inactivas" preguntar a daniel q onda jajaj
+        for (Propietario pro : proData.listarProJuridicosI()) {
+            String Estado = pro.isEstado()? "Activo" : "Inactivo"; // Convierte true en "Activas" y false en "Inactivas" preguntar a daniel q onda jajaj
             tablita.addRow(new Object[]{
-                pro5.getIdPropietario(),pro5.getTipo(),pro5.getNombre(),pro5.getDni(),pro5.getCuilCuit(),pro5.getLugarTrabajo(),pro5.getDomicilio(),
-                pro5.getCiudad(),pro5.getCodigoPostal(),pro5.getTelefono(),pro5.getMail(),Estado
+                pro.getIdPropietario(),pro.getTipo(),pro.getNombre(),pro.getDni(),pro.getCuilCuit(),pro.getLugarTrabajo(),pro.getDomicilio(),pro.getCiudad(),pro.getCodigoPostal(),pro.getTelefono(),pro.getMail(),pro.isEstado()
             });
         }
     }
     public void mostrarjt() {
 
-        for (Propietario pro6 : proData.listarProJuridicosT()) {
-            String Estado = pro6.isEstado()? "Activo" : "Inactivo"; // Convierte true en "Activas" y false en "Inactivas" preguntar a daniel q onda jajaj
+        for (Propietario pro : proData.listarProJuridicosT()) {
+            String Estado = pro.isEstado()? "Activo" : "Inactivo"; // Convierte true en "Activas" y false en "Inactivas" preguntar a daniel q onda jajaj
             tablita.addRow(new Object[]{
-                pro6.getIdPropietario(),pro6.getTipo(),pro6.getNombre(),pro6.getDni(),pro6.getCuilCuit(),pro6.getLugarTrabajo(),pro6.getDomicilio(),
-                pro6.getCiudad(),pro6.getCodigoPostal(),pro6.getTelefono(),pro6.getMail(),Estado
+                pro.getIdPropietario(),pro.getTipo(),pro.getNombre(),pro.getDni(),pro.getCuilCuit(),pro.getLugarTrabajo(),pro.getDomicilio(),pro.getCiudad(),pro.getCodigoPostal(),pro.getTelefono(),pro.getMail(),pro.isEstado()
             });
         }
     }
@@ -747,6 +771,36 @@ private boolean jurifisi;
     }
 
      private boolean modificarHabilitado = false;
+     public void setajustar(int ajustar){
+         this.ajustar= ajustar;
+         if (ajustar==1) {
+             borrarFilas();
+             jRadio_Fisicos.setSelected(true);
+             mostrarft();
+             
+         }else{
+              borrarFilas();
+             jRadio_Juridicos.setSelected(true);
+            mostrarjt();
+             
+         }
+         
+     }
+     public void setmod(int modifi){
+         this.modifi =modifi;
+         if (modifi==1) {
+             borrarFilas();
+             jRadio_Fisicos.setSelected(true);
+             mostrarft();
+         }else{
+             if (modifi==2) {
+                 borrarFilas();
+                 jRadio_Juridicos.setSelected(true);
+                 mostrarjt();
+             }
+         }
+         
+     }
      
      
 }

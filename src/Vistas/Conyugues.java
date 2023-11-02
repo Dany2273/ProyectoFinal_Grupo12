@@ -65,6 +65,7 @@ public class Conyugues extends javax.swing.JInternalFrame {
         jLabel15 = new javax.swing.JLabel();
 
         setClosable(true);
+        setFrameIcon(null);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("Nombre:");

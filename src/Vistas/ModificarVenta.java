@@ -97,6 +97,8 @@ public class ModificarVenta extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
+        setFrameIcon(null);
+
         jPanel1.setMaximumSize(new java.awt.Dimension(653, 451));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));

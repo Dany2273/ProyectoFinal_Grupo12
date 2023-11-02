@@ -96,6 +96,7 @@ public class ManejoInmuebles extends javax.swing.JInternalFrame {
         jbBuscarTodos = new javax.swing.JButton();
 
         setAutoscrolls(true);
+        setFrameIcon(null);
         setPreferredSize(new java.awt.Dimension(1050, 850));
 
         jLabel1.setFont(new java.awt.Font("Ebrima", 2, 24)); // NOI18N
@@ -355,7 +356,7 @@ public class ManejoInmuebles extends javax.swing.JInternalFrame {
                                                     .addComponent(jrbVenta)))
                                             .addGap(18, 18, 18)
                                             .addComponent(jbBuscarTodos)))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGap(6, 6, Short.MAX_VALUE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel6)

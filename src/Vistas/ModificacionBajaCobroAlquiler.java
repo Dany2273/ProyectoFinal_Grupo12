@@ -77,6 +77,7 @@ public class ModificacionBajaCobroAlquiler extends javax.swing.JInternalFrame {
         jtfNumComprobante = new javax.swing.JTextField();
 
         setAutoscrolls(true);
+        setFrameIcon(null);
         setPreferredSize(new java.awt.Dimension(800, 650));
 
         jLabel1.setFont(new java.awt.Font("Ebrima", 2, 24)); // NOI18N
@@ -213,7 +214,7 @@ public class ModificacionBajaCobroAlquiler extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel13)
                                         .addGap(36, 36, 36)
                                         .addComponent(jtfComision, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 98, Short.MAX_VALUE))
+                                        .addGap(0, 49, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jcbAlquiler, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -230,14 +231,11 @@ public class ModificacionBajaCobroAlquiler extends javax.swing.JInternalFrame {
                                         .addGroup(layout.createSequentialGroup()
                                             .addGap(60, 60, 60)
                                             .addComponent(jtfMora, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel9)
-                                            .addGap(130, 130, 130)))))
+                                        .addComponent(jLabel9))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel14)
                                 .addGap(18, 18, 18)
-                                .addComponent(jlIdCobroAlquier, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(jlIdCobroAlquier, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

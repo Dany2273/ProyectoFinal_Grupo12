@@ -88,6 +88,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         jInmueble = new javax.swing.JComboBox<>();
 
         setClosable(true);
+        setFrameIcon(null);
 
         jPanel1.setMaximumSize(new java.awt.Dimension(653, 451));
 

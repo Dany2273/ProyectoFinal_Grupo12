@@ -70,6 +70,8 @@ public class AltaGarante extends javax.swing.JInternalFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
 
+        setFrameIcon(null);
+
         jNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jNombreActionPerformed(evt);
@@ -309,8 +311,7 @@ public class AltaGarante extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel16))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(36, 36, 36)
-                                .addComponent(jLabel6)))
-                        .addGap(4, 4, 4)))
+                                .addComponent(jLabel6)))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -90,6 +90,7 @@ public class ModificacionBajaInmueble extends javax.swing.JInternalFrame {
         jbEliminar = new javax.swing.JButton();
 
         setAutoscrolls(true);
+        setFrameIcon(null);
         setPreferredSize(new java.awt.Dimension(850, 650));
 
         jLabel1.setFont(new java.awt.Font("Ebrima", 2, 24)); // NOI18N

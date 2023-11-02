@@ -105,6 +105,8 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        setFrameIcon(null);
+
         jPanel1.setMaximumSize(new java.awt.Dimension(653, 451));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));

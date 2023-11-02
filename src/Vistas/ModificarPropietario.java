@@ -10,6 +10,7 @@ import accesoDatos.PropietarioData;
 import entidades.Propietario;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -72,6 +73,7 @@ public class ModificarPropietario extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setFrameIcon(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Modificar Propietario");
 
@@ -122,7 +124,7 @@ public class ModificarPropietario extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(66, Short.MAX_VALUE)
+                .addContainerGap(62, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jL_Nombre)
@@ -199,16 +201,7 @@ public class ModificarPropietario extends javax.swing.JInternalFrame {
                 .addContainerGap(52, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -276,6 +269,17 @@ public class ModificarPropietario extends javax.swing.JInternalFrame {
                                             pro.setTelefono(jT_Tel.getText());
                                             pro.setMail(jT_Mail.getText());
                                             proData.modificarPropietarioPF(pro);//modifica persona
+                                            
+                                            
+                                            
+        Propietarios npro = new Propietarios();
+        npro.setmod(1);
+        
+        Menu.Escritorio.add(npro);//menu original
+   //                Main.jDesktopPane1.add(nProp);//otro menu
+                npro.toFront();
+                npro.setVisible(true);
+                
                                             dispose();//cierre
 
                                         } else {
@@ -339,7 +343,17 @@ public class ModificarPropietario extends javax.swing.JInternalFrame {
                             pro.setCodigoPostal(jT_CodPo.getText());
                             pro.setTelefono(jT_Tel.getText());
                             pro.setMail(jT_Mail.getText());
+                            
                             proData.modificarPropietarioPJ(pro);
+                            
+                            Propietarios npro = new Propietarios();
+        npro.setmod(2);
+        
+        Menu.Escritorio.add(npro);//menu original
+  //                Main.jDesktopPane1.add(nProp);//otro menu
+                npro.toFront();
+                npro.setVisible(true);
+                           
                             dispose();
 
                         } else {
@@ -365,6 +379,18 @@ public class ModificarPropietario extends javax.swing.JInternalFrame {
     private void jB_ReactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ReactivarActionPerformed
         // TODO add your handling code here:
         proData.reactivarPropietario(id);
+        Propietarios npro = new Propietarios();
+        if (dni==0) {
+            npro.setajustar(2);
+        }else{
+            npro.setajustar(1);
+        }
+        
+        Menu.Escritorio.add(npro);//menu original
+  //                Main.jDesktopPane1.add(mProp);
+                npro.toFront();
+                npro.setVisible(true);
+   
         dispose();
         
     }//GEN-LAST:event_jB_ReactivarActionPerformed

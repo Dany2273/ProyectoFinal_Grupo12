@@ -97,6 +97,8 @@ public class ListaVentas extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jBModificar = new javax.swing.JButton();
 
+        setFrameIcon(null);
+
         jTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

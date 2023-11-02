@@ -35,6 +35,8 @@ public class Rescindir extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jTfGastos = new javax.swing.JTextField();
 
+        setFrameIcon(null);
+
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("Rescisión De Contrato");
 
