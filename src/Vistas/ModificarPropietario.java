@@ -10,7 +10,6 @@ import accesoDatos.PropietarioData;
 import entidades.Propietario;
 import java.awt.Color;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 
 /**
  *
@@ -49,7 +48,6 @@ public class ModificarPropietario extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jL_Nombre = new javax.swing.JLabel();
         jT_Nombre = new javax.swing.JTextField();
         jL_Dni = new javax.swing.JLabel();
@@ -70,14 +68,15 @@ public class ModificarPropietario extends javax.swing.JInternalFrame {
         jT_Mail = new javax.swing.JTextField();
         jB_Modificar = new javax.swing.JButton();
         jB_Reactivar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
         setFrameIcon(null);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Modificar Propietario");
-
-        jL_Nombre.setText("Nombre/RazónSocial");
+        jL_Nombre.setBackground(new java.awt.Color(255, 255, 255));
+        jL_Nombre.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jL_Nombre.setForeground(new java.awt.Color(255, 255, 255));
+        jL_Nombre.setText("Nombre:");
 
         jT_Nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,21 +84,45 @@ public class ModificarPropietario extends javax.swing.JInternalFrame {
             }
         });
 
-        jL_Dni.setText("Dni");
+        jL_Dni.setBackground(new java.awt.Color(255, 255, 255));
+        jL_Dni.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jL_Dni.setForeground(new java.awt.Color(255, 255, 255));
+        jL_Dni.setText("DNI:");
 
-        jL_Cc.setText("Cuil/Cuit");
+        jL_Cc.setBackground(new java.awt.Color(255, 255, 255));
+        jL_Cc.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jL_Cc.setForeground(new java.awt.Color(255, 255, 255));
+        jL_Cc.setText("CUIL/CUIT:");
 
-        jL_Lugar.setText("Lugar/Trabajo");
+        jL_Lugar.setBackground(new java.awt.Color(255, 255, 255));
+        jL_Lugar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jL_Lugar.setForeground(new java.awt.Color(255, 255, 255));
+        jL_Lugar.setText("Trabajo:");
 
-        jL_Domi.setText("Domicilio");
+        jL_Domi.setBackground(new java.awt.Color(255, 255, 255));
+        jL_Domi.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jL_Domi.setForeground(new java.awt.Color(255, 255, 255));
+        jL_Domi.setText("Domicilio:");
 
-        jL_Ciudad.setText("Ciudad");
+        jL_Ciudad.setBackground(new java.awt.Color(255, 255, 255));
+        jL_Ciudad.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jL_Ciudad.setForeground(new java.awt.Color(255, 255, 255));
+        jL_Ciudad.setText("Ciudad:");
 
-        jL_CodPo.setText("CodPostal");
+        jL_CodPo.setBackground(new java.awt.Color(255, 255, 255));
+        jL_CodPo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jL_CodPo.setForeground(new java.awt.Color(255, 255, 255));
+        jL_CodPo.setText("Cod.Postal:");
 
-        jL_Tel.setText("Tel");
+        jL_Tel.setBackground(new java.awt.Color(255, 255, 255));
+        jL_Tel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jL_Tel.setForeground(new java.awt.Color(255, 255, 255));
+        jL_Tel.setText("Telefono:");
 
-        jL_Mail.setText("Mail");
+        jL_Mail.setBackground(new java.awt.Color(255, 255, 255));
+        jL_Mail.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jL_Mail.setForeground(new java.awt.Color(255, 255, 255));
+        jL_Mail.setText("Mail:");
 
         jB_Modificar.setText("Guardar");
         jB_Modificar.addActionListener(new java.awt.event.ActionListener() {
@@ -115,50 +138,53 @@ public class ModificarPropietario extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Modificar Datos");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(161, 161, 161)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(62, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jL_Nombre)
-                        .addComponent(jL_Dni)
-                        .addComponent(jL_Cc)
-                        .addComponent(jL_Lugar)
-                        .addComponent(jL_Domi)
-                        .addComponent(jL_Ciudad)
-                        .addComponent(jL_CodPo)
-                        .addComponent(jL_Tel)
-                        .addComponent(jL_Mail))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jB_Modificar)
-                        .addGap(39, 39, 39)))
-                .addGap(86, 86, 86)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jT_Mail, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jT_Tel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jT_CodPo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jT_Ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jT_Dom, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jT_Lugar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jT_Cc, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jT_Dni, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jB_Reactivar))
-                .addGap(44, 44, 44))
+                .addContainerGap(50, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jL_Nombre)
+                            .addComponent(jL_Dni)
+                            .addComponent(jL_Cc)
+                            .addComponent(jL_Lugar)
+                            .addComponent(jL_Domi)
+                            .addComponent(jL_Ciudad)
+                            .addComponent(jL_CodPo)
+                            .addComponent(jL_Tel)
+                            .addComponent(jL_Mail)
+                            .addComponent(jB_Modificar))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jT_Mail, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jT_Tel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jT_CodPo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jT_Ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jT_Dom, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jT_Lugar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jT_Cc, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jT_Dni, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jB_Reactivar))
+                        .addGap(50, 50, 50))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(59, 59, 59))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jL_Nombre)
                     .addComponent(jT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -194,14 +220,23 @@ public class ModificarPropietario extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jL_Mail)
                     .addComponent(jT_Mail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jB_Modificar)
-                    .addComponent(jB_Reactivar))
-                .addContainerGap(52, Short.MAX_VALUE))
+                    .addComponent(jB_Reactivar)
+                    .addComponent(jB_Modificar))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 500));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -269,17 +304,6 @@ public class ModificarPropietario extends javax.swing.JInternalFrame {
                                             pro.setTelefono(jT_Tel.getText());
                                             pro.setMail(jT_Mail.getText());
                                             proData.modificarPropietarioPF(pro);//modifica persona
-                                            
-                                            
-                                            
-        Propietarios npro = new Propietarios();
-        npro.setmod(1);
-        
-        Menu.Escritorio.add(npro);//menu original
-   //                Main.jDesktopPane1.add(nProp);//otro menu
-                npro.toFront();
-                npro.setVisible(true);
-                
                                             dispose();//cierre
 
                                         } else {
@@ -343,17 +367,7 @@ public class ModificarPropietario extends javax.swing.JInternalFrame {
                             pro.setCodigoPostal(jT_CodPo.getText());
                             pro.setTelefono(jT_Tel.getText());
                             pro.setMail(jT_Mail.getText());
-                            
                             proData.modificarPropietarioPJ(pro);
-                            
-                            Propietarios npro = new Propietarios();
-        npro.setmod(2);
-        
-        Menu.Escritorio.add(npro);//menu original
-  //                Main.jDesktopPane1.add(nProp);//otro menu
-                npro.toFront();
-                npro.setVisible(true);
-                           
                             dispose();
 
                         } else {
@@ -379,18 +393,6 @@ public class ModificarPropietario extends javax.swing.JInternalFrame {
     private void jB_ReactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ReactivarActionPerformed
         // TODO add your handling code here:
         proData.reactivarPropietario(id);
-        Propietarios npro = new Propietarios();
-        if (dni==0) {
-            npro.setajustar(2);
-        }else{
-            npro.setajustar(1);
-        }
-        
-        Menu.Escritorio.add(npro);//menu original
-  //                Main.jDesktopPane1.add(mProp);
-                npro.toFront();
-                npro.setVisible(true);
-   
         dispose();
         
     }//GEN-LAST:event_jB_ReactivarActionPerformed

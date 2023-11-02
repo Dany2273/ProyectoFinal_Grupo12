@@ -102,8 +102,8 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        guardar1 = new javax.swing.JButton();
+        salir1 = new javax.swing.JButton();
 
         setFrameIcon(null);
 
@@ -248,6 +248,7 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
 
         jScrollPane1.setViewportView(nuevaClausula);
 
+        clausula.setPreferredSize(new java.awt.Dimension(186, 73));
         jScrollPane2.setViewportView(clausula);
 
         jLabel16.setBackground(new java.awt.Color(255, 255, 255));
@@ -275,11 +276,21 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Nuevos Datos.");
 
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton1.setText("Guardar");
+        guardar1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        guardar1.setText("Guardar");
+        guardar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardar1ActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton2.setText("Salir.");
+        salir1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        salir1.setText("Salir.");
+        salir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salir1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -333,7 +344,7 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(227, 227, 227)
-                                .addComponent(jButton1)))
+                                .addComponent(guardar1)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(79, 79, 79)
@@ -343,23 +354,22 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
                                 .addGap(64, 64, 64))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton2)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel10)
-                                                .addComponent(jLabel11)
-                                                .addComponent(jLabel14))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(fin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(firma, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addComponent(jScrollPane2)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(salir1)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel10)
+                                            .addComponent(jLabel11)
+                                            .addComponent(jLabel14))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(fin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(firma, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(30, 30, 30)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nuevoInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                                    .addComponent(nuevoInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                                     .addComponent(nuevoFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(nuevaFirma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jScrollPane1)))
@@ -446,13 +456,13 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
                         .addComponent(jLabel16)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)
                             .addComponent(jScrollPane2)))
                     .addComponent(jSeparator1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(salir1)
+                    .addComponent(guardar1))
                 .addGap(45, 45, 45))
         );
 
@@ -506,7 +516,7 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_salirActionPerformed
 
-    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+    private void guardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar1ActionPerformed
         // TODO add your handling code here:
          if (jInmueble.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar el inmueble!!.", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -605,7 +615,16 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
             }
 
         }
-    }//GEN-LAST:event_guardarActionPerformed
+    }//GEN-LAST:event_guardar1ActionPerformed
+
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GuardarActionPerformed
+
+    private void salir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salir1ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_salir1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -616,10 +635,9 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
     private javax.swing.JTextField fin;
     private javax.swing.JTextField firma;
     private javax.swing.JTextField garante;
+    private javax.swing.JButton guardar1;
     private javax.swing.JTextField inicio;
     private javax.swing.JTextField inmueble;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<Cliente> jCliente;
     private javax.swing.JComboBox<Garante> jGarante;
     private javax.swing.JComboBox<Inmueble> jInmueble;
@@ -650,6 +668,7 @@ public class ModificarAlquiler extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser nuevoInicio;
     private javax.swing.JTextField nuevoPrecio;
     private javax.swing.JTextField precio;
+    private javax.swing.JButton salir1;
     private javax.swing.JTextField tipo;
     private javax.swing.JComboBox<TipoAlquiler> tipoalq2;
     // End of variables declaration//GEN-END:variables
